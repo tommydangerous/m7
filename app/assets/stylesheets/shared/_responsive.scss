@@ -1,4 +1,4 @@
-// $grid-columns: 12;
+$grid-columns: 12;
 
 // @mixin grid-core($size) {
 //   @for $i from 1 through $grid-columns {
@@ -35,48 +35,48 @@
 //   }
 // }
 
-// .page-container,
-// .page-container-full {
-//   padding-left: $page-side-spacing;
-//   padding-right: $page-side-spacing;
-//   width: auto;
-//   @include outer-container;
-// }
+.page-container,
+.page-container-full {
+  padding-left: $page-side-spacing;
+  padding-right: $page-side-spacing;
+  width: auto;
+  // @include outer-container;
+}
 
-// .page-container {
-//   @include screen-md {
-//     width: $min-width-medium;
-//   }
-//   @include screen-lg {
-//     width: $min-width-large;
-//   }
-// }
+.page-container {
+  @include screen-md {
+    width: $min-width-medium;
+  }
+  @include screen-lg {
+    width: $min-width-large;
+  }
+}
 
-// .page-container-full {
-//   max-width: 100%;
-// }
+.page-container-full {
+  max-width: 100%;
+}
 
-// .page-container:after,
-// .page-container:before,
-// .page-container-full:after,
-// .page-container-full:before {
-//   content: " ";
-//   display: table;
-// }
+.page-container:after,
+.page-container:before,
+.page-container-full:after,
+.page-container-full:before {
+  content: " ";
+  display: table;
+}
 
 // .row {
 //   @include row();
 // }
 
-// .col-center {
-//   float: none !important;
-//   margin-left: auto !important;
-//   margin-right: auto !important;
-// }
+.col-center {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
-// .col-full-height {
-//   height: 100%;
-// }
+.col-full-height {
+  height: 100%;
+}
 
 // // Extra small
 // @include screen-xs {

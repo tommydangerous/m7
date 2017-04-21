@@ -14,7 +14,7 @@ const RESET_STATE = {
 const INITIAL_STATE = combine(RESET_STATE, {
 });
 
-export default function posts(state = INITIAL_STATE, action) {
+export default function reducers(state = INITIAL_STATE, action) {
   const {
     id,
     posts,

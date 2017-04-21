@@ -1,4 +1,5 @@
 import { Provider } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import React from 'react';
 
 // Stores
@@ -11,3 +12,7 @@ export default function Root({ app }) {
     </Provider>
   );
 }
+
+Root.propTypes = {
+  app: PropTypes.object.isRequired,
+};
