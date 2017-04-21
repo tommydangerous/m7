@@ -1,24 +1,20 @@
-# README
+# M7
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+Web client for the Minute7 application.
 
-Things you may want to cover:
+## Setup
+```
+$ bundle install
+```
 
-* Ruby version
+## Run development server
+```
+$ bundle exec foreman start -f Procfile.dev
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Technology stack
+1. Webpack
+1. Rails
+1. React
+1. Redux
