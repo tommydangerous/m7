@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>M7</title>
+    <title>
+      <%= page_title %>
+    </title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= content_tag :meta, nil, content: mobile_meta_content, name: "viewport" %>
+    <%= favicon_link_tag "favicon.png" %>
+    <%= render "stylesheets" %>
   </head>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= content_tag :body, class: body_class do %>
+    <div class="wrapper">
+      <%= render "header" %>
+
+      <div class="content">
+        <%= yield %>
+      </div>
+
+      <%= render "footer" %>
+    </div>
+    <%= render "javascripts" %>
+  <% end %>
 </html>
