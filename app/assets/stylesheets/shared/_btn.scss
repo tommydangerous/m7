@@ -1,0 +1,118 @@
+.btn {
+  background-color: $white;
+  border: 1px solid $gray-light-1;
+  border-radius: $border-radius;
+  color: $text-color;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $font-family;
+  font-size: $font-size-1;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-factor;
+  margin: 0;
+  outline: none;
+  padding: $spacing * 0.5 $spacing * 0.5 * 3;
+  text-align: center;
+  vertical-align: middle;
+  @include browser(appearance, none);
+  @include browser(user-select, none);
+
+  &:focus,
+  &:hover {
+    color: $text-color;
+    text-decoration: none;
+  }
+}
+
+.btn + .btn {
+  margin-left: $spacing * 0.25;
+}
+
+.btn-block {
+  display: block;
+  white-space: normal;
+  width: 100%;
+}
+
+.btn-contrast {
+  background-color: $gray-dark-3;
+  border-color: $gray-dark-3;
+  border-bottom-color: $gray-dark-2;
+  color: $white;
+
+  &:focus,
+  &:hover {
+    background-color: $gray-medium-2;
+    border-left-color: $gray-medium-2;
+    border-right-color: $gray-medium-2;
+    border-top-color: $gray-medium-3;
+    color: $white;
+  }
+}
+
+.btn-large {
+  font-size: $font-size-2;
+  padding: $spacing * 0.6 $spacing * 0.6 * 3;
+}
+
+.btn-primary {
+  background-color: $orange;
+  border-color: $orange;
+  border-bottom-color: $orange-dark;
+  color: $white;
+
+  &:focus,
+  &:hover {
+    background-color: $orange-hover;
+    border-left-color: $orange-hover;
+    border-right-color: $orange-hover;
+    border-top-color: $orange-hover;
+    color: $white;
+  }
+}
+
+.btn-reset {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: $orange;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  @include browser(appearance, none);
+  @include browser(user-select, none);
+
+  &:focus,
+  &:hover {
+    color: $orange;
+    text-decoration: underline;
+  }
+}
+
+.btn-semi-transparent {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-style: none;
+
+  &:focus,
+  &:hover {
+    background-color: rgba(80, 80, 80, 0.5);
+  }
+}
+
+.btn-special {
+  background-color: $blue;
+  border-color: $blue;
+  border-bottom-color: $blue-dark;
+  color: $white;
+
+  &:focus,
+  &:hover {
+    background-color: $blue-hover;
+    border-left-color: $blue-hover;
+    border-right-color: $blue-hover;
+    border-top-color: $blue-hover;
+    color: $white;
+  }
+}

@@ -1,0 +1,91 @@
+@mixin image-sizing($size) {
+  @for $i from 1 through 10 {
+    .img-#{$size}-height-#{$i} {
+      height: $spacing * 5 * 0.5 * $i;
+    }
+
+    .img-#{$size}-width-#{$i} {
+      width: $spacing * 5 * 0.5 * $i;
+    }
+  }
+}
+
+@for $i from 1 through 10 {
+  .img-height-#{$i} {
+    height: $spacing * 5 * 0.5 * $i;
+  }
+
+  .img-width-#{$i} {
+    width: $spacing * 5 * 0.5 * $i;
+  }
+
+  .img-elastic-height-#{$i} {
+    overflow: hidden;
+    padding-bottom: 10% * $i;
+    position: relative;
+  }
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+.img-absolute {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+}
+
+.img-cover {
+  background-color: $background-color;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.img-price__container {
+  height: 100%;
+  position: relative;
+}
+
+.img-price__value {
+  background-color: rgba(60, 60, 60, 0.9);
+  bottom: 15%;
+  color: $white;
+  font-size: $font-size-4;
+  left: 0;
+  padding: $spacing * 0.25 $spacing * 0.75;
+  position: absolute;
+}
+
+
+.img-responsive-height {
+  height: 100%;
+  width: auto;
+}
+
+.img-round {
+  border-radius: 50%;
+  border: 2px solid $white;
+  overflow: hidden;
+}
+
+@include screen-xs {
+  @include image-sizing(xs);
+}
+
+@include screen-sm {
+  @include image-sizing(sm);
+}
+
+@include screen-md {
+  @include image-sizing(md);
+}
+
+@include screen-lg {
+  @include image-sizing(lg);
+}

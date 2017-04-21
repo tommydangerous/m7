@@ -1,0 +1,61 @@
+.text-center {
+  text-align: center;
+}
+
+@include screen-xs {
+  .text-center-xs {
+    text-align: center;
+  }
+}
+
+@include screen-sm {
+  .text-center-sm {
+    text-align: center;
+  }
+}
+
+@include screen-md {
+  .text-center-md {
+    text-align: center;
+  }
+}
+
+@include screen-lg {
+  .text-center-lg {
+    text-align: center;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-contrast {
+  color: $white;
+}
+
+.text-muted {
+  color: $muted-color;
+}
+
+.text-normal {
+  color: inherit;
+}
+
+.text-overflow {
+  @include text-overflow-ellipsis;
+}
+
+.text-bold-font-weight {
+  font-family: $font-family;
+  font-weight: bold;
+}
+
+.text-normal-font-weight {
+  font-family: $font-family;
+  font-weight: $font-weight-normal;
+}
+
+.text-normal-line-height {
+  line-height: inherit;
+}

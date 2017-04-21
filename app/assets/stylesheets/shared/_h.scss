@@ -1,0 +1,38 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: $font-weight-bold;
+  margin: 0;
+}
+
+// Header for the page
+h1,
+.h1 {
+  font-size: $font-size-6;
+}
+
+// Header for a section
+h2,
+.h2 {
+  font-size: $font-size-5;
+}
+
+// Header inside a section
+h3,
+.h3 {
+  font-size: $font-size-4;
+}
+
+// Header for a body of text
+h4,
+.h4 {
+  font-size: $font-size-3;
+}
+
+// Normal size text that is bold
+h5,
+.h5 {
+  font-size: $font-size-2;
+}

@@ -1,0 +1,86 @@
+@import "../../variables/all";
+@import "../../mixins/all";
+
+ // Header
+.home-index .header--primary {
+  background: rgba(0, 0, 0, 0);
+  border-bottom: none;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+
+  .header__logo,
+  .nav,
+  .user-name {
+    color: $white;
+  }
+
+  .nav > li > a,
+  .header__user-item {
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  .search-form {
+    display: none;
+  }
+
+  .header__dropdown-menu {
+    @include border-top-left-radius;
+  }
+}
+
+// Hero
+.home-index {
+  .hero__content {
+    padding-bottom: ($spacing * 1.5 * 2) + 52;
+    padding-top: $spacing * 2.5;
+  }
+
+  // Searchbar
+  .searchbar {
+    display: inline-block;
+    height: 52px;
+    vertical-align: middle;
+  }
+
+  .searchbar__input {
+    float: left;
+    position: relative;
+    z-index: 1;
+  }
+
+  .searchbar__input__label {
+    display: inline-block;
+    float: left;
+    position: relative;
+  }
+
+  .searchbar__location,
+  .searchbar__button {
+    vertical-align: middle;
+  }
+
+  .searchbar .searchbar__location {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right: none;
+    outline: none;
+    padding-bottom: ($spacing * 0.75) - 3 !important;
+    padding-top: ($spacing * 0.75) - 3 !important;
+    width: $spacing * 27.5;
+
+    &:hover {
+      border-color: $gray-light-1;
+    }
+  }
+
+  .searchbar .searchbar__button {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -1px;
+    position: relative;
+    z-index: 0;
+  }
+}

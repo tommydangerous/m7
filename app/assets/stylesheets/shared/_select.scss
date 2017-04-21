@@ -1,0 +1,35 @@
+.select {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.select select {
+  padding-right: 2em;
+}
+
+.select:before {
+  bottom: 1px;
+  color: $gray-medium-3;
+  content: "\25bc";
+  line-height: 1;
+  padding-top: 1.15em;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2em;
+  text-align: center;
+  transform: scale(0.84, 0.42);
+  -webkit-transform: scale(0.84, 0.42);
+  -moz-transform: scale(0.84, 0.42);
+  -ms-transform: scale(0.84, 0.42);
+  -o-transform: scale(0.84, 0.42);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.84, M12=0, M21=0, M22=0.42, SizingMethod='auto expand')";
+  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.84, M12=0, M21=0, M22=0.42, SizingMethod='auto expand');
+}
+
+.select-block {
+  display: block;
+  width: 100%;
+}

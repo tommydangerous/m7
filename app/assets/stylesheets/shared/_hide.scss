@@ -1,0 +1,36 @@
+.hide {
+  display: none;
+}
+
+.hide-xs {
+  @include screen-xs {
+    display: none;
+  }
+  @include screen-sm-min {
+    display: block;
+  }
+}
+
+.hide-sm {
+  @include screen-sm-max {
+    display: none;
+  }
+  @include screen-md-min {
+    display: block;
+  }
+}
+
+.hide-md {
+  @include screen-md-max {
+    display: none;
+  }
+  @include screen-lg {
+    display: block;
+  }
+}
+
+.hide-lg {
+  @include screen-lg {
+    display: none;
+  }
+}

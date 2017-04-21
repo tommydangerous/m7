@@ -1,0 +1,152 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  max-width: 100%;
+}
+
+th {
+  text-align: left;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+}
+
+.table > thead > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+  padding: $spacing * 0.5;
+  border-top: 1px solid $border-color;
+  vertical-align: top;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+}
+
+.table > colgroup + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > td,
+.table > colgroup + tbody > tr:first-child > th,
+.table > colgroup + tbody > tr:first-child > td,
+.table > thead:first-child > tr:first-child > th,
+.table > thead:first-child > tr:first-child > td,
+.table > tbody:first-child > tr:first-child > th,
+.table > tbody:first-child > tr:first-child > td {
+  border-top: 0;
+}
+
+.table-bordered {
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  border-left: 0;
+}
+
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > tfoot > tr > td {
+  border-left: 1px solid $border-color;
+}
+
+.table-bordered > colgroup + thead > tr:first-child > th:first-child,
+.table-bordered > colgroup + thead > tr:first-child > td:first-child,
+.table-bordered > colgroup + tbody > tr:first-child > th:first-child,
+.table-bordered > colgroup + tbody > tr:first-child > td:first-child,
+.table-bordered > thead:first-child > tr:first-child > th:first-child,
+.table-bordered > thead:first-child > tr:first-child > td:first-child,
+.table-bordered > tbody:first-child > tr:first-child > th:first-child,
+.table-bordered > tbody:first-child > tr:first-child > td:first-child {
+  border-top-left-radius: 2px;
+}
+
+.table-bordered > colgroup + thead > tr:first-child > th:first-child,
+.table-bordered > colgroup + thead > tr:first-child > td:first-child,
+.table-bordered > colgroup + tbody > tr:first-child > th:first-child,
+.table-bordered > colgroup + tbody > tr:first-child > td:first-child,
+.table-bordered > thead:first-child > tr:first-child > th:first-child,
+.table-bordered > thead:first-child > tr:first-child > td:first-child,
+.table-bordered > tbody:first-child > tr:first-child > th:first-child,
+.table-bordered > tbody:first-child > tr:first-child > td:first-child {
+  border-top-right-radius: 2px;
+}
+
+.table-bordered > thead:last-child > tr:last-child > th:first-child,
+.table-bordered > thead:last-child > tr:last-child > td:first-child,
+.table-bordered > tbody:last-child > tr:last-child > th:first-child,
+.table-bordered > tbody:last-child > tr:last-child > td:first-child,
+.table-bordered > tfoot:last-child > tr:last-child > th:first-child,
+.table-bordered > tfoot:last-child > tr:last-child > td:first-child {
+  border-bottom-left-radius: 2px;
+}
+
+.table-bordered > thead:last-child > tr:last-child > th:first-child,
+.table-bordered > thead:last-child > tr:last-child > td:first-child,
+.table-bordered > tbody:last-child > tr:last-child > th:first-child,
+.table-bordered > tbody:last-child > tr:last-child > td:first-child,
+.table-bordered > tfoot:last-child > tr:last-child > th:first-child,
+.table-bordered > tfoot:last-child > tr:last-child > td:first-child {
+  border-bottom-right-radius: 2px;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #ffffff;
+}
+
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  background-color: $gray-ultralight-2;
+}
+
+.table-striped-alt > tbody > tr:nth-child(even) > td,
+.table-striped-alt > tbody > tr:nth-child(even) > th {
+  background-color: #ffffff;
+}
+
+.table-striped-alt > tbody > tr:nth-child(odd) > td,
+.table-striped-alt > tbody > tr:nth-child(odd) > th {
+  background-color: $gray-ultralight-2;
+}
+
+.table-condensed > thead > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > th,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > th,
+.table-condensed > tfoot > tr > td {
+  padding: $spacing * 0.25 $spacing * 0.5;
+}
+
+table col[class^="col-"],
+table td[class^="col-"],
+table th[class^="col-"] {
+  float: none;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+@media (max-width: 767px) {
+  .table-responsive {
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    width: 100%;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
+  .table-responsive > .table {
+    margin-bottom: 0;
+  }
+
+  .table-responsive > .table th,
+  .table-responsive > .table td {
+    white-space: nowrap;
+  }
+}

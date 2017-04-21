@@ -1,0 +1,20 @@
+@import "../../variables/all";
+
+footer {
+  background-color: $gray-dark-1;
+  background-image: image-url("application/footer/pattern.png");
+  padding: $spacing * 2.5 0;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.footer__divider {
+  border-bottom: 1px solid $gray-medium-1;
+  width: 100%;
+}
+
+.footer__copyright {
+  font-size: $font-size-1;
+  line-height: $spacing + 9;
+}

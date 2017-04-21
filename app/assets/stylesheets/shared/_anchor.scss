@@ -1,0 +1,22 @@
+.link-block {
+  display: block;
+}
+
+.link-contrast {
+  color: $white;
+
+  &:hover {
+    color: $gray-light-1;
+    text-decoration: none;
+  }
+}
+
+.link-media {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.link-reset {
+  color: inherit;
+}

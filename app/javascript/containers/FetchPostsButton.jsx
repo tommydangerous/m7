@@ -10,7 +10,7 @@ function FetchPostsButton({ dispatch }) {
   };
 
   return (
-    <button onClick={onClick}>
+    <button className="btn btn-primary" onClick={onClick}>
       Fetch Posts
     </button>
   );

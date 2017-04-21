@@ -1,0 +1,60 @@
+.panel {
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: 0;
+}
+
+.panel-body {
+  padding: $spacing;
+}
+
+.panel-body-small {
+  padding: $spacing * 0.5;
+}
+
+.panel-body-h {
+  padding-left: $spacing;
+  padding-right: $spacing;
+}
+
+.panel-body-h-small {
+  padding-left: $spacing * 0.5;
+  padding-right: $spacing * 0.5;
+}
+
+.panel-body-v {
+  padding-bottom: $spacing;
+  padding-top: $spacing;
+}
+
+.panel-body-v-small {
+  padding-bottom: $spacing * 0.5;
+  padding-top: $spacing * 0.5;
+}
+
+.panel-border-bottom {
+  border-bottom: 1px solid $border-color;
+}
+
+.panel-border-top {
+  border-top: 1px solid $border-color;
+}
+
+.panel-header {
+  background-color: $gray-ultralight-2;
+  font-size: $font-size-2;
+  padding: $spacing * 0.75 $spacing;
+  border-bottom: 1px solid $border-color;
+}
+
+.panel-light {
+  background-color: $white;
+}
+
+.panel-footer {
+  border-top: 1px solid $border-color;
+  margin: 0;
+  padding: $spacing;
+  position: relative;
+  text-align: right;
+}

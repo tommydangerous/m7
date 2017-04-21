@@ -1,0 +1,113 @@
+@import "../../variables/all";
+@import "../../mixins/all";
+
+// Cover
+.activities-show .cover {
+  @include screen-lg {
+    height: $spacing * 35;
+  }
+  @include screen-md {
+    height: $spacing * 30;
+  }
+  @include screen-sm {
+    height: $spacing * 25;
+  }
+  @include screen-xs {
+    height: $spacing * 20;
+  }
+}
+
+// Details
+$image-height: ($min-width-large * 0.667 * 0.5) - ($spacing * 2);
+
+.activities-show .details {
+
+  .details__images a {
+    padding: 1.5px;
+    height: $image-height;
+    width: 50%;
+
+    &:first-child {
+      width: 100%;
+    }
+
+    &.image-25 {
+      height: $image-height * 0.5;
+      width: 25%;
+    }
+  }
+}
+
+// Map
+.activities-show .map {
+  position: relative;
+
+  .map__react {
+    height: $spacing * 30;
+    position: relative;
+  }
+
+  #map {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .map__card {
+    border-radius: $border-radius;
+    position: absolute;
+    width: $spacing * 15;
+    @include screen-sm-max {
+      right: $spacing;
+      top: $spacing;
+    }
+    @include screen-md-min {
+      right: 15%;
+      top: 15%;
+    }
+  }
+}
+
+// Summary
+$book-it-price-height: $spacing * 2.5;
+
+.activities-show .summary {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+
+  .profile-image {
+    height: $spacing * 6;
+    margin: auto;
+    width: $spacing * 6;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .book-it {
+    width: 100%;
+    @include screen-lg {
+      margin-top: -1 * $book-it-price-height;
+    }
+  }
+
+  .book-it__price {
+    background-color: $gray-dark-3;
+    color: $white;
+    font-size: $font-size-4;
+    height: $book-it-price-height;
+    line-height: $book-it-price-height;
+    padding: 0 $spacing;
+    width: 100%;
+  }
+
+  .book-it__container {
+    width: 100%;
+    z-index: 10;
+    width: 100%;
+    @include screen-lg {
+      position: absolute;
+    }
+  }
+}

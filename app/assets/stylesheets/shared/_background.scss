@@ -1,0 +1,23 @@
+.background-dark-gray {
+  background-color: $gray-dark-1;
+}
+
+.background-image-full {
+  @include background-image-default;
+}
+
+.background-image-tint {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.background-green {
+  background-color: $green;
+}
+
+.background-red {
+  background-color: $red;
+}

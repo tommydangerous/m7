@@ -1,0 +1,101 @@
+.modal {
+  opacity: 0;
+  @include transition;
+
+  @include screen-sm-max {
+    background: none;
+  }
+}
+
+.modal[aria-hidden="false"] {
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.modal[aria-hidden="true"] {
+  display: none;
+  z-index: -1;
+}
+
+.modal,
+.modal__container {
+  background-color: $background-color;
+  background-color: $background-color-tint;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2000;
+  overflow-y: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.modal__table {
+  display: table;
+  height: 100%;
+  table-layout: fixed;
+  width: 100%;
+
+  @include screen-sm-max {
+    display: block;
+  }
+}
+
+.modal__cell {
+  display: table-cell;
+  height: 100%;
+  padding: $spacing * 2;
+  vertical-align: middle;
+  width: 100%;
+
+  @include screen-sm-max {
+    display: block;
+    padding: 0;
+  }
+}
+
+.modal__content {
+  background-color: $white;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $spacing * 30;
+  overflow: hidden;
+  position: relative;
+  @include border-radius;
+
+  @include screen-sm-max {
+    border-radius: 0;
+    height: 100%;
+    max-width: none;
+    overflow: auto;
+  }
+}
+
+.modal__close {
+  color: $gray-light-2;
+  cursor: pointer;
+  float: right;
+  font-size: 2em;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 0.7;
+  margin-right: $spacing * 0.5 * -1;
+  margin-top: $spacing * 0.5 * -1;
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.modal__close:before {
+  content: "\00d7";
+}
+
+.modal__close:hover,
+.modal__close:focus {
+  color: $gray-light-1;
+  text-decoration: none;
+}
+
+.modal__close:not(:empty):before {
+  display: none;
+}

@@ -1,0 +1,20 @@
+%flash {
+  padding: $page-side-spacing;
+  position: relative;
+}
+
+.flash {
+  @extend %flash;
+}
+
+.flash--error {
+  @extend %flash;
+  background-color: $red;
+  color: $red-text;
+}
+
+.flash--success {
+  @extend %flash;
+  background-color: $green;
+  color: $green-text;
+}

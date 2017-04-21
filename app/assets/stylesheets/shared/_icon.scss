@@ -1,0 +1,30 @@
+.icon {
+}
+
+.icon-size-1 {
+  font-size: $spacing * 1;
+}
+
+.icon-size-2 {
+  font-size: $spacing * 2;
+}
+
+.icon-size-3 {
+  font-size: $spacing * 3;
+}
+
+.icon-size-4 {
+  font-size: $spacing * 4;
+}
+
+.icon-green {
+  color: $green;
+}
+
+.icon-primary {
+  color: $orange;
+}
+
+.icon-incomplete {
+  opacity: 0.2;
+}

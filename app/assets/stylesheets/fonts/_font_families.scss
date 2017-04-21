@@ -1,0 +1,36 @@
+@font-face {
+  font-family: "Aspira";
+  /* IE9 Compat Modes */
+  src: font-url("Aspira/regular/Aspira-Regular-webfont.eot");
+  src:
+    /* IE6-IE8 */
+    font-url("Aspira/regular/Aspira-Regular-webfont.eot?#iefix") format("embedded-opentype"),
+    /* Super Modern Browsers */
+    font-url("Aspira/regular/Aspira-Regular-webfont.woff2") format("woff2"),
+    /* Pretty Modern Browsers */
+    font-url("Aspira/regular/Aspira-Regular-webfont.woff") format("woff"),
+    /* Safari, Android, iOS */
+    font-url("Aspira/regular/Aspira-Regular-webfont.ttf") format("truetype"),
+    /* Legacy iOS */
+    font-url("Aspira/regular/Aspira-Regular-webfont.svg#SofiaProSoftReg-webfont.svg") format("svg");
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  /* IE9 Compat Modes */
+  src: font-url("sofia-pro/regular/SofiaProRegular-webfont.eot");
+  src:
+    /* IE6-IE8 */
+    font-url("sofia-pro/regular/SofiaProRegular-webfont.eot?#iefix") format("embedded-opentype"),
+    /* Super Modern Browsers */
+    font-url("sofia-pro/regular/SofiaProRegular-webfont.woff2") format("woff2"),
+    /* Pretty Modern Browsers */
+    font-url("sofia-pro/regular/SofiaProRegular-webfont.woff") format("woff"),
+    /* Safari, Android, iOS */
+    font-url("sofia-pro/regular/SofiaProRegular-webfont.ttf") format("truetype"),
+    /* Legacy iOS */
+    font-url("sofia-pro/regular/SofiaProRegular-webfont.svg#SofiaProSoftReg-webfont.svg")
+      format("svg");
+}
+
+$font-family: "Sofia Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;

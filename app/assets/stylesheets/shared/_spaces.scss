@@ -1,0 +1,20 @@
+$space-margin-values: 12;
+
+@mixin space-margin($direction) {
+  @for $i from 0 through $space-margin-values {
+    @if $direction == bottom {
+      .space-#{$i} {
+        margin-#{$direction}: $spacing * 0.25 * number("#{$i}");
+      }
+    } @else {
+      .space-#{$direction}-#{$i} {
+        margin-#{$direction}: $spacing * 0.25 * number("#{$i}");
+      }
+    }
+  }
+}
+
+@include space-margin(bottom);
+@include space-margin(left);
+@include space-margin(right);
+@include space-margin(top);

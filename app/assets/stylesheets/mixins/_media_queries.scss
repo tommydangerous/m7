@@ -1,0 +1,70 @@
+// @import "bourbon";
+// @import "neat";
+
+// @media (min-width: 744px) {
+// @media (min-width: 744px) and (max-width: 1127px) {
+
+// Extra small
+@mixin screen-xs {
+  @media(min-width: $min-width-extra-small) and (max-width: $min-width-small) {
+    @content;
+  }
+}
+
+@mixin screen-xs-min {
+  @media(min-width: $min-width-extra-small) {
+    @content;
+  }
+}
+
+// Small
+@mixin screen-sm {
+  @media(min-width: $min-width-small) and (max-width: $min-width-medium) {
+    @content;
+  }
+}
+
+@mixin screen-sm-min {
+  @media(min-width: $min-width-small) {
+    @content;
+  }
+}
+
+@mixin screen-sm-max {
+  @media(max-width: $min-width-medium - 1) {
+    @content;
+  }
+}
+
+// Medium
+@mixin screen-md {
+  @media(min-width: $min-width-medium) and (max-width: $min-width-large) {
+    @content;
+  }
+}
+
+@mixin screen-md-min {
+  @media(min-width: $min-width-medium) {
+    @content;
+  }
+}
+
+@mixin screen-md-max {
+  @media(max-width: $min-width-large - 1) {
+    @content;
+  }
+}
+
+// Large
+@mixin screen-lg {
+  @media(min-width: $min-width-large) {
+    @content;
+  }
+}
+
+// Everything but large
+@mixin screen-except-lg {
+  @media(max-width: $min-width-large - 1) {
+    @content;
+  }
+}

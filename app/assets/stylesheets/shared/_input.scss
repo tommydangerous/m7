@@ -1,0 +1,70 @@
+$placeholder-color: $gray-medium-3;
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include browser(appearance, none);
+}
+
+input,
+select,
+textarea {
+  background-color: $white;
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius;
+  color: $text-color;
+  outline-style: none;
+  padding: $spacing * 0.5;
+  width: 100%;
+
+  &:active,
+  &:focus {
+    border-color: $muted-color;
+  }
+}
+
+label {
+  display: block;
+  padding-bottom: $spacing * 0.25;
+}
+
+.input-large {
+  font-size: $font-size-2;
+  padding: $spacing * 0.75;
+}
+
+.input-outline {
+  outline-color: $green;
+  outline-style: solid;
+  outline-width: medium;
+}
+
+::-webkit-input-placeholder {
+   color: $placeholder-color;
+}
+
+/* Firefox 18- */
+:-moz-placeholder {
+   color: $placeholder-color;
+}
+
+/* Firefox 19+ */
+::-moz-placeholder {
+   color: $placeholder-color;
+}
+
+:-ms-input-placeholder {
+   color: $placeholder-color;
+}
+
+button[disabled],
+html input[disabled] {
+ cursor: default;
+}

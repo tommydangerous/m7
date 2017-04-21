@@ -1,0 +1,138 @@
+@import "../../variables/all";
+@import "../../mixins/all";
+
+$header-height: $spacing * 3;
+$hover-background-color: $gray-ultralight-2;
+$user-image-size: $spacing * 1.8;
+
+.header--primary {
+  background-color: $white;
+  border-bottom: 1px solid $border-color;
+  height: $header-height + 1;
+  width: 100%;
+
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  // Nav
+  .nav {
+    height: $header-height;
+  }
+
+  .nav > li {
+    line-height: $header-height;
+  }
+
+  .nav > li > a {
+    line-height: $header-height;
+    padding-left: $page-side-spacing;
+    padding-right: $page-side-spacing;
+
+    &:hover {
+      background-color: $hover-background-color;
+    }
+  }
+
+  .search-form__container {
+    position: relative;
+
+    i {
+      color: $input-border-color;
+      font-size: $font-size-1;
+      left: $spacing * 0.5;
+      position: absolute;
+      top: ((($header-height + 1) - 14px) * 0.5);
+      width: 13px;
+    }
+
+    input {
+      font-size: $font-size-1;
+      line-height: $font-size-1 * 1.5;
+      padding-bottom: $spacing * 0.5;
+      padding-left: ($spacing * 0.5 * 2) + 13;
+      padding-right: $spacing * 0.5;
+      padding-top: $spacing * 0.5;
+      vertical-align: middle;
+      width: $spacing * 15;
+    }
+  }
+}
+
+// Logo
+.header__logo {
+  color: $orange;
+  display: block;
+  font-size: $font-size-4;
+  line-height: $header-height;
+}
+
+// User profile picture
+.header__user-item {
+  padding-left: $page-side-spacing;
+
+  &:hover {
+    background-color: $hover-background-color;
+    cursor: pointer;
+  }
+
+  > li {
+    line-height: $header-height;
+    padding-left: $user-image-size + ($spacing * 0.5);
+    padding-right: $page-side-spacing;
+    position: relative;
+  }
+
+  .user-profile-image {
+    background-image: image-url("user-default.png");
+    height: $user-image-size;
+    left: 0;
+    position: absolute;
+    top: ($header-height - $user-image-size) * 0.5;
+    width: $user-image-size;
+    @include background-image-default;
+
+    img {
+      height: $user-image-size - 4px;
+      width: $user-image-size - 4px;
+      vertical-align: top;
+    }
+  }
+}
+
+// Dropdown menu
+.header__dropdown-menu {
+  background-color: $white;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+  display: none;
+  left: auto;
+  max-width: none;
+  min-width: $spacing * 10;
+  position: absolute;
+  right: 0;
+  top: $header-height;
+  z-index: 3000;
+  @include border-bottom-left-radius;
+
+  li:first-child {
+    .menu-item {
+      border-top: none;
+    }
+  }
+
+  .menu-item {
+    line-height: $font-size-1 * $line-height-factor;
+    padding-bottom: $spacing;
+    padding-top: $spacing;
+    position: relative;
+    @include transition;
+
+    &:hover {
+      @include browser(transform, translate($spacing * 0.25, 0));
+    }
+  }
+}

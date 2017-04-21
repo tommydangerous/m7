@@ -1,0 +1,122 @@
+// $grid-columns: 12;
+
+// @mixin grid-core($size) {
+//   @for $i from 1 through $grid-columns {
+//     .col-#{$size}-#{$i} {
+//       @if $i < $grid-columns {
+//         float: left;
+//       }
+//       min-height: 1px;
+//       position: relative;
+//       @include span-columns($i);
+//     }
+
+//     .col-#{$size}-shift-left-#{$i} {
+//       @include shift($i * -1);
+//     }
+
+//     .col-#{$size}-shift-right-#{$i} {
+//       @include shift($i);
+//     }
+//   }
+// }
+
+// @mixin grid-omega($size) {
+//   @for $i from 1 through $grid-columns {
+//     .col-#{$size}-omega-#{$i} {
+//       @include omega($i + n);
+//     }
+//   }
+// }
+
+// @mixin column-omega($size) {
+//   .col-#{$size}-omega {
+//     margin-right: 0 !important;
+//   }
+// }
+
+// .page-container,
+// .page-container-full {
+//   padding-left: $page-side-spacing;
+//   padding-right: $page-side-spacing;
+//   width: auto;
+//   @include outer-container;
+// }
+
+// .page-container {
+//   @include screen-md {
+//     width: $min-width-medium;
+//   }
+//   @include screen-lg {
+//     width: $min-width-large;
+//   }
+// }
+
+// .page-container-full {
+//   max-width: 100%;
+// }
+
+// .page-container:after,
+// .page-container:before,
+// .page-container-full:after,
+// .page-container-full:before {
+//   content: " ";
+//   display: table;
+// }
+
+// .row {
+//   @include row();
+// }
+
+// .col-center {
+//   float: none !important;
+//   margin-left: auto !important;
+//   margin-right: auto !important;
+// }
+
+// .col-full-height {
+//   height: 100%;
+// }
+
+// // Extra small
+// @include screen-xs {
+//   @include column-omega(xs);
+//   @include grid-omega(xs);
+// }
+
+// @include screen-xs-min {
+//   @include grid-core(xs);
+// }
+
+// // Small
+// @include screen-sm {
+//   @include grid-omega(sm);
+// }
+
+// @include screen-sm-max {
+//   @include column-omega(sm);
+// }
+
+// @include screen-sm-min {
+//   @include grid-core(sm);
+// }
+
+// // Medium
+// @include screen-md {
+//   @include grid-omega(md);
+// }
+
+// @include screen-md-max {
+//   @include column-omega(md);
+// }
+
+// @include screen-md-min {
+//   @include grid-core(md);
+// }
+
+// // Large
+// @include screen-lg {
+//   @include column-omega(lg);
+//   @include grid-core(lg);
+//   @include grid-omega(lg);
+// }

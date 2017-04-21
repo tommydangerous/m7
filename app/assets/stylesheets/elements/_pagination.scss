@@ -1,0 +1,35 @@
+.pagination {
+
+  span {
+    margin-right: $spacing * 0.5;
+
+    &.next {
+      margin-right: 0;
+    }
+  }
+
+  .gap {
+    padding: 0 $spacing * 0.25;
+  }
+
+  a,
+  .current {
+    background-color: $white;
+    border: 1px solid $input-border-color;
+    padding: $spacing * 0.25 $spacing * 0.5;
+
+    &:hover {
+      border-color: $muted-color;
+      text-decoration: none;
+    }
+  }
+
+  .current {
+    background-color: $border-color;
+
+    &:hover {
+      cursor: default;
+      border-color: $input-border-color;
+    }
+  }
+}

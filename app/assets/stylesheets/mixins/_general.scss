@@ -1,0 +1,92 @@
+@mixin browser($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+@mixin blur {
+  @include browser(filter, blur(5px));
+}
+
+@mixin display-flex {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+}
+
+@mixin display-flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flexbox;
+}
+
+@mixin display-horizontal {
+  @include display-flexbox;
+  @include browser(box-orient, horizontal);
+}
+
+@mixin gradient($startColor, $endColor) {
+  background: -webkit-linear-gradient($startColor, $endColor);
+  background: -moz-linear-gradient($startColor, $endColor);
+  background: -o-linear-gradient($startColor, $endColor);
+  background: linear-gradient($startColor, $endColor);
+}
+
+@mixin background-image-default {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin border-radius {
+  @include browser(border-radius, 2px);
+}
+
+@mixin border-bottom-left-radius {
+  -webkit-border-bottom-left-radius: 2px;
+  -moz-border-radius-bottomleft: 2px;
+  -o-border-bottom-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+@mixin border-bottom-right-radius {
+  -webkit-border-bottom-right-radius: 2px;
+  -moz-border-radius-bottomright: 2px;
+  -o-border-bottom-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+@mixin border-top-left-radius {
+  -webkit-border-top-left-radius: 2px;
+  -moz-border-radius-topleft: 2px;
+  -o-border-top-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+
+@mixin border-top-right-radius {
+  -webkit-border-top-right-radius: 2px;
+  -moz-border-radius-topright: 2px;
+  -o-border-top-right-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+@mixin clearfix {
+  &:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+}
+
+@mixin text-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin transition {
+  @include browser(transition, 0.1s all linear);
+}

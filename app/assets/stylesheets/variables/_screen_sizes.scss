@@ -1,0 +1,11 @@
+$slack: 40px * 2;
+
+$min-width-extra-small: 0px;
+$min-width-small: 320px + $slack;
+$min-width-medium: 640px + $slack;
+$min-width-large: 960px + $slack;
+
+$max-width: $min-width-large + 280px;
+
+// Additional styles below this line
+//------------------------------------------------------------------------------

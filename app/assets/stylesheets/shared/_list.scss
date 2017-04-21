@@ -1,0 +1,14 @@
+ol,
+ul {
+  margin: 0;
+  padding-left: $spacing * 1.25;
+}
+
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list__item {
+  padding: $spacing * 0.5;
+}

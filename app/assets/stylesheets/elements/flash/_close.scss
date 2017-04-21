@@ -1,0 +1,23 @@
+$i-size: $spacing * 0.75;
+
+.flash__close {
+  display: block;
+  height: $spacing;
+  position: absolute;
+  right: $page-side-spacing;
+  top: $page-side-spacing;
+  width: $spacing;
+
+  i {
+    color: $black;
+    font-size: $i-size;
+    opacity: 0.25;
+    position: absolute;
+    right: ($spacing - $i-size) * 0.5;
+    top: ($spacing - $i-size) * 0.5;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

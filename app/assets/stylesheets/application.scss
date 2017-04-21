@@ -1,0 +1,32 @@
+// Libraries
+// -----------------------------------------------------------------------------
+// @import "bourbon";
+// @import "font-awesome";
+// @import "neat";
+
+// Bootstrap libraries
+// -----------------------------------------------------------------------------
+// @import "bootstrap-sprockets";
+// @import "bootstrap/variables";
+// @import "bootstrap/glyphicons";
+
+// Fonts and utilities
+// -----------------------------------------------------------------------------
+@import "fonts/font_families";
+@import "functions/all";
+@import "variables/all";
+@import "mixins/all";
+
+// UI elements
+// -----------------------------------------------------------------------------
+@import "shared/all";
+@import "elements/all";
+@import "jquery/all";
+
+// Specific views
+// -----------------------------------------------------------------------------
+@import "views/application/all";
+
+// HTML and body
+// -----------------------------------------------------------------------------
+@import "main";
