@@ -13,6 +13,7 @@ Web client for the Minute7 application.
 - [ ] Uncomment lines in `application.scss`
 - [ ] Uncomment lines in `_media_queries.scss`
 - [ ] Uncomment lines in `_responsiveness.scss`
+- [ ] Add `react-router`
 
 ## Todos
 - [ ] Remove ActiveRecord

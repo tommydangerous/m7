@@ -2,12 +2,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import * as postActionCreators from '../action_creators/posts';
+import * as postActionCreators from '../../../../action_creators/postActionCreators';
 
-import Post from '../components/Post';
+import Post from './Post';
 
 const mapStateToProps = state => ({
-  loading: state.loading,
   posts: state.posts,
 });
 

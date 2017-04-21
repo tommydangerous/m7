@@ -3,10 +3,10 @@ import {
   POSTS_RECEIVED,
   POSTS_REMOVE_POST,
   POSTS_REQUESTED,
-} from '../actions/posts';
+} from '../actions/postActions';
 
 // Utils
-import { combine } from '../shared/utils/ReducerUtils';
+import { combine } from '../utils/reducer';
 
 const RESET_STATE = {
   loading: false,

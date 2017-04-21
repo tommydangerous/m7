@@ -1,8 +1,8 @@
 import React from 'react';
 
 // Components
-import FetchPostsButton from '../containers/FetchPostsButton';
-import Posts from '../containers/Posts';
+import FetchPostsButton from './FetchPostsButton';
+import Posts from './Posts';
 
 export default function App() {
   return (

@@ -4,13 +4,10 @@ import React from 'react';
 // Stores
 import store from '../stores/store';
 
-// Components
-import App from '../components/App';
-
-export default function Root() {
+export default function Root({ app }) {
   return (
     <Provider store={store}>
-      <App />
+      {app}
     </Provider>
   );
 }

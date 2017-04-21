@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 
 // Action Creators
-import { fetchPosts } from '../action_creators/posts';
+import { fetchPosts } from '../../../../action_creators/postActionCreators';
 
 function FetchPostsButton({ dispatch }) {
   const onClick = () => {

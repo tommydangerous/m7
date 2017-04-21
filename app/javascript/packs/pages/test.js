@@ -1,1 +1,1 @@
-require('pages/test');
+require('apps/pages/test');

@@ -6,7 +6,7 @@ import {
   POSTS_RECEIVED,
   POSTS_REMOVE_POST,
   POSTS_REQUESTED,
-} from '../actions/posts';
+} from '../actions/postActions';
 
 export function fetchPosts(subreddit) {
   return function(dispatch) {
