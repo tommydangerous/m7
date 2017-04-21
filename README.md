@@ -18,3 +18,8 @@ $ bundle exec foreman start -f Procfile.dev
 1. Rails
 1. React
 1. Redux
+
+## Deploy
+```
+$ bundle exec rake assets:precompile RAILS_ENV=production
+$ bundle exec foreman start

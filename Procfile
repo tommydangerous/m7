@@ -1,1 +1,1 @@
-web: bundle exec puma -p $PORT
+web: RAILS_ENV=production puma -p $PORT
