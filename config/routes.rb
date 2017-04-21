@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get "login", to: "sessions#login"
 
   get "test", to: "pages#test"
+
+  resources :expenses, only: :index
 end

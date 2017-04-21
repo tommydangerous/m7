@@ -15,6 +15,7 @@ Web client for the Minute7 application.
 - [ ] Uncomment lines in `_responsiveness.scss`
 - [ ] Add `react-router`
 - [ ] `npm install --save classnames`
+- [ ] `npm install --save moment`
 
 ## Development TODOs
 - [x] Login UI

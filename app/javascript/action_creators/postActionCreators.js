@@ -2,7 +2,6 @@ import fetch from 'isomorphic-fetch';
 
 // Actions
 import {
-  POSTS_FETCH,
   POSTS_RECEIVED,
   POSTS_REMOVE_POST,
   POSTS_REQUESTED,

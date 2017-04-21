@@ -4,7 +4,7 @@ import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 // Reducers
-import rootReducer from '../reducers/root';
+import rootReducer from '../reducers/rootReducer';
 
 const loggerMiddleware = createLogger();
 const enhancer = compose(
