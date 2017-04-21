@@ -3,7 +3,7 @@
 ## Description
 Web client for the Minute7 application.
 
-## Todos
+## Setup TODOS
 - [ ] `gem "bitters"`
 - [ ] `gem "bootstrap-sass"`
 - [ ] `gem "bourbon"`
@@ -16,15 +16,20 @@ Web client for the Minute7 application.
 - [ ] Add `react-router`
 - [ ] `npm install --save classnames`
 
-## Todos
+## Development TODOs
+- [x] Login UI
+- [ ] Login API
+- [ ] Expensing UI
+- [ ] Expensing API
+- [ ] Time tracking UI
+- [ ] Time tracking API
+
+## DevOps TODOs
 - [ ] Remove ActiveRecord
 - [ ] Launch EC2 instance
 - [ ] Setup Nginx
 - [ ] Setup Puma
 - [ ] Deploy to production
-- [ ] Login
-- [ ] Expensing
-- [ ] Time tracking
 - [ ] Use Docker
 
 ## Setup
