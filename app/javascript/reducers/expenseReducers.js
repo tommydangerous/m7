@@ -7,10 +7,26 @@ import {
 
 const mockExpenses = [
   {
-    employee: { id: 1, first_name: 'Tommy' },
+    amount: 525.50,
+    customer_id: 109,
+    date: '2017-12-25',
+    description: 'We bought Nobu for everyone.',
+    expenses_grouping_id: 1448,
+    id: 123,
+    qb_account_id: 431,
+    qb_class_id: 1559,
+    vendor_id: 2530,
   },
   {
-    employee: { id: 2, first_name: 'Kylo' },
+    amount: 25.50,
+    customer_id: 19,
+    date: '2017-12-25',
+    description: 'Drinks for everyone.',
+    expenses_grouping_id: 148,
+    id: 13,
+    qb_account_id: 31,
+    qb_class_id: 59,
+    vendor_id: 530,
   },
 ];
 

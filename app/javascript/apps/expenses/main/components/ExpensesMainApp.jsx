@@ -4,20 +4,33 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
-import { rootSelector } from '../../../../selectors/expenseSelectors';
+import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
+import * as expenseRootSelector from '../../../../selectors/expenseSelectors';
+import * as modalRootSelector from '../../../../selectors/modalSelectors';
 
 import ExpensesTable from './ExpensesTable';
+import Form from './Form';
+import Modal from '../../../../components/Modal';
 
 const mapStateToProps = state => ({
-  expenses: rootSelector(state).expenses,
-  loading: rootSelector(state).loading,
+  expenses: expenseRootSelector.rootSelector(state).expenses,
+  loading: expenseRootSelector.rootSelector(state).loading,
+  modalVisible: modalRootSelector.rootSelector(state).visible,
 });
 
 const mapDispatchToProps = dispatch => ({
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
+  modalActions: bindActionCreators(modalActionCreators, dispatch),
 });
 
 class ExpensesMainApp extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show: false,
+    };
+  }
   componentDidMount() {
     const { expenseActions } = this.props;
     expenseActions.fetchExpenses({
@@ -27,11 +40,34 @@ class ExpensesMainApp extends React.Component {
   }
 
   render() {
-    const { expenses, loading } = this.props;
+    const {
+      expenses,
+      loading,
+      modalActions,
+      modalVisible,
+    } = this.props;
 
     return (
       <div className="page-container">
+        <a
+          className="btn btn-primary"
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            modalActions.show();
+          }}
+        >
+          Add expense
+        </a>
+
+        <h1>
+          Expenses
+        </h1>
         <ExpensesTable expenses={expenses} loading={loading} />
+
+        <Modal onClose={modalActions.hide} visible={modalVisible}>
+          <Form />
+        </Modal>
       </div>
     );
   }

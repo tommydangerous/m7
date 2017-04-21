@@ -3,11 +3,34 @@ import React from 'react';
 
 import SimpleTable from '../../../../components/SimpleTable';
 
+const TABLE_HEADERS = [
+  'Amount',
+  'Customer',
+  'Date',
+  'Description',
+  'Group',
+  'ID',
+  'QB ID',
+  'QB Class',
+  'Vendor',
+  'Edit',
+];
+
 const renderTableRow = (object) => {
   return (
-    <tr key={object.employee.id}>
-      <td>{object.employee.first_name}</td>
-      <td>{object.employee.id}</td>
+    <tr key={object.id}>
+      <td>{`$${object.amount}`}</td>
+      <td>{object.customer_id}</td>
+      <td>{object.date}</td>
+      <td>{object.description}</td>
+      <td>{object.expenses_grouping_id}</td>
+      <td>{object.id}</td>
+      <td>{object.qb_account_id}</td>
+      <td>{object.qb_class_id}</td>
+      <td>{object.vendor_id}</td>
+      <td>
+        <a href="#">Edit</a>
+      </td>
     </tr>
   );
 };
@@ -18,7 +41,7 @@ export default function ExpensesTable({ expenses, loading }) {
       <SimpleTable
         objects={expenses}
         renderTableRow={renderTableRow}
-        tableHeaders={['Name', 'ID']}
+        tableHeaders={TABLE_HEADERS}
       />
     </div>
   );
