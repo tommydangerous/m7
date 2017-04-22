@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 
 import * as loginActionCreators from '../../../../action_creators/loginActionCreators';
+import LoginForm from './LoginForm';
 
 const mapStateToProps = state => ({
   login: state.login,
@@ -22,41 +23,16 @@ function LoginApp({ login, loginActions }) {
 
   return (
     <div className="page-container">
-      <div className="panel panel-body">
-        <h1>Login</h1>
-        <form
-          action="#"
-          method="POST"
-          onSubmit={(e) => {
-            e.preventDefault();
-            loginActions.login();
-          }}
-        >
-          <input
-            className="space-1"
-            onChange={(e) => loginActions.updateInputValue('email', e.target.value)}
-            placeholder="Email"
-            type="text"
-            value={email}
+      <div className="row">
+        <div className="col-sm-6 col-center">
+          <LoginForm
+            email={email}
+            loading={loading}
+            onInputChange={loginActions.updateInputValue}
+            onSubmit={loginActions.login}
+            password={password}
           />
-
-          <input
-            className="space-1"
-            autoComplete="off"
-            onChange={(e) => loginActions.updateInputValue('password', e.target.value)}
-            placeholder="Password"
-            type="password"
-            value={password}
-          />
-
-          <button
-            className={`btn ${loading ? 'loading' : ''}`}
-            disabled={loading}
-            onClick={loginActions.login}
-          >
-            Login
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

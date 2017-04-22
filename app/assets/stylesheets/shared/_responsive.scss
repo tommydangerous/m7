@@ -1,4 +1,4 @@
-$grid-columns: 12;
+// $grid-columns: 12;
 
 // @mixin grid-core($size) {
 //   @for $i from 1 through $grid-columns {
@@ -37,6 +37,8 @@ $grid-columns: 12;
 
 .page-container,
 .page-container-full {
+  margin-left: auto;
+  margin-right: auto;
   padding-left: $page-side-spacing;
   padding-right: $page-side-spacing;
   width: auto;
@@ -68,15 +70,15 @@ $grid-columns: 12;
 //   @include row();
 // }
 
-.col-center {
-  float: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
+// .col-center {
+//   float: none !important;
+//   margin-left: auto !important;
+//   margin-right: auto !important;
+// }
 
-.col-full-height {
-  height: 100%;
-}
+// .col-full-height {
+//   height: 100%;
+// }
 
 // // Extra small
 // @include screen-xs {

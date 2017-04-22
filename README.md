@@ -3,20 +3,6 @@
 ## Description
 Web client for the Minute7 application.
 
-## Setup TODOS
-- [ ] `gem "bitters"`
-- [ ] `gem "bootstrap-sass"`
-- [ ] `gem "bourbon"`
-- [ ] `gem "flutie"`
-- [ ] `gem "font-awesome-rails"`
-- [ ] `gem "refills"`
-- [ ] Uncomment lines in `application.scss`
-- [ ] Uncomment lines in `_media_queries.scss`
-- [ ] Uncomment lines in `_responsiveness.scss`
-- [ ] Add `react-router`
-- [ ] `npm install --save classnames`
-- [ ] `npm install --save moment`
-
 ## Development TODOs
 - [x] Login UI
 - [ ] Login API

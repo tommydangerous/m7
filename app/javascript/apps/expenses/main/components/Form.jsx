@@ -1,21 +1,46 @@
 import React from 'react';
 
+// import SimpleForm from '../../../../components/SimpleForm';
+
+const FIELDS = [
+  {
+    label: 'Name of pickup location',
+    name: 'name',
+    type: 'text',
+  },
+  {
+    defaultValue: '',
+    label: 'Client name',
+    name: 'agent_client_id',
+    options: [
+      {
+        text: 'blade',
+        value: 1,
+      },
+      {
+        text: 'gun',
+        value: 2,
+      },
+    ],
+    type: 'select',
+  },
+  {
+    label: 'Approval required?',
+    name: 'approval_required',
+    type: 'checkbox',
+  },
+];
+
+/*
+  <SimpleForm
+      header="Add a new expense"
+      fields={FIELDS}
+      onSubmitForm={() => console.log('hello')}
+    />
+*/
+
 export default function Form({}) {
   return (
-    <div className="panel-body">
-      <h3 className="space-top-4">
-        Congratulations!{""}
-      </h3>
-      <h3>
-        You have published
-      </h3>
-      <div className="space-2 space-top-4">
-        Now the whole world can experience this activity.
-        <br />
-      </div>
-      <a className="btn btn-special" href="/bookings/requests/pending">
-        View Booking Requests
-      </a>
-    </div>
+    <h1>Hello</h1>
   );
 }

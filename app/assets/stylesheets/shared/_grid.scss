@@ -1,0 +1,83 @@
+$grid-columns: 12;
+
+$grid-small: (
+  media: $min-width-small,
+);
+$grid-medium: (
+  media: $min-width-medium,
+);
+$grid-large: (
+  media: $min-width-large,
+);
+
+@mixin grid-core($size) {
+  @for $i from 1 through $grid-columns {
+    .col-#{$size}-#{$i} {
+      @include grid-column($i);
+    }
+
+    .col-#{$size}-pull-#{$i} {
+      @include grid-push($i * -1);
+    }
+
+    .col-#{$size}-shift-left-#{$i} {
+      @include grid-shift($i * -1);
+    }
+
+    .col-#{$size}-push-#{$i} {
+      @include grid-push($i);
+    }
+
+    .col-#{$size}-shift-right-#{$i} {
+      @include grid-shift($i);
+    }
+  }
+}
+
+.row {
+  @include grid-container;
+}
+
+@include grid-media($grid-small){
+  @include grid-core(sm);
+}
+
+@include grid-media($grid-medium){
+  @include grid-core(md);
+}
+
+@include grid-media($grid-large){
+  @include grid-core(lg);
+}
+
+.col-center {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.col-collapse {
+  @include grid-collapse;
+}
+
+.col-visual {
+  @include grid-visual;
+}
+
+.col-sm-collapse {
+  @include screen-sm-max {
+    @include grid-collapse;
+  }
+}
+
+.col-md-collapse {
+  @include screen-md-max {
+    @include grid-collapse;
+  }
+}
+
+.col-lg-collapse {
+  @include screen-lg {
+    @include grid-collapse;
+  }
+}
