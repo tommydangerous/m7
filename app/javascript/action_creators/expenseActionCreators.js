@@ -18,7 +18,7 @@ export function fetchExpenses(query = {}) {
   return function(dispatch) {
     dispatch(requested());
     return resource.index(queryTransformed)
-      .then(response => response.json())
+      .then(response => z)
       .then(json => dispatch(received(json)));
   };
 }

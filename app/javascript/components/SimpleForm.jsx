@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-// import cx from 'classnames';
+import cx from 'classnames';
 import React from 'react';
 
 // Utils
@@ -12,15 +12,7 @@ import SimpleCheckbox from './forms/SimpleCheckbox';
 import SimpleSelectField from './forms/SimpleSelectField';
 import SimpleTextField from './forms/SimpleTextField';
 
-const propTypes = {
-  header: PropTypes.string,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClickCancel: PropTypes.func,
-  onSubmitForm: PropTypes.func.isRequired,
-  submitFormButtonText: PropTypes.string,
-};
-
-class SimpleForm extends React.Component {
+export default class SimpleForm extends React.Component {
   constructor() {
     super();
     this.onAutocompleteLocation = this.onAutocompleteLocation.bind(this);
@@ -276,6 +268,10 @@ class SimpleForm extends React.Component {
   }
 };
 
-SimpleForm.propTypes = propTypes;
-
-module.exports = SimpleForm;
+SimpleForm.propTypes = {
+  header: PropTypes.string,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClickCancel: PropTypes.func,
+  onSubmitForm: PropTypes.func.isRequired,
+  submitFormButtonText: PropTypes.string,
+};

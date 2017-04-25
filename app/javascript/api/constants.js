@@ -1,5 +1,5 @@
-export const API_KEY = 'some_api_key';
 export const BASE_PATH = 'www.minute7.com';
+export const GET = 'GET';
 export const FORMAT = 'json';
+export const POST = 'POST';
 export const SCHEME = 'https';
-export const SIGNATURE = 'some_signature';

@@ -1,4 +1,9 @@
 import {
+  LOCAL_STORAGE_KEY_SESSION,
+  LOCAL_STORAGE_KEY_USER,
+} from '../utils/constants';
+import {
+  LOGIN_RECEIVED,
   LOGIN_REQUESTED,
   LOGIN_VALUE_CHANGED,
 } from '../actions/loginActions';
@@ -8,6 +13,8 @@ import { combine } from '../utils/reducer';
 const RESET_STATE = {
   loading: false,
   password: '',
+  session: null,
+  user: null,
 };
 const INITIAL_STATE = combine(RESET_STATE, {
   email: '',
@@ -16,6 +23,7 @@ const INITIAL_STATE = combine(RESET_STATE, {
 export default function reducers(state = INITIAL_STATE, action) {
   const {
     key,
+    login,
     type,
     value,
   } = action;
@@ -26,6 +34,15 @@ export default function reducers(state = INITIAL_STATE, action) {
   } = state;
 
   switch (type) {
+    case LOGIN_RECEIVED: {
+      const {
+        AccountUser: user,
+        session,
+      } = login;
+      localStorage.setItem(LOCAL_STORAGE_KEY_SESSION, session);
+      localStorage.setItem(LOCAL_STORAGE_KEY_USER, user);
+      return combine(state, { session, user });
+    }
     case LOGIN_REQUESTED: {
       return combine(state, INITIAL_STATE);
     }

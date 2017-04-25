@@ -9,16 +9,18 @@ export default function LoginForm({
   onInputChange,
   onSubmit,
 }) {
+  const submit = (e) => {
+    e.preventDefault();
+    onSubmit({ email, password });
+  }
+
   return (
     <div>
       <h1>Login</h1>
       <form
         action="#"
         method="POST"
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit();
-        }}
+        onSubmit={submit}
       >
         <input
           className="space-1"
@@ -40,7 +42,7 @@ export default function LoginForm({
         <button
           className={cx('btn', { loading })}
           disabled={loading}
-          onClick={onSubmit}
+          onClick={submit}
         >
           Login
         </button>

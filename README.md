@@ -32,12 +32,6 @@ This will run Rails server, webpack dev server, and webpack watcher for asset bu
 $ bundle exec foreman start -f Procfile.dev
 ```
 
-## Technology stack
-1. Webpack
-1. Rails
-1. React
-1. Redux
-
 ## Deploy
 1. Precompile assets
 1. Deploy master to production server (todo)
@@ -47,3 +41,12 @@ $ bundle exec foreman start -f Procfile.dev
 $ bundle exec rake assets:precompile RAILS_ENV=production
 $ bundle exec foreman start
 ```
+
+## Technology stack
+1. Webpack
+1. Rails
+1. React
+1. Redux
+
+## Problems
+1. Where to store the signature?

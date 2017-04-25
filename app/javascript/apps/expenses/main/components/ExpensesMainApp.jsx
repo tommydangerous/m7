@@ -9,7 +9,7 @@ import * as expenseRootSelector from '../../../../selectors/expenseSelectors';
 import * as modalRootSelector from '../../../../selectors/modalSelectors';
 
 import ExpensesTable from './ExpensesTable';
-import Form from './Form';
+import ExpenseForm from './ExpenseForm';
 import Modal from '../../../../components/Modal';
 
 const mapStateToProps = state => ({
@@ -66,7 +66,7 @@ class ExpensesMainApp extends React.Component {
         <ExpensesTable expenses={expenses} loading={loading} />
 
         <Modal onClose={modalActions.hide} visible={modalVisible}>
-          <Form />
+          <ExpenseForm />
         </Modal>
       </div>
     );
