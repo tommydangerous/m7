@@ -5,7 +5,7 @@ Web client for the Minute7 application.
 
 ## Development TODOs
 - [x] Login UI
-- [ ] Login API
+- [x] Login API
 - [ ] Expensing UI
 - [ ] Expensing API
 - [ ] Time tracking UI
