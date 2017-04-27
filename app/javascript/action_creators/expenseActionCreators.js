@@ -16,7 +16,7 @@ export function createExpense(payload) {
   return dispatch => {
     dispatch(requestedCreate());
     return new Promise((resolve, reject) => {
-      dispatch(receivedCreate({ expense: { ...payload, id: 777 } }));
+      dispatch(receivedCreate({ expense: { ...payload, id: String(new Date()) } }));
     });
   }
 

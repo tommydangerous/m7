@@ -55,7 +55,7 @@ class ExpensesMainApp extends React.Component {
 
     return (
       <div className="page-container">
-        <div className="row space-top-lg">
+        <div className="row space-bottom-lg space-top-lg">
           <div className="col-sm-12">
             <a
               className="btn btn-primary pull-right"
