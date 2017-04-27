@@ -65,8 +65,8 @@ export default class SimpleForm extends React.Component {
     const promise = this.props.onSubmitForm(this.submitFormPayload());
 
     promise.then(
-      function(options) {
-        _this.reset(options.response);
+      function(opts) {
+        _this.reset(opts ? opts.response : {});
       },
       function(xhr) {
         _this.setState({

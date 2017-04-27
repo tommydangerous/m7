@@ -12,11 +12,24 @@ import {
 
 const resource = new Resource({ name: 'expenses' });
 
+const mockExpense = (payload) => {
+  return {
+    ...payload,
+    id: String(new Date()),
+  };
+}
+
 export function createExpense(payload) {
   return dispatch => {
     dispatch(requestedCreate());
     return new Promise((resolve, reject) => {
-      dispatch(receivedCreate({ expense: { ...payload, id: String(new Date()) } }));
+      const expense = mockExpense(payload);
+      dispatch(receivedCreate({ expense }));
+      if (true) {
+        resolve({ expense });
+      } else {
+        reject({});
+      }
     });
   }
 

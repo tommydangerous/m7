@@ -62,10 +62,9 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
     }
     case EXPENSES_RECEIVED_CREATED: {
-      const dict = combine({}, expensesById);
-      dict[expense.id] = expense;
-      console.log(dict);
-      return combine(combine(state, RESET_STATE), { expensesById: dict });
+      const expensesByIdUpdated = { ...expensesById };
+      expensesByIdUpdated[expense.id] = expense;
+      return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
     }
     case EXPENSES_REQUESTED: {
       return combine(state, { loading: true });

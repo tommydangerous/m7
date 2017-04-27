@@ -81,12 +81,12 @@ class ExpensesMainApp extends React.Component {
             loading={loading}
             onClickCancel={modalActions.hide}
             onSubmitForm={(payload) => {
-              console.log(payload);
               // return new Promise((resolve, reject) => {
               //   expenseActions.createExpense(payload).
               //     then(response => resolve(response), xhr => reject(xhr));
               // });
-              return expenseActions.createExpense(payload);
+              return expenseActions.createExpense(payload)
+                .then(response => modalActions.hide(), xhr => {});
             }}
           />
         </Modal>
