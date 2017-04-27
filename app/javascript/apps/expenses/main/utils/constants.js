@@ -1,8 +1,4 @@
-import React from 'react';
-
-import SimpleForm from '../../../../components/SimpleForm';
-
-const FIELDS = [
+export const CREATE_FORM_FIELDS = [
   {
     defaultValue: '',
     label: 'Vendor',
@@ -96,17 +92,15 @@ const FIELDS = [
   },
 ];
 
-export default function Form({}) {
-  return (
-    <SimpleForm
-      header="Add a new expense"
-      fields={FIELDS}
-      onSubmitForm={(payload) => {
-        return new Promise((resolve, reject) => {
-          console.log(payload);
-          resolve({});
-        });
-      }}
-    />
-  );
-}
+export const TABLE_HEADERS = [
+  'Amount',
+  'Customer',
+  'Date',
+  'Description',
+  'Group',
+  'ID',
+  'QB ID',
+  'QB Class',
+  'Vendor',
+  'Edit',
+];

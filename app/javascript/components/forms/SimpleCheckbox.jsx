@@ -17,7 +17,6 @@ class SimpleCheckbox extends React.Component {
   }
 
   onChangeInput(e) {
-    console.log(e.target.value);
     this.props.onChangeInput(e);
   }
 

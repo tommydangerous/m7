@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import { isLoggedIn } from '../../../../stores/appLocalStorage';
 import * as loginActionCreators from '../../../../action_creators/loginActionCreators';
 import LoginForm from './LoginForm';
 
@@ -14,12 +15,21 @@ const mapDispatchToProps = dispatch => ({
   loginActions: bindActionCreators(loginActionCreators, dispatch),
 });
 
-function LoginApp({ login, loginActions }) {
+function LoginApp({ login, loginActions, redirect_url }) {
   const {
     email,
     loading,
     password,
   } = login;
+
+  if (isLoggedIn()) {
+    if (redirect_url) {
+      window.location = redirect_url;
+    } else {
+      window.location = '/expenses';
+    }
+    return <div />;
+  }
 
   return (
     <div className="page-container">
@@ -42,12 +52,14 @@ LoginApp.propTypes = {
   email: PropTypes.string,
   loading: PropTypes.bool,
   password: PropTypes.string,
+  redirect_url: PropTypes.string,
 };
 
 LoginApp.defaultProps = {
   email: '',
   loading: false,
   password: '',
+  redirect_url: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginApp);

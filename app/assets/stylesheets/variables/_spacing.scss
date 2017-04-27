@@ -1,4 +1,8 @@
 $spacing: 20px;
+$spacing-increment: $spacing * 0.25;
+$spacing-sm: $spacing-increment * 3;
+$spacing-md: $spacing-increment * 5;
+$spacing-lg: $spacing-increment * 8;
 
 $page-side-spacing: $spacing * 0.75;
 

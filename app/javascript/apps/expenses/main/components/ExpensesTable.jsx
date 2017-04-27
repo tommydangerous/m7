@@ -1,20 +1,10 @@
 import { PropTypes } from 'prop-types';
+import cx from 'classnames';
 import React from 'react';
 
-import SimpleTable from '../../../../components/SimpleTable';
+import { TABLE_HEADERS } from '../utils/constants';
 
-const TABLE_HEADERS = [
-  'Amount',
-  'Customer',
-  'Date',
-  'Description',
-  'Group',
-  'ID',
-  'QB ID',
-  'QB Class',
-  'Vendor',
-  'Edit',
-];
+import SimpleTable from '../../../../components/SimpleTable';
 
 const renderTableRow = (object) => {
   return (
@@ -37,7 +27,7 @@ const renderTableRow = (object) => {
 
 export default function ExpensesTable({ expenses, loading }) {
   return (
-    <div className={`${loading ? '' : 'loading'}`}>
+    <div className={cx({ loading })}>
       <SimpleTable
         objects={expenses}
         renderTableRow={renderTableRow}

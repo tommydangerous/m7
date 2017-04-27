@@ -3,7 +3,6 @@ import 'whatwg-fetch';
 import {
   BASE_PATH,
   GET,
-  FORMAT,
   POST,
   SCHEME,
 } from './constants';
@@ -17,67 +16,41 @@ const hashToUrlParamsString = query => {
 
 const apiData = () => getBootstrapData('api');
 
-const fullPath = (resource, action) => {
+const fullPath = (path) => {
   const api = apiData();
   const str = hashToUrlParamsString({
     api_key: api.key,
-    // format: FORMAT,
     signature: api.signature,
   });
-  let url = `${SCHEME}://${BASE_PATH}/api/${resource}`;
-  if (action) {
-    url = `${url}/${action}`
-  }
+  const url = `${SCHEME}://${BASE_PATH}${path}`;
   return `${url}?${str}`;
 };
 
-const fullPathWithQuery = (resource, action, query = {}) => {
-  let url = fullPath(resource, action);
+const fullPathWithQuery = (path, query = {}) => {
+  let url = fullPath(path);
   if (Object.values(query).length >= 1) {
     url = `${url}&${hashToUrlParamsString(query)}`;
   }
   return url;
 };
 
-export default class Resource {
-  constructor(props) {
-    this.name = props.name;
-  }
-
-  create(payload = {}) {
-    return this._fetch({
-      action: null,
-      method: POST,
-      payload,
-    });
-  }
-
-  index(query = {}) {
-    return this._fetch({
-      action: 'view',
-      method: GET,
-      query,
-    });
-  }
-
-  _fetch(opts) {
+export default {
+  request(method, endpoint, opts = {}) {
     const {
-      action,
       headers,
-      method,
       payload,
       query,
     } = opts;
-    let initialUrl = fullPathWithQuery(this.name, action, query);
+    let initialUrl = fullPathWithQuery(endpoint, query);
     const extraUrlParams = {};
     if (isLoggedIn()) {
       const {
         session_id: sessionId,
         session_name: sessionName,
       } = getCurrentSession();
-      // rcgc19g3motgm5h5dt8fr97me4
       extraUrlParams.session_name = sessionName;
     }
+
     const data = {
       method: method,
       headers: {

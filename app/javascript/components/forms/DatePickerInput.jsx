@@ -32,7 +32,7 @@ export default class DatepickerInput extends React.Component {
   }
 
   componentDidMount() {
-    var _this = this;
+    const _this = this;
     $(this.refs[this.props.inputRef]).datepicker({
       dateFormat: _this.props.dateFormat,
       maxDate: _this.props.max_date,
@@ -73,14 +73,23 @@ export default class DatepickerInput extends React.Component {
     });
 
     if (this.props.inputOnChange) {
-      this.props.inputOnChange(date);
+      this.props.inputOnChange(this._formatDateForData(date));
     }
   }
 
   _formatDate(date) {
-    var values = date.split('-');
+    const values = date.split('-');
     if (values.length == 3) {
       return [values[1], values[0], values[2]].join('-');
+    } else {
+      return '';
+    }
+  }
+
+  _formatDateForData(date) {
+    const values = date.split('-');
+    if (values.length == 3) {
+      return [values[2], values[1], values[0]].join('-');
     } else {
       return '';
     }

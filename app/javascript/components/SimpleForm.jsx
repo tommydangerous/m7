@@ -17,6 +17,7 @@ export default class SimpleForm extends React.Component {
     super();
     this.onAutocompleteLocation = this.onAutocompleteLocation.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onClickCancel = this.onClickCancel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
     this.state = this.initialState();
@@ -25,7 +26,7 @@ export default class SimpleForm extends React.Component {
   initialState() {
     return {
       errors: null,
-      loading: false,
+      // loading: false,
       timestamp: new Date(),
     };
   }
@@ -47,6 +48,10 @@ export default class SimpleForm extends React.Component {
     this.state[e.target.name] = e.target.value;
   }
 
+  onChangeCheckbox(e) {
+    this.state[e.target.name] = !this.state[e.target.name];
+  }
+
   onClickCancel(e) {
     e.preventDefault();
     this.props.onClickCancel();
@@ -55,7 +60,7 @@ export default class SimpleForm extends React.Component {
   onSubmitForm(e) {
     // This method (this.props.onSubmitForm) needs to return a promise
     e.preventDefault();
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
     const _this = this;
     const promise = this.props.onSubmitForm(this.submitFormPayload());
 
@@ -109,7 +114,7 @@ export default class SimpleForm extends React.Component {
       <SimpleCheckbox
         defaultValue={this.props[hash.name]}
         name={hash.name}
-        onChangeInput={this.onChangeInput}
+        onChangeInput={this.onChangeCheckbox}
         value={this.props[hash.name]}
       />
     );
@@ -130,7 +135,7 @@ export default class SimpleForm extends React.Component {
   renderErrors() {
     if (this.state.errors) {
       return (
-        <div className="background-red panel-body-small space-1 text-center text-contrast">
+        <div className="background-red panel-body-small text-center text-contrast">
           {this.state.errors}
         </div>
       );
@@ -240,6 +245,10 @@ export default class SimpleForm extends React.Component {
   }
 
   render() {
+    const {
+      loading,
+    } = this.props;
+
     return (
       <div key={this.state.timestamp}>
         {this.renderErrors()}
@@ -255,7 +264,8 @@ export default class SimpleForm extends React.Component {
               <div>
                 {this.renderCancelButton()}
                 <button
-                  className={cx("btn btn-primary", { loading: this.state.loading })}
+                  className={cx("btn btn-primary", { loading: loading })}
+                  disabled={loading}
                 >
                   {this.props.submitFormButtonText ? this.props.submitFormButtonText : "Save"}
                 </button>
@@ -271,7 +281,12 @@ export default class SimpleForm extends React.Component {
 SimpleForm.propTypes = {
   header: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  loading: PropTypes.bool,
   onClickCancel: PropTypes.func,
   onSubmitForm: PropTypes.func.isRequired,
   submitFormButtonText: PropTypes.string,
+};
+
+SimpleForm.defaultProps = {
+  loading: false,
 };

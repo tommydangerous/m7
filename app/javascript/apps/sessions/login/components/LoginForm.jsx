@@ -23,6 +23,7 @@ export default function LoginForm({
         onSubmit={submit}
       >
         <input
+          autoComplete="on"
           className="space-1"
           onChange={(e) => onInputChange('email', e.target.value)}
           placeholder="Email"
@@ -57,4 +58,4 @@ LoginForm.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
-}
+};

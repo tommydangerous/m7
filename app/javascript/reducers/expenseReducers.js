@@ -1,12 +1,15 @@
 import { combine } from '../utils/reducer';
 
 import {
+  EXPENSES_FAILED,
   EXPENSES_RECEIVED,
+  EXPENSES_RECEIVED_CREATED,
   EXPENSES_REQUESTED,
+  EXPENSES_REQUESTED_CREATED,
 } from '../actions/expenseActions';
 
-const mockExpenses = [
-  {
+const mockExpenses = {
+  123: {
     amount: 525.50,
     customer_id: 109,
     date: '2017-12-25',
@@ -17,7 +20,7 @@ const mockExpenses = [
     qb_class_id: 1559,
     vendor_id: 2530,
   },
-  {
+  13: {
     amount: 25.50,
     customer_id: 19,
     date: '2017-12-25',
@@ -28,26 +31,45 @@ const mockExpenses = [
     qb_class_id: 59,
     vendor_id: 530,
   },
-];
+};
 
 const RESET_STATE = {
   loading: false,
 };
 const INITIAL_STATE = combine(RESET_STATE, {
-  expenses: mockExpenses,
+  expensesById: mockExpenses,
 });
 
 export default function reducers(state = INITIAL_STATE, action) {
   const {
+    expense,
     expenses,
     type,
   } = action;
+  const {
+    expensesById,
+  } = state;
 
   switch (type) {
+    case EXPENSES_FAILED: {
+      return combine(state, { loading: false });
+    }
     case EXPENSES_RECEIVED: {
-      return combine(combine(state, RESET_STATE), { expenses });
+      const expensesByIdUpdated = { ...expensesById };
+      expenses.forEach(obj => {
+        expensesByIdUpdated[obj.id] = obj;
+      });
+      return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
+    }
+    case EXPENSES_RECEIVED_CREATED: {
+      const expensesByIdUpdated = { ...expensesById };
+      expensesByIdUpdated[expense.id] = expense;
+      return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
     }
     case EXPENSES_REQUESTED: {
+      return combine(state, { loading: true });
+    }
+    case EXPENSES_REQUESTED_CREATED: {
       return combine(state, { loading: true });
     }
     default: {

@@ -13,3 +13,7 @@ export function getBootstrapData(key) {
 
   return data;
 }
+
+export function getApiData(key) {
+  return getBootstrapData('api')[key];
+}

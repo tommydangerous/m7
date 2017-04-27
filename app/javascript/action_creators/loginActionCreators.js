@@ -1,4 +1,4 @@
-import Resource from '../api/Resource';
+import 'whatwg-fetch';
 
 import {
   LOGIN_RECEIVED,
@@ -6,14 +6,18 @@ import {
   LOGIN_VALUE_CHANGED,
 } from '../actions/loginActions';
 
-const resource = new Resource({ name: 'login' });
-
 export function login({ email, password }) {
   return function(dispatch) {
     dispatch(requested());
-    return resource.create({
-      email,
-      password,
+    return fetch('/login', {
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then(response => response.json())
       .then(json => dispatch(received(json)));
@@ -29,10 +33,11 @@ export function updateInputValue(key, value) {
 }
 
 function received(json) {
-  const { logininfo: login } = json;
+  const { session, user } = json;
   return {
     type: LOGIN_RECEIVED,
-    login,
+    session,
+    user,
   };
 }
 
