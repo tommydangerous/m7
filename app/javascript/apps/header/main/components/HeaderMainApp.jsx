@@ -10,6 +10,18 @@ export default function HeaderMainApp() {
   return (
     <ul className="nav pull-right list-unstyled">
       <li className="pull-left" id="app-header">
+        <a className="link-block link-reset"href="/timesheets">
+          Timesheets
+        </a>
+      </li>
+
+      <li className="pull-left" id="app-header">
+        <a className="link-block link-reset"href="/expenses">
+          Expenses
+        </a>
+      </li>
+
+      <li className="pull-left" id="app-header">
         <a className="link-block link-reset"href="/login">
           Log Out
         </a>

@@ -3,12 +3,13 @@ import { createGenericRequest } from './sharedActionCreators';
 import Resource from '../api/Resource';
 
 import {
-  EXPENSES_FAILED,
-  EXPENSES_FAILED_CREATED,
-  EXPENSES_RECEIVED,
-  EXPENSES_RECEIVED_CREATED,
-  EXPENSES_REQUESTED,
-  EXPENSES_REQUESTED_CREATED,
+  EXPENSES_FAILED_INDEX,
+  EXPENSES_FAILED_CREATE,
+  EXPENSES_RECEIVED_INDEX,
+  EXPENSES_RECEIVED_CREATE,
+  EXPENSES_REQUESTED_INDEX,
+  EXPENSES_REQUESTED_CREATE,
+  EXPENSES_UPDATED,
 } from '../actions/expenseActions';
 
 const resource = new Resource({ name: 'expenses' });
@@ -35,9 +36,9 @@ export function createExpense(payload) {
   // }
 
   return createGenericRequest('POST', '/api/expenses/add', { payload }, {
-    failedActionType: EXPENSES_FAILED_CREATED,
-    startedActionType: EXPENSES_REQUESTED_CREATED,
-    succeededActionType: EXPENSES_RECEIVED_CREATED,
+    failedActionType: EXPENSES_FAILED_CREATE,
+    startedActionType: EXPENSES_REQUESTED_CREATE,
+    succeededActionType: EXPENSES_RECEIVED_CREATE,
   });
 }
 
@@ -56,35 +57,42 @@ export function fetchExpenses(query = {}) {
   //     .then(json => dispatch(received(json)));
   // };
   return createGenericRequest('GET', '/api/expenses/view', { query }, {
-    failedActionType: EXPENSES_FAILED,
-    startedActionType: EXPENSES_REQUESTED,
-    succeededActionType: EXPENSES_RECEIVED,
+    failedActionType: EXPENSES_FAILED_INDEX,
+    startedActionType: EXPENSES_REQUESTED_INDEX,
+    succeededActionType: EXPENSES_RECEIVED_INDEX,
   });
+}
+
+export function updateAttributes(opts = {}) {
+  return {
+    type: EXPENSES_UPDATED,
+    ...opts,
+  };
 }
 
 function received(json) {
   const { expenses } = json;
   return {
-    type: EXPENSES_RECEIVED,
+    type: EXPENSES_RECEIVED_INDEX,
     expenses,
   };
 }
 
 function receivedCreate({ expense }) {
   return {
-    type: EXPENSES_RECEIVED_CREATED,
+    type: EXPENSES_RECEIVED_CREATE,
     expense,
   };
 }
 
 function requested() {
   return {
-    type: EXPENSES_REQUESTED,
+    type: EXPENSES_REQUESTED_INDEX,
   };
 }
 
 function requestedCreate() {
   return {
-    type: EXPENSES_REQUESTED_CREATED,
+    type: EXPENSES_REQUESTED_CREATE,
   };
 }

@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   get "test", to: "pages#test"
 
   resources :expenses, only: :index
+  resources :timesheets, only: :index
 end
