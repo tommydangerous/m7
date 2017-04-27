@@ -35,7 +35,7 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
     }
 
     return Promise.resolve(Api.request(httpMethod, endpoint, {
-      data,
+      ...data,
     }))
     .then(response => {
       if (succeededActionType) {

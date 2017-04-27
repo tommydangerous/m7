@@ -25,7 +25,7 @@ export default class SimpleForm extends React.Component {
 
   initialState() {
     return {
-      errors: null,
+      // errors: null,
       // loading: false,
       timestamp: new Date(),
     };
@@ -70,7 +70,7 @@ export default class SimpleForm extends React.Component {
       },
       function(xhr) {
         _this.setState({
-          errors: handleError(xhr),
+          // errors: handleError(xhr),
           loading: false,
         });
       });
@@ -78,8 +78,8 @@ export default class SimpleForm extends React.Component {
 
   submitFormPayload() {
     const payload = Object.assign({}, this.state);
-    delete payload['errors'];
-    delete payload['loading'];
+    // delete payload['errors'];
+    // delete payload['loading'];
     delete payload['timestamp'];
     return payload;
   }
@@ -133,10 +133,11 @@ export default class SimpleForm extends React.Component {
   }
 
   renderErrors() {
-    if (this.state.errors) {
+    const { error } = this.props;
+    if (error) {
       return (
         <div className="background-red panel-body-small text-center text-contrast">
-          {this.state.errors}
+          {error}
         </div>
       );
     }
@@ -279,6 +280,7 @@ export default class SimpleForm extends React.Component {
 };
 
 SimpleForm.propTypes = {
+  error: PropTypes.string,
   header: PropTypes.string,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool,
@@ -288,5 +290,9 @@ SimpleForm.propTypes = {
 };
 
 SimpleForm.defaultProps = {
+  header: null,
+  error: null,
   loading: false,
+  onClickCancel() {},
+  submitFormButtonText: null,
 };

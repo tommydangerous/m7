@@ -2,6 +2,7 @@ import { combine } from '../utils/reducer';
 
 import {
   EXPENSES_FAILED,
+  EXPENSES_FAILED_CREATED,
   EXPENSES_RECEIVED,
   EXPENSES_RECEIVED_CREATED,
   EXPENSES_REQUESTED,
@@ -34,7 +35,14 @@ const mockExpenses = {
 };
 
 const RESET_STATE = {
-  loading: false,
+  errors: {
+    create: null,
+    index: null,
+  },
+  loading: {
+    create: null,
+    index: null,
+  },
 };
 const INITIAL_STATE = combine(RESET_STATE, {
   expensesById: mockExpenses,
@@ -42,17 +50,29 @@ const INITIAL_STATE = combine(RESET_STATE, {
 
 export default function reducers(state = INITIAL_STATE, action) {
   const {
+    error,
     expense,
     expenses,
     type,
   } = action;
   const {
+    errors,
     expensesById,
+    loading,
   } = state;
 
   switch (type) {
     case EXPENSES_FAILED: {
-      return combine(state, { loading: false });
+      return combine(state, {
+        errors: { ...errors, index: error },
+        loading: { ...loading, index: false },
+      });
+    }
+    case EXPENSES_FAILED_CREATED: {
+      return combine(state, {
+        errors: { ...errors, create: error },
+        loading: { ...loading, create: false },
+      });
     }
     case EXPENSES_RECEIVED: {
       const expensesByIdUpdated = { ...expensesById };
@@ -67,10 +87,10 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
     }
     case EXPENSES_REQUESTED: {
-      return combine(state, { loading: true });
+      return combine(state, { loading: { ...loading, index: false } });
     }
     case EXPENSES_REQUESTED_CREATED: {
-      return combine(state, { loading: true });
+      return combine(state, { loading: { ...loading, create: false } });
     }
     default: {
       return state;

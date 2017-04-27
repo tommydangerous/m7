@@ -64,7 +64,16 @@ export default {
 
     if (payload) {
       // data.body = JSON.stringify(payload);
-      Object.keys(payload).forEach(key => extraUrlParams[key] = encodeURIComponent(payload[key]));
+      Object.keys(payload).forEach(key => {
+        const val1 = payload[key];
+        if (typeof val1 === "object") {
+          Object.keys(val1).forEach(key2 => {
+            extraUrlParams[`${key}[${key2}]`] = encodeURIComponent(val1[key2]);
+          });
+        } else {
+          extraUrlParams[key] = encodeURIComponent(val1);
+        }
+      });
     }
     if (Object.keys(extraUrlParams).length >= 1) {
       initialUrl = `${initialUrl}&${hashToUrlParamsString(extraUrlParams)}`;

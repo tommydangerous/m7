@@ -15,6 +15,7 @@ import Modal from '../../../../components/Modal';
 import SimpleForm from '../../../../components/SimpleForm';
 
 const mapStateToProps = state => ({
+  errors: expenseRootSelector.rootSelector(state).errors,
   expensesById: expenseRootSelector.rootSelector(state).expensesById,
   loading: expenseRootSelector.rootSelector(state).loading,
   modalVisible: modalRootSelector.rootSelector(state).visible,
@@ -43,6 +44,7 @@ class ExpensesMainApp extends React.Component {
 
   render() {
     const {
+      errors,
       expenseActions,
       expensesById,
       loading,
@@ -70,23 +72,33 @@ class ExpensesMainApp extends React.Component {
             <h1>
               Expenses
             </h1>
-            <ExpensesTable expenses={expenses} loading={loading} />
+            {errors.index && (
+              <div className="background-red panel-body-small space-1 text-center text-contrast">
+                {errors.index.message}
+              </div>
+            )}
+            <ExpensesTable expenses={expenses} loading={loading.index} />
           </div>
         </div>
 
         <Modal onClose={modalActions.hide} visible={modalVisible}>
           <SimpleForm
+            error={errors.create ? errors.create.message : null}
             header="Add a new expense"
             fields={CREATE_FORM_FIELDS}
-            loading={loading}
+            loading={loading.create}
             onClickCancel={modalActions.hide}
             onSubmitForm={(payload) => {
               // return new Promise((resolve, reject) => {
               //   expenseActions.createExpense(payload).
               //     then(response => resolve(response), xhr => reject(xhr));
               // });
-              return expenseActions.createExpense(payload)
-                .then(response => modalActions.hide(), xhr => {});
+              return expenseActions.createExpense({ 'TimeEntry': payload })
+                .then(response => {
+                  if (!error) {
+                    modalActions.hide();
+                  }
+                });
             }}
           />
         </Modal>
@@ -96,11 +108,13 @@ class ExpensesMainApp extends React.Component {
 }
 
 ExpensesMainApp.propTypes = {
+  error: PropTypes.object,
   expensesById: PropTypes.object,
-  loading: PropTypes.bool,
+  loading: PropTypes.object,
 };
 
 ExpensesMainApp.defaultProps = {
+  error: null,
   expensesById: {},
   loading: false,
 };

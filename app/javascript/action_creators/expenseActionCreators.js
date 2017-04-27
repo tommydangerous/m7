@@ -4,6 +4,7 @@ import Resource from '../api/Resource';
 
 import {
   EXPENSES_FAILED,
+  EXPENSES_FAILED_CREATED,
   EXPENSES_RECEIVED,
   EXPENSES_RECEIVED_CREATED,
   EXPENSES_REQUESTED,
@@ -20,24 +21,24 @@ const mockExpense = (payload) => {
 }
 
 export function createExpense(payload) {
-  return dispatch => {
-    dispatch(requestedCreate());
-    return new Promise((resolve, reject) => {
-      const expense = mockExpense(payload);
-      dispatch(receivedCreate({ expense }));
-      if (true) {
-        resolve({ expense });
-      } else {
-        reject({});
-      }
-    });
-  }
+  // return dispatch => {
+  //   dispatch(requestedCreate());
+  //   return new Promise((resolve, reject) => {
+  //     const expense = mockExpense(payload);
+  //     dispatch(receivedCreate({ expense }));
+  //     if (true) {
+  //       resolve({ expense });
+  //     } else {
+  //       reject({});
+  //     }
+  //   });
+  // }
 
-  // return createGenericRequest('POST', '/api/expenses/add', payload, {
-  //   // failedActionType: EXPENSES_FAILED,
-  //   startedActionType: EXPENSES_REQUESTED_CREATED,
-  //   succeededActionType: EXPENSES_RECEIVED_CREATED,
-  // });
+  return createGenericRequest('POST', '/api/expenses/add', { payload }, {
+    failedActionType: EXPENSES_FAILED_CREATED,
+    startedActionType: EXPENSES_REQUESTED_CREATED,
+    succeededActionType: EXPENSES_RECEIVED_CREATED,
+  });
 }
 
 export function fetchExpenses(query = {}) {
