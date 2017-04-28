@@ -19,6 +19,7 @@ Web client for the Minute7 application.
 ```
 $ gem install rails
 $ bundle install
+$ npm install
 ```
 
 ## Run development server
