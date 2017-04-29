@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def bootstrap_api_data
-    bootstrap_data("api", { key: ENV["API_KEY"], private_key: ENV['API_PRIVATE_KEY'] })
+    bootstrap_data("api", { clientKey: ENV["API_KEY"], privateKey: ENV['API_PRIVATE_KEY'] })
   end
 end

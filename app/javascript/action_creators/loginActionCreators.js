@@ -6,8 +6,8 @@ import {
   LOGIN_VALUE_CHANGED,
 } from '../actions/loginActions';
 
-export function login({ email, password }) {
-  return createGenericRequest('POST', '/api/login', { email, password }, {
+export function login(payload) {
+  return createGenericRequest('POST', '/api/login', { payload }, {
     startedActionType: LOGIN_REQUESTED,
     succeededActionType: LOGIN_RECEIVED,
   })

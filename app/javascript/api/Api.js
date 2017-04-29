@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import jsSHA from 'jssha';
 
 import {
   BASE_PATH,
@@ -7,80 +8,74 @@ import {
   SCHEME,
 } from './constants';
 
-import { getBootstrapData } from '../utils/bootstrapData';
+import { getApiData } from '../utils/bootstrapData';
 import { getCurrentSession, isLoggedIn } from '../stores/appLocalStorage';
 
-const hashToUrlParamsString = query => {
-  return Object.keys(query).map(key => `${key}=${query[key]}`).filter(s => s.length >= 1).join('&');
-};
+const BASE_URI = `${SCHEME}://${BASE_PATH}`;
 
-const apiData = () => getBootstrapData('api');
-
-const fullPath = (path) => {
-  const api = apiData();
-  const str = hashToUrlParamsString({
-    api_key: api.key,
-    signature: api.signature,
-  });
-  const url = `${SCHEME}://${BASE_PATH}${path}`;
-  return `${url}?${str}`;
-};
-
-const fullPathWithQuery = (path, query = {}) => {
-  let url = fullPath(path);
-  if (Object.values(query).length >= 1) {
-    url = `${url}&${hashToUrlParamsString(query)}`;
-  }
-  return url;
+const generateSignature = (pathWithQuery) => {
+  const stringForDigest = `${getApiData('privateKey')}${pathWithQuery}`;
+  const shaObj = new jsSHA('SHA-512', 'TEXT');
+  shaObj.update(stringForDigest);
+  return shaObj.getHash('HEX');
 };
 
 export default {
   request(method, endpoint, opts = {}) {
     const {
-      headers,
       payload,
       query,
     } = opts;
-    let initialUrl = fullPathWithQuery(endpoint, query);
-    const extraUrlParams = {};
-    if (isLoggedIn()) {
-      const {
-        session_id: sessionId,
-        session_name: sessionName,
-      } = getCurrentSession();
-      extraUrlParams.session_name = sessionName;
-    }
 
-    const data = {
-      method: method,
-      headers: {
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        // 'Content-Type': 'application/json',
-        // 'Cookie': `IMPRESARIO=${apiData().signature}`,
-        // 'Cookie': 'IMPRESARIO=hmiti3s5hp14mqrlfkop5eul62',
-      },
-      // encodeURIComponent()
+    let queryParams = {
+      api_key: getApiData('clientKey'),
     };
 
+    if (isLoggedIn()) {
+      queryParams = {
+        session_name: getCurrentSession().session_name,
+        ...queryParams,
+      };
+    }
+
     if (payload) {
-      // data.body = JSON.stringify(payload);
+      const transformedPayload = {};
       Object.keys(payload).forEach(key => {
         const val1 = payload[key];
         if (typeof val1 === "object") {
           Object.keys(val1).forEach(key2 => {
-            extraUrlParams[`${key}[${key2}]`] = encodeURIComponent(val1[key2]);
+            transformedPayload[`${key}[${key2}]`] = val1[key2];
           });
         } else {
-          extraUrlParams[key] = encodeURIComponent(val1);
+          transformedPayload[key] = val1;
         }
       });
+      queryParams = { ...transformedPayload, ...queryParams };
     }
-    if (Object.keys(extraUrlParams).length >= 1) {
-      initialUrl = `${initialUrl}&${hashToUrlParamsString(extraUrlParams)}`;
+
+    if (query) {
+      queryParams = { ...query, ...queryParams };
     }
-    if (headers) {
-      data.headers = Object.assign(data.headers, headers);
-    }
-    return fetch(initialUrl, data);
+
+    const data = {
+      method,
+    };
+
+    const urlParamsSortedByKey = Object.keys(queryParams)
+      .sort((a, b) => {
+        if (a > b) {
+          return 1;
+        } else if (a < b) {
+          return -1;
+        }
+        return 0;
+      })
+      .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
+      .join('&');
+
+    const pathWithQuery = `${endpoint}?${urlParamsSortedByKey}`;
+    const signature = generateSignature(pathWithQuery);
+
+    return fetch(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
   }
 }
