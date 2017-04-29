@@ -1,5 +1,4 @@
 import Api from '../api/Api';
-import Resource from '../api/Resource';
 
 export function requestFailed(type, error) {
   return {
@@ -37,9 +36,10 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
     return Promise.resolve(Api.request(httpMethod, endpoint, {
       ...data,
     }))
-    .then(response => {
+    .then(response => response.json())
+    .then(json => {
       if (succeededActionType) {
-        dispatch(requestSucceeded(succeededActionType, response, data));
+        dispatch(requestSucceeded(succeededActionType, json, data));
       }
     })
     .catch(error => {

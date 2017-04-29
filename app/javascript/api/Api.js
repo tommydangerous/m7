@@ -33,7 +33,7 @@ export default {
 
     if (isLoggedIn()) {
       queryParams = {
-        session_name: getCurrentSession().session_name,
+        session_name: getCurrentSession().session_id,
         ...queryParams,
       };
     }

@@ -15,6 +15,11 @@ export function isLoggedIn() {
   return !!getCurrentSession() && !!getCurrentUser();
 }
 
+export function logIn({ session, user }) {
+  setObject(LOCAL_STORAGE_KEY_SESSION, session);
+  setObject(LOCAL_STORAGE_KEY_USER, user);
+}
+
 export function logOut() {
   localStorage.removeItem(LOCAL_STORAGE_KEY_SESSION);
   localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
@@ -25,4 +30,8 @@ function getObject(key) {
   if (obj !== 'undefined') {
     return JSON.parse(obj);
   }
+}
+
+function setObject(key, object) {
+  localStorage.setItem(key, JSON.stringify(object));
 }
