@@ -1,4 +1,4 @@
-import 'whatwg-fetch';
+import { createGenericRequest } from './sharedActionCreators';
 
 import {
   LOGIN_RECEIVED,
@@ -7,21 +7,10 @@ import {
 } from '../actions/loginActions';
 
 export function login({ email, password }) {
-  return function(dispatch) {
-    dispatch(requested());
-    return fetch('/login', {
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => response.json())
-      .then(json => dispatch(received(json)));
-  }
+  return createGenericRequest('POST', '/api/login', { email, password }, {
+    startedActionType: LOGIN_REQUESTED,
+    succeededActionType: LOGIN_RECEIVED,
+  })
 }
 
 export function updateInputValue(key, value) {
@@ -29,20 +18,5 @@ export function updateInputValue(key, value) {
     type: LOGIN_VALUE_CHANGED,
     key,
     value,
-  };
-}
-
-function received(json) {
-  const { session, user } = json;
-  return {
-    type: LOGIN_RECEIVED,
-    session,
-    user,
-  };
-}
-
-function requested() {
-  return {
-    type: LOGIN_REQUESTED,
   };
 }

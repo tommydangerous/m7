@@ -1,17 +1,14 @@
-import { getApiData } from '../utils/bootstrapData';
 import {
   LOCAL_STORAGE_KEY_SESSION,
   LOCAL_STORAGE_KEY_USER,
 } from '../utils/constants';
 
 export function getCurrentSession() {
-  // return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SESSION));
-  return getApiData('session');
+  return getObject(LOCAL_STORAGE_KEY_SESSION);
 }
 
 export function getCurrentUser() {
-  // return localStorage.getItem(LOCAL_STORAGE_KEY_USER);
-  return getApiData('user');
+  return getObject(LOCAL_STORAGE_KEY_USER);
 }
 
 export function isLoggedIn() {
@@ -21,4 +18,11 @@ export function isLoggedIn() {
 export function logOut() {
   localStorage.removeItem(LOCAL_STORAGE_KEY_SESSION);
   localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
+}
+
+function getObject(key) {
+  const obj = localStorage.getItem(key);
+  if (obj !== 'undefined') {
+    return JSON.parse(obj);
+  }
 }

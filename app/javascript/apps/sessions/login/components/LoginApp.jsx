@@ -23,11 +23,7 @@ function LoginApp({ login, loginActions, redirect_url }) {
   } = login;
 
   if (isLoggedIn()) {
-    if (redirect_url) {
-      window.location = redirect_url;
-    } else {
-      window.location = '/expenses';
-    }
+    window.location = '/expenses';
     return <div />;
   }
 

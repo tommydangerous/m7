@@ -19,6 +19,7 @@
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
     "js-yaml": "^3.8.3",
+    "jssha": "^2.2.0",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
     "path-complete-extname": "^0.1.0",
