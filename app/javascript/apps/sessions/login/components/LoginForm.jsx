@@ -15,40 +15,37 @@ export default function LoginForm({
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form
-        action="#"
-        method="POST"
-        onSubmit={submit}
+    <form
+      action="#"
+      method="POST"
+      onSubmit={submit}
+    >
+      <input
+        autoComplete="on"
+        className="space-1"
+        onChange={(e) => onInputChange('email', e.target.value)}
+        placeholder="Email"
+        type="text"
+        value={email}
+      />
+
+      <input
+        className="space-1"
+        autoComplete="off"
+        onChange={(e) => onInputChange('password', e.target.value)}
+        placeholder="Password"
+        type="password"
+        value={password}
+      />
+
+      <button
+        className={cx('btn', { loading })}
+        disabled={loading}
+        onClick={submit}
       >
-        <input
-          autoComplete="on"
-          className="space-1"
-          onChange={(e) => onInputChange('email', e.target.value)}
-          placeholder="Email"
-          type="text"
-          value={email}
-        />
-
-        <input
-          className="space-1"
-          autoComplete="off"
-          onChange={(e) => onInputChange('password', e.target.value)}
-          placeholder="Password"
-          type="password"
-          value={password}
-        />
-
-        <button
-          className={cx('btn', { loading })}
-          disabled={loading}
-          onClick={submit}
-        >
-          Login
-        </button>
-      </form>
-    </div>
+        Login
+      </button>
+    </form>
   );
 }
 

@@ -9,6 +9,7 @@ import * as expenseRootSelector from '../../../../selectors/expenseSelectors';
 import * as modalRootSelector from '../../../../selectors/modalSelectors';
 
 import { CREATE_FORM_FIELDS } from '../utils/constants';
+import { OFFLINE_MODE } from '../../../../utils/constants';
 
 import ExpensesTable from './ExpensesTable';
 import Modal from '../../../../components/Modal';
@@ -34,12 +35,15 @@ class ExpensesMainApp extends React.Component {
       show: false,
     };
   }
+
   componentDidMount() {
-    const { expenseActions } = this.props;
-    expenseActions.fetchExpenses({
-      startDate: '2017-04-01',
-      endDate: '2017-05-01',
-    });
+    if (!OFFLINE_MODE) {
+      const { expenseActions } = this.props;
+      expenseActions.fetchExpenses({
+        search_start_date: '2017-04-01',
+        search_end_date: '2017-05-01',
+      });
+    }
   }
 
   render() {
@@ -89,10 +93,6 @@ class ExpensesMainApp extends React.Component {
             loading={loading.create}
             onClickCancel={modalActions.hide}
             onSubmitForm={(payload) => {
-              // return new Promise((resolve, reject) => {
-              //   expenseActions.createExpense(payload).
-              //     then(response => resolve(response), xhr => reject(xhr));
-              // });
               return expenseActions.createExpense({ 'TimeEntry': payload })
                 .then(response => {
                   if (!error) {

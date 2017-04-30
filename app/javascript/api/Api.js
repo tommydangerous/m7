@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import jsSHA from 'jssha';
 
 import {
@@ -31,11 +30,44 @@ export default {
       api_key: getApiData('clientKey'),
     };
 
+    const data = {
+      dataType: 'json',
+      method,
+      // credentials: 'include',
+      // credentials: 'same-origin',
+      // mode: 'cors',
+    };
+
     if (isLoggedIn()) {
+      // const {
+      //   session_id: sessionId,
+      //   session_name: sessionName,
+      // } = getCurrentSession();
+
       queryParams = {
-        session_name: getCurrentSession().session_id,
+        // session_name: sessionId,
+        // z_ca: 42137,
         ...queryParams,
       };
+      // queryParams[sessionName] = sessionId;
+
+      // document.cookie = `${sessionName}=${sessionId}`;
+
+      // const headers = new Headers({
+        // 'Content-Type': 'application/json',
+        // 'Cookie': `${sessionName}=${sessionId}`,
+        // 'Cookie': 'IMPRESARIO=tsukcilka56g7mmqkst4am97l2',
+        // 'Authorization': ' ',
+        // 'User-Agent': null,
+        // 'Accept': 'application/json',
+        // 'Connection': 'keep-alive',
+        // 'Origin': null,
+        // 'Content-Type': 'application/json',
+        // 'Cache': 'no-cache',
+      // });
+
+      // data.headers = headers;
+
     }
 
     if (payload) {
@@ -57,10 +89,6 @@ export default {
       queryParams = { ...query, ...queryParams };
     }
 
-    const data = {
-      method,
-    };
-
     const urlParamsSortedByKey = Object.keys(queryParams)
       .sort((a, b) => {
         if (a > b) {
@@ -76,6 +104,8 @@ export default {
     const pathWithQuery = `${endpoint}?${urlParamsSortedByKey}`;
     const signature = generateSignature(pathWithQuery);
 
-    return fetch(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
+    const request = new Request(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
+    // debugger
+    return fetch(request);
   }
 }

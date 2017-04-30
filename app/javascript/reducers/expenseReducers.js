@@ -1,4 +1,5 @@
 import { combine } from '../utils/reducer';
+import { OFFLINE_MODE } from '../utils/constants';
 
 import {
   EXPENSES_FAILED_INDEX,
@@ -9,30 +10,15 @@ import {
   EXPENSES_REQUESTED_CREATE,
 } from '../actions/expenseActions';
 
-const mockExpenses = {
-  123: {
-    amount: 525.50,
-    customer_id: 109,
-    date: '2017-12-25',
-    description: 'We bought Nobu for everyone.',
-    expenses_grouping_id: 1448,
-    id: 123,
-    qb_account_id: 431,
-    qb_class_id: 1559,
-    vendor_id: 2530,
-  },
-  13: {
-    amount: 25.50,
-    customer_id: 19,
-    date: '2017-12-25',
-    description: 'Drinks for everyone.',
-    expenses_grouping_id: 148,
-    id: 13,
-    qb_account_id: 31,
-    qb_class_id: 59,
-    vendor_id: 530,
-  },
-};
+import { mock } from '../mocks/expense';
+
+const initialExpensesById = {};
+
+if (OFFLINE_MODE) {
+  [mock(), mock(), mock(), mock(), mock()].forEach(expense => {
+    initialExpensesById[expense.id] = expense;
+  });
+}
 
 const RESET_STATE = {
   errors: {
@@ -45,7 +31,7 @@ const RESET_STATE = {
   },
 };
 const INITIAL_STATE = combine(RESET_STATE, {
-  expensesById: mockExpenses,
+  expensesById: initialExpensesById,
 });
 
 export default function reducers(state = INITIAL_STATE, action) {

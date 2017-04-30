@@ -29,8 +29,10 @@ function LoginApp({ login, loginActions, redirect_url }) {
 
   return (
     <div className="page-container">
-      <div className="row">
+      <div className="row space-bottom-lg space-top-lg">
         <div className="col-sm-6 col-center">
+          <h1>Hello</h1>
+
           <LoginForm
             email={email}
             loading={loading}

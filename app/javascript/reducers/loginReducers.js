@@ -1,10 +1,12 @@
 import {
+  LOGIN_FAILED,
   LOGIN_RECEIVED,
   LOGIN_REQUESTED,
   LOGIN_VALUE_CHANGED,
+  LOGOUT_RECEIVED,
 } from '../actions/loginActions';
 
-import { logIn } from '../stores/appLocalStorage';
+import { logIn, logOut } from '../stores/appLocalStorage';
 import { combine } from '../utils/reducer';
 
 const RESET_STATE = {
@@ -31,6 +33,9 @@ export default function reducers(state = INITIAL_STATE, action) {
   } = state;
 
   switch (type) {
+    case LOGIN_FAILED: {
+      return combine(state, RESET_STATE);
+    }
     case LOGIN_RECEIVED: {
       const {
         logininfo: {
@@ -45,12 +50,16 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(state, { session, user });
     }
     case LOGIN_REQUESTED: {
-      return combine(state, INITIAL_STATE);
+      return combine(state, { loading: true });
     }
     case LOGIN_VALUE_CHANGED: {
       const fields = { email, password };
       fields[key] = value;
       return combine(state, fields);
+    }
+    case LOGOUT_RECEIVED: {
+      logOut();
+      return combine(combine(state, RESET_STATE), INITIAL_STATE);
     }
     default: {
       return state;
