@@ -31,9 +31,9 @@ export default {
     };
 
     const data = {
-      dataType: 'json',
+      // dataType: 'json',
       method,
-      // credentials: 'include',
+      credentials: 'include',
       // credentials: 'same-origin',
       // mode: 'cors',
     };

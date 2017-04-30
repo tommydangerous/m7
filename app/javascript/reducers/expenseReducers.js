@@ -38,7 +38,7 @@ export default function reducers(state = INITIAL_STATE, action) {
   const {
     error,
     expense,
-    expenses,
+    response,
     type,
   } = action;
   const {
@@ -61,8 +61,11 @@ export default function reducers(state = INITIAL_STATE, action) {
       });
     }
     case EXPENSES_RECEIVED_INDEX: {
+      const {
+        ExpenseEntries: expenses,
+      } = response;
       const expensesByIdUpdated = { ...expensesById };
-      expenses.forEach(obj => {
+      expenses.forEach(({ ExpenseEntry: obj }) => {
         expensesByIdUpdated[obj.id] = obj;
       });
       return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });
