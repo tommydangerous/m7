@@ -1,3 +1,9 @@
+import moment from 'moment';
+
+const now = moment();
+const minYear = now.add(-5, 'year');
+const minDate = new Date(minYear.year(), 0, 0);
+
 export const CREATE_FORM_FIELDS = {
   amount: {
     label: 'Amount',
@@ -22,6 +28,7 @@ export const CREATE_FORM_FIELDS = {
   },
   date: {
     label: 'Date',
+    minDate,
     order: 7,
     required: true,
     type: 'date',
