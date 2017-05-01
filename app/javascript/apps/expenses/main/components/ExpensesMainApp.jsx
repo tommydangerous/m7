@@ -71,14 +71,6 @@ class ExpensesMainApp extends React.Component {
             <ExpenseForm
               error={errors.create ? errors.create.message : null}
               onClickCancel={closeModal}
-              onSubmitForm={(payload) => {
-                return expenseActions.create({ 'ExpenseEntry': payload })
-                  .then(response => {
-                    if (!error) {
-                      closeModal();
-                    }
-                  });
-              }}
             />
           )}
         </Modal>

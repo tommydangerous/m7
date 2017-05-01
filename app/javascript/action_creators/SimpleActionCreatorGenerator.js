@@ -49,7 +49,15 @@ export default function generate(opts = {}) {
     },
 
     update: (id, payload = {}) => {
-
+      const updatedPayload = {
+        ...payload,
+        id,
+      };
+      return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: updatedPayload }, {
+        failedActionType: actions.UPDATE.FAILED,
+        startedActionType: actions.UPDATE.STARTED,
+        succeededActionType: actions.UPDATE.SUCCEEDED,
+      });
     },
   };
 }

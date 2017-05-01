@@ -20,3 +20,7 @@ export function index(opts) {
 export function selfSelected(obj) {
   return generator.selfSelected(obj);
 }
+
+export function update(id, opts) {
+  return generator.update(id, opts);
+}

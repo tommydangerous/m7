@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   customerActions: bindActionCreators(customerActionCreators, dispatch),
+  expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   expensegroupingActions: bindActionCreators(expensegroupingActionCreators, dispatch),
   qbaccountActions: bindActionCreators(qbaccountActionCreators, dispatch),
   qbclassActions: bindActionCreators(qbclassActionCreators, dispatch),
@@ -93,10 +94,10 @@ class ExpenseForm extends React.Component {
       customers,
       error,
       expense,
+      expenseActions,
       expensegroupings,
       loading,
       onClickCancel,
-      onSubmitForm,
       qbaccounts,
       qbclasses,
       vendors,
@@ -128,7 +129,21 @@ class ExpenseForm extends React.Component {
       return (
         <FormWithStore
           fields={fields}
-          onSubmitForm={() => {}}
+          header="Edit expense"
+          onClickCancel={onClickCancel}
+          onSubmitForm={(payload) => {
+            return expenseActions.update(expense.id, {
+              'ExpenseEntry': {
+                ...expense,
+                ...payload,
+              },
+            }).then(response => {
+                if (!error) {
+                  closeModal();
+                }
+              });
+          }}
+          submitFormButtonText="Update"
         />
       );
     }
@@ -140,7 +155,14 @@ class ExpenseForm extends React.Component {
         fields={fields}
         loading={loading.create}
         onClickCancel={onClickCancel}
-        onSubmitForm={onSubmitForm}
+        onSubmitForm={(payload) => {
+          return expenseActions.create({ 'ExpenseEntry': payload })
+            .then(response => {
+              if (!error) {
+                onClickCancel();
+              }
+            });
+        }}
       />
     );
   }

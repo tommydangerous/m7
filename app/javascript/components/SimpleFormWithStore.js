@@ -26,7 +26,7 @@ export default function generate(opts = {}) {
     }
 
     submitFormPayload() {
-      const payload = {};
+      const payload = {  };
       this.fields().forEach(obj => {
         payload[obj.name] = this.props[obj.name];
       });
