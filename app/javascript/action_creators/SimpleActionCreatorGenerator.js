@@ -32,8 +32,16 @@ export default function generate(opts = {}) {
       });
     },
 
-    delete: (id, query = {}) => {
-
+    deleteObject: (id, query = {}) => {
+      const updatedQuery = {
+        ...query,
+        id,
+      };
+      return createGenericRequest('POST', `/api/${pluralName}/delete`, { query: updatedQuery }, {
+        failedActionType: actions.DELETE.FAILED,
+        startedActionType: actions.DELETE.STARTED,
+        succeededActionType: actions.DELETE.SUCCEEDED,
+      });
     },
 
     index: (query = {}) => {

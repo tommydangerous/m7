@@ -58,7 +58,6 @@ class ExpensesTable extends React.Component {
               onClick={e => {
                 e.preventDefault();
                 expenseActions.selfSelected(expense);
-                console.log(expense);
                 onEdit();
               }}
             >
@@ -66,7 +65,15 @@ class ExpensesTable extends React.Component {
             </a>
           </td>
           <td>
-            <a href="#">Delete</a>
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault();
+                expenseActions.deleteObject(expense.id);
+              }}
+            >
+              Delete
+            </a>
           </td>
         </tr>
       );

@@ -13,6 +13,10 @@ export function create(opts) {
   return generator.create(opts);
 }
 
+export function deleteObject(id, opts) {
+  return generator.deleteObject(id, opts);
+}
+
 export function index(opts) {
   return generator.index(opts);
 }

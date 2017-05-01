@@ -63,29 +63,6 @@ export default function generate(opts = {}) {
   objectsByIdUpdated[objectsByIdKey] = { ...state[objectsByIdKey] };
 
   switch(type) {
-    case INDEX.FAILED: {
-      return combine(state, {
-        errors: { ...errors, index: error },
-        loading: { ...loading, index: false },
-      });
-    }
-    case INDEX.STARTED: {
-      return combine(state, { loading: { ...loading, index: true } });
-    }
-    case INDEX.SUCCEEDED: {
-      responseParsers.index(response).forEach(obj => {
-        // console.log(obj);
-        objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
-      });
-      return combine(
-        combine(
-          state,
-          combine(DEFAULT_RESET_STATE, reset),
-        ),
-        objectsByIdUpdated,
-      );
-    }
-
     case CREATE.FAILED: {
       return combine(state, {
         errors: { ...errors, create: error },
@@ -98,6 +75,38 @@ export default function generate(opts = {}) {
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
       objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
+      return combine(
+        combine(
+          state,
+          combine(DEFAULT_RESET_STATE, reset),
+        ),
+        objectsByIdUpdated,
+      );
+    }
+
+    case DELETE.FAILED: {
+      return state;
+    }
+    case DELETE.STARTED: {
+      return state;
+    }
+    case DELETE.SUCCEEDED: {
+      return state;
+    }
+
+    case INDEX.FAILED: {
+      return combine(state, {
+        errors: { ...errors, index: error },
+        loading: { ...loading, index: false },
+      });
+    }
+    case INDEX.STARTED: {
+      return combine(state, { loading: { ...loading, index: true } });
+    }
+    case INDEX.SUCCEEDED: {
+      responseParsers.index(response).forEach(obj => {
+        objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
+      });
       return combine(
         combine(
           state,
