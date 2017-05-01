@@ -1,4 +1,5 @@
 import { combine } from '../utils/reducer';
+import { singularize } from '../utils/stringTransformers';
 import SimpleActionGenerator from '../actions/SimpleActionGenerator';
 
 const DEFAULT_RESET_STATES = {
@@ -14,17 +15,12 @@ const DEFAULT_RESET_STATE = {
   loading: { ...DEFAULT_RESET_STATES },
 };
 
-const DEFAULT_INITIAL_STATE = combine(DEFAULT_RESET_STATE, {});
-
 export default function generate(opts = {}) {
   const {
-    action: {
-      error,
-      response,
-      type,
-    },
+    action,
     name: pluralName,
     responseParsers,
+    singularName,
     states: {
       current,
       initial,
@@ -33,16 +29,30 @@ export default function generate(opts = {}) {
   } = opts;
 
   const {
+    error,
+    response,
+    type,
+  } = action;
+
+  const {
     CREATE,
     DELETE,
     INDEX,
     SHOW,
     UPDATE,
-  } = SimpleActionGenerator({ name: pluralName });
+
+    ATTRIBUTES,
+    SELF,
+  } = SimpleActionGenerator({ name: pluralName, singularName });
   const objectsByIdKey = `${pluralName}ById`;
 
-  const initialState = { ...DEFAULT_INITIAL_STATE };
+  const resetState = { ...DEFAULT_RESET_STATE };
+  const nameSingular = singularName || singularize(pluralName);
+  resetState[nameSingular] = {};
+
+  const initialState = combine(resetState, {});
   initialState[objectsByIdKey] = {};
+
   const state = current || combine(initialState, initial);
   const {
     errors,
@@ -60,7 +70,7 @@ export default function generate(opts = {}) {
       });
     }
     case INDEX.STARTED: {
-      return combine(state, { loading: { ...loading, index: false } });
+      return combine(state, { loading: { ...loading, index: true } });
     }
     case INDEX.SUCCEEDED: {
       responseParsers.index(response).forEach(obj => {
@@ -83,7 +93,7 @@ export default function generate(opts = {}) {
       });
     }
     case CREATE.STARTED: {
-      return combine(state, { loading: { ...loading, create: false } });
+      return combine(state, { loading: { ...loading, create: true } });
     }
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
@@ -95,6 +105,18 @@ export default function generate(opts = {}) {
         ),
         objectsByIdUpdated,
       );
+    }
+
+    case ATTRIBUTES.UPDATED: {
+      const dict = {};
+      dict[nameSingular] = combine(state[nameSingular], action[nameSingular]);
+      return combine(state, dict);
+    }
+
+    case SELF.SELECTED: {
+      const dict = {};
+      dict[nameSingular] = action[nameSingular];
+      return combine(state, dict);
     }
 
     default: {

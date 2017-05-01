@@ -24,6 +24,7 @@ export default function reducers(state, action) {
       index: resp => resp.ExpenseEntries.map(obj => obj.ExpenseEntry),
       create: resp => resp.ExpenseEntry,
     },
+    singularName: 'expense',
     states: {
       current: state,
       initial: INITIAL_STATE,

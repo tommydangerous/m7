@@ -179,6 +179,12 @@ export default class SimpleForm extends React.Component {
       checked = hash.defaultValue;
     }
 
+    if (checked === 'Yes') {
+      checked = true;
+    } else if (checked === 'No') {
+      checked = false;
+    }
+
     return (
       <SimpleCheckbox
         checked={checked}
@@ -293,7 +299,6 @@ export default class SimpleForm extends React.Component {
     return (
       <textarea
         autoComplete="off"
-        defaultValue={this.props[hash.name]}
         name={hash.name}
         onChange={this.onChangeInput}
         placeholder={hash.placeholder}

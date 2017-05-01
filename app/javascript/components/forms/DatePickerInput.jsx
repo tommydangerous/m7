@@ -27,7 +27,8 @@ export default class DatepickerInput extends React.Component {
     let defaultDate = props.date || '';
     this.state = {
       date: defaultDate,
-      formattedDate: this._formatDate(defaultDate),
+      // formattedDate: this._formatDate(defaultDate),
+      formattedDate: defaultDate,
     };
   }
 

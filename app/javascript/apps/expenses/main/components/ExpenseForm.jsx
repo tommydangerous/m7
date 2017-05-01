@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 
 import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
+import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as expensegroupingActionCreators
   from '../../../../action_creators/expensegroupingActionCreators';
 import * as qbaccountActionCreators from '../../../../action_creators/qbaccountActionCreators';
@@ -11,14 +12,21 @@ import * as qbclassActionCreators from '../../../../action_creators/qbclassActio
 import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import * as customerSelectors from '../../../../selectors/customerSelectors';
+import * as expenseSelectors from '../../../../selectors/expenseSelectors';
 import * as expensegroupingSelectors from '../../../../selectors/expensegroupingSelectors';
 import * as qbaccountSelectors from '../../../../selectors/qbaccountSelectors';
 import * as qbclassSelectors from '../../../../selectors/qbclassSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import SimpleForm from '../../../../components/SimpleForm';
+import SimpleFormWithStore from '../../../../components/SimpleFormWithStore';
 
 import { CREATE_FORM_FIELDS } from '../utils/constants';
+
+const FormWithStore = SimpleFormWithStore({
+  actionCreators: expenseActionCreators,
+  selector: state => expenseSelectors.rootSelector(state).expense,
+});
 
 const selectOptions = array => {
   const arr = array.map(obj => {
@@ -36,7 +44,9 @@ const selectOptions = array => {
 
 const mapStateToProps = state => ({
   customers: customerSelectors.sortedObjects(state),
+  expense: expenseSelectors.rootSelector(state).expense,
   expensegroupings: expensegroupingSelectors.sortedObjects(state),
+  loading: expenseSelectors.rootSelector(state).loading,
   qbaccounts: qbaccountSelectors.sortedObjects(state),
   qbclasses: qbclassSelectors.sortedObjects(state),
   vendors: vendorSelectors.sortedObjects(state),
@@ -52,17 +62,37 @@ const mapDispatchToProps = dispatch => ({
 
 class ExpenseForm extends React.Component {
   componentDidMount() {
-    this.props.customerActions.index();
-    this.props.expensegroupingActions.index();
-    this.props.qbaccountActions.index();
-    this.props.qbclassActions.index();
-    this.props.vendorActions.index();
+    const {
+      customers,
+      expensegroupings,
+      qbaccounts,
+      qbclasses,
+      vendors,
+      customerActions,
+      expensegroupingActions,
+      qbaccountActions,
+      qbclassActions,
+      vendorActions,
+    } = this.props;
+
+    [
+      [customers, customerActions],
+      [expensegroupings, expensegroupingActions],
+      [qbaccounts, qbaccountActions],
+      [qbclasses, qbclassActions],
+      [vendors, vendorActions],
+    ].forEach(arr => {
+      if (arr[0].length === 0) {
+        arr[1].index();
+      }
+    });
   }
 
   render() {
     const {
       customers,
       error,
+      expense,
       expensegroupings,
       loading,
       onClickCancel,
@@ -94,12 +124,21 @@ class ExpenseForm extends React.Component {
       fields.qb_class_id.options = selectOptions(qbclasses);
     }
 
+    if (expense) {
+      return (
+        <FormWithStore
+          fields={fields}
+          onSubmitForm={() => {}}
+        />
+      );
+    }
+
     return (
       <SimpleForm
         error={error}
         header="Add a new expense"
         fields={fields}
-        loading={loading}
+        loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={onSubmitForm}
       />
@@ -110,6 +149,9 @@ class ExpenseForm extends React.Component {
 ExpenseForm.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
   expensegroupings: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.shape({
+    create: PropTypes.bool,
+  }).isRequired,
   qbaccounts: PropTypes.arrayOf(PropTypes.object),
   qbclasses: PropTypes.arrayOf(PropTypes.object),
   vendors: PropTypes.arrayOf(PropTypes.object),

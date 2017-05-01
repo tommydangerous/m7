@@ -1,9 +1,15 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import React from 'react';
 
 import SimpleForm from './SimpleForm';
 
-export default function({ actionCreators, selector }) {
+export default function generate(opts = {}) {
+  const {
+    actionCreators,
+    selector,
+  } = opts;
+
   const mapStateToProps = state => ({
     ...selector(state),
   });
@@ -14,19 +20,19 @@ export default function({ actionCreators, selector }) {
 
   class SimpleFormWithStore extends SimpleForm {
     onChangeInput(e) {
-      const hash = {};
-      hash[e.target.name] = e.target.value;
-      actions.updateAttributes(hash);
+      const dict = {};
+      dict[e.target.name] = e.target.value;
+      this.props.actions.attributesUpdated(dict);
     }
 
     submitFormPayload() {
-      const _this = this;
       const payload = {};
-      this.props.fields.forEach(hash => {
-        payload[hash.name] = _this.props[hash.name];
+      this.fields().forEach(obj => {
+        payload[obj.name] = this.props[obj.name];
       });
       return payload;
     }
   };
+
   return connect(mapStateToProps, mapDispatchToProps)(SimpleFormWithStore);
 }

@@ -6,23 +6,15 @@ import React from 'react';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
 
-import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
-
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
-
-import { OFFLINE_MODE } from '../../../../utils/constants';
 
 import ExpenseForm from './ExpenseForm';
 import ExpensesTable from './ExpensesTable';
 import Modal from '../../../../components/Modal';
 
-import ExpenseShape from '../../../../shapes/ExpenseShape';
-
 const mapStateToProps = state => ({
   errors: expenseSelectors.rootSelector(state).errors,
-  expenses: expenseSelectors.sortedObjects(state),
-  loading: expenseSelectors.rootSelector(state).loading,
   modalVisible: modalSelectors.rootSelector(state).visible,
 });
 
@@ -32,33 +24,19 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class ExpensesMainApp extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      show: false,
-    };
-  }
-
-  componentDidMount() {
-    if (!OFFLINE_MODE) {
-      const { expenseActions } = this.props;
-      expenseActions.index({
-        search_start_date: '2017-04-01',
-        search_end_date: '2017-05-01',
-      });
-    }
-  }
-
   render() {
     const {
       errors,
       expenseActions,
       expenses,
-      loading,
       modalActions,
       modalVisible,
     } = this.props;
+
+    const closeModal = () => {
+      expenseActions.selfSelected(null);
+      modalActions.hide();
+    };
 
     return (
       <div className="page-container">
@@ -82,24 +60,27 @@ class ExpensesMainApp extends React.Component {
                 {errors.index.message}
               </div>
             )}
-            <ExpensesTable expenses={expenses} loading={loading.index} />
+            <ExpensesTable
+              onEdit={() => modalActions.show()}
+            />
           </div>
         </div>
 
-        <Modal onClose={modalActions.hide} visible={modalVisible}>
-          <ExpenseForm
-            error={errors.create ? errors.create.message : null}
-            loading={loading.create}
-            onClickCancel={modalActions.hide}
-            onSubmitForm={(payload) => {
-              return expenseActions.create({ 'ExpenseEntry': payload })
-                .then(response => {
-                  if (!error) {
-                    modalActions.hide();
-                  }
-                });
-            }}
-          />
+        <Modal onClose={closeModal} visible={modalVisible}>
+          {modalVisible && (
+            <ExpenseForm
+              error={errors.create ? errors.create.message : null}
+              onClickCancel={closeModal}
+              onSubmitForm={(payload) => {
+                return expenseActions.create({ 'ExpenseEntry': payload })
+                  .then(response => {
+                    if (!error) {
+                      closeModal();
+                    }
+                  });
+              }}
+            />
+          )}
         </Modal>
       </div>
     );
@@ -108,14 +89,10 @@ class ExpensesMainApp extends React.Component {
 
 ExpensesMainApp.propTypes = {
   error: PropTypes.object,
-  expenses: PropTypes.arrayOf(ExpenseShape),
-  loading: PropTypes.object,
 };
 
 ExpensesMainApp.defaultProps = {
   error: null,
-  expenses: [],
-  loading: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesMainApp);

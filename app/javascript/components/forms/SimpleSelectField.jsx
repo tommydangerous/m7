@@ -48,7 +48,6 @@ class SimpleSelectField extends React.Component {
     return (
       <div className="select select-block">
         <select
-          defaultValue={this.props.defaultValue}
           name={this.props.name}
           onChange={this.onChangeSelect}
           value={this.props.defaultValue}

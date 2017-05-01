@@ -1,8 +1,8 @@
-export function capitalize(word) => {
+export function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
-export function pascalize(word) => {
+export function pascalize(word) {
   return word.split(' ').map((word) => {
     return capitalize(word);
   }).join('_').split('_').map((word) => {
@@ -10,7 +10,7 @@ export function pascalize(word) => {
   }).join('');
 };
 
-export function pluralize(string, number) => {
+export function pluralize(string, number) {
   const hasNumber = number !== undefined && number !== null;
   if (!hasNumber) {
     number = 2;
@@ -40,16 +40,18 @@ export function pluralize(string, number) => {
   }
 };
 
-export function singularize(string) => {
+export function singularize(string) {
   const length = string.length;
   if (string.slice(length - 3, length) === 'ies') {
     return `${string.slice(0, length - 3)}y`;
+  } else if (string.slice(length - 2, length) === 'es') {
+    return string.slice(0, length - 2);
   } else {
     return string.slice(0, length - 1);
   }
 };
 
-export function titleize(word) => {
+export function titleize(word) {
   return word.split(' ').map((word) => {
     return capitalize(word);
   }).join('_').split('_').map((word) => {

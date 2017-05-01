@@ -1,19 +1,27 @@
 import { createGenericRequest } from './sharedActionCreators';
+import { singularize } from '../utils/stringTransformers';
 import SimpleActionGenerator from '../actions/SimpleActionGenerator';
 
 export default function generate(opts = {}) {
   const {
     name: pluralName,
+    singularName,
   } = opts;
 
   const actions = SimpleActionGenerator({ name: pluralName });
+  const nameSingular = singularName || singularize(pluralName);
 
   return {
     attributesUpdated: (payload = {}) => {
-      return {
-        ...payload,
-        type: actions.ATTRIBUTES.UPDATED,
-      };
+      const dict = { type: actions.ATTRIBUTES.UPDATED };
+      dict[nameSingular] = { ...dict[nameSingular], ...payload };
+      return dict;
+    },
+
+    selfSelected: obj => {
+      const dict = { type: actions.SELF.SELECTED };
+      dict[nameSingular] = obj;
+      return dict;
     },
 
     create: (payload = {}) => {

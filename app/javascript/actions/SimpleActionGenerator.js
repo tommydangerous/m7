@@ -21,6 +21,9 @@ export default function generate(opts = {}) {
     'ATTRIBUTES': {
       'UPDATED': `${resource}_ATTRIBUTES_UPDATED`,
     },
+    'SELF': {
+      'SELECTED': `${resource}_SELF_SELECTED`,
+    },
   };
 
   METHODS.forEach(method => {
