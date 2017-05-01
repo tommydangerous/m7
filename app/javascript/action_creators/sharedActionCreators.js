@@ -13,11 +13,16 @@ export function requestStarted(type) {
   };
 }
 
-export function requestSucceeded(type, response, query) {
+export function requestSucceeded(type, response, data) {
+  const {
+    payload,
+    query,
+  } = data;
   return {
+    payload,
+    query,
     response,
     type,
-    query,
   };
 }
 
@@ -36,13 +41,19 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
     return Promise.resolve(Api.request(httpMethod, endpoint, {
       ...data,
     }))
-    .then(response => response.json())
-    .then(json => {
-      if (succeededActionType) {
-        dispatch(requestSucceeded(succeededActionType, json, data));
-      }
+    .then(response => {
+      response.text().then(text => {
+        let json = {};
+        if (!!text) {
+          json = JSON.parse(text);
+        }
+        if (succeededActionType) {
+          dispatch(requestSucceeded(succeededActionType, json, data));
+        }
+      });
     })
     .catch(error => {
+      debugger
       if (failedActionType) {
         dispatch(requestFailed(failedActionType, error));
       }

@@ -44,6 +44,7 @@ const selectOptions = array => {
 
 const mapStateToProps = state => ({
   customers: customerSelectors.sortedObjects(state),
+  errors: expenseSelectors.rootSelector(state).errors,
   expense: expenseSelectors.rootSelector(state).expense,
   expensegroupings: expensegroupingSelectors.sortedObjects(state),
   loading: expenseSelectors.rootSelector(state).loading,
@@ -92,7 +93,7 @@ class ExpenseForm extends React.Component {
   render() {
     const {
       customers,
-      error,
+      errors,
       expense,
       expenseActions,
       expensegroupings,
@@ -128,8 +129,10 @@ class ExpenseForm extends React.Component {
     if (expense) {
       return (
         <FormWithStore
+          error={errors.update ? errors.update.message : null}
           fields={fields}
           header="Edit expense"
+          loading={loading.update}
           onClickCancel={onClickCancel}
           onSubmitForm={(payload) => {
             return expenseActions.update(expense.id, {
@@ -138,7 +141,7 @@ class ExpenseForm extends React.Component {
                 ...payload,
               },
             }).then(response => {
-                if (!error) {
+                if (!errors.update) {
                   closeModal();
                 }
               });
@@ -150,15 +153,15 @@ class ExpenseForm extends React.Component {
 
     return (
       <SimpleForm
-        error={error}
-        header="Add a new expense"
+        error={errors.create ? errors.create.message : null}
         fields={fields}
+        header="Add a new expense"
         loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={(payload) => {
           return expenseActions.create({ 'ExpenseEntry': payload })
             .then(response => {
-              if (!error) {
+              if (!errors.create) {
                 onClickCancel();
               }
             });

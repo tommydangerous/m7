@@ -2,6 +2,6 @@ import React from 'react'
 
 import { renderAppInContainer } from '../../../utils/rendering';
 
-import TimesheetsMainApp from './components/TimesheetsMainApp';
+import TimesheetMainApp from './components/TimesheetMainApp';
 
-renderAppInContainer(<TimesheetsMainApp />);
+renderAppInContainer(<TimesheetMainApp />);

@@ -18,7 +18,6 @@ import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
   loading: expenseSelectors.rootSelector(state).loading,
-  expense: expenseSelectors.rootSelector(state).expense,
   expenses: expenseSelectors.sortedObjects(state),
 });
 
@@ -30,10 +29,7 @@ class ExpensesTable extends React.Component {
   componentDidMount() {
     if (!OFFLINE_MODE) {
       const { expenseActions } = this.props;
-      expenseActions.index({
-        search_start_date: '2017-04-01',
-        search_end_date: '2017-05-01',
-      });
+      expenseActions.index();
     }
   }
 

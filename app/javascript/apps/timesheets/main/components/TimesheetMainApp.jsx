@@ -3,34 +3,34 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
-import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
+import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
 
-import * as expenseSelectors from '../../../../selectors/expenseSelectors';
+import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
 
-import ExpenseForm from './ExpenseForm';
-import ExpensesTable from './ExpensesTable';
+// import TimesheetForm from './TimesheetForm';
+import TimesheetTable from './TimesheetTable';
 import Modal from '../../../../components/Modal';
 
 const mapStateToProps = state => ({
-  errors: expenseSelectors.rootSelector(state).errors,
+  errors: timesheetSelectors.rootSelector(state).errors,
   modalVisible: modalSelectors.rootSelector(state).visible,
 });
 
 const mapDispatchToProps = dispatch => ({
-  expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
+  timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
 });
 
-function ExpensesMainApp({
+function TimesheetMainApp({
   errors,
-  expenseActions,
   modalActions,
   modalVisible,
+  timesheetActions,
 }) {
   const closeModal = () => {
-    expenseActions.selfSelected(null);
+    timesheetActions.selfSelected(null);
     modalActions.hide();
   };
 
@@ -46,39 +46,39 @@ function ExpensesMainApp({
               modalActions.show();
             }}
           >
-            Add expense
+            Add time
           </a>
           <h1>
-            Expenses
+            Timesheets
           </h1>
           {errors.index && (
             <div className="background-red panel-body-small space-1 text-center text-contrast">
               {errors.index.message}
             </div>
           )}
-          <ExpensesTable
+          <TimesheetTable
             onEdit={() => modalActions.show()}
           />
         </div>
       </div>
 
       <Modal onClose={closeModal} visible={modalVisible}>
-        {modalVisible && (
-          <ExpenseForm
+        {/*modalVisible && (
+          <TimesheetForm
             onClickCancel={closeModal}
           />
-        )}
+        )*/}
       </Modal>
     </div>
   );
 }
 
-ExpensesMainApp.propTypes = {
+TimesheetMainApp.propTypes = {
   errors: PropTypes.object,
 };
 
-ExpensesMainApp.defaultProps = {
+TimesheetMainApp.defaultProps = {
   errors: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpensesMainApp);
+export default connect(mapStateToProps, mapDispatchToProps)(TimesheetMainApp);

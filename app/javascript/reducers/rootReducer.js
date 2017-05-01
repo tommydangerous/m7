@@ -9,6 +9,7 @@ import loginReducers from './loginReducers';
 import modalReducers from './modalReducers';
 import qbaccountReducers from './qbaccountReducers';
 import qbclassReducers from './qbclassReducers';
+import timesheetReducers from './timesheetReducers';
 import vendorReducers from './vendorReducers';
 
 export default combineReducers({
@@ -20,5 +21,6 @@ export default combineReducers({
   modal: modalReducers,
   qbaccount: qbaccountReducers,
   qbclass: qbclassReducers,
+  timesheet: timesheetReducers,
   vendor: vendorReducers,
 });

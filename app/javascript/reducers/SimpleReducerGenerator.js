@@ -30,6 +30,8 @@ export default function generate(opts = {}) {
 
   const {
     error,
+    payload,
+    query,
     response,
     type,
   } = action;
@@ -91,7 +93,14 @@ export default function generate(opts = {}) {
       return state;
     }
     case DELETE.SUCCEEDED: {
-      return state;
+      delete objectsByIdUpdated[objectsByIdKey][query.id];
+      return combine(
+        combine(
+          state,
+          combine(DEFAULT_RESET_STATE, reset),
+        ),
+        objectsByIdUpdated,
+      );
     }
 
     case INDEX.FAILED: {
