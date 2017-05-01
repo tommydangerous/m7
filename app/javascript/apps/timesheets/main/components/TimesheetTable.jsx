@@ -6,8 +6,12 @@ import React from 'react';
 
 import { TABLE_HEADERS } from '../utils/constants';
 
+import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
+import * as employeeActionCreators from '../../../../action_creators/employeeActionCreators';
 import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
 
+import * as customerSelectors from '../../../../selectors/customerSelectors';
+import * as employeeSelectors from '../../../../selectors/employeeSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 
 import SimpleTable from '../../../../components/SimpleTable';
@@ -16,21 +20,33 @@ import TimesheetShape from '../../../../shapes/TimesheetShape';
 
 const mapStateToProps = state => ({
   loading: timesheetSelectors.rootSelector(state).loading,
+  customersById: customerSelectors.rootSelector(state).customersById,
+  employeesById: employeeSelectors.rootSelector(state).employeesById,
   timesheets: timesheetSelectors.sortedObjects(state),
 });
 
 const mapDispatchToProps = dispatch => ({
+  customerActions: bindActionCreators(customerActionCreators, dispatch),
+  employeeActions: bindActionCreators(employeeActionCreators, dispatch),
   timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
 });
 
 class TimesheetTable extends React.Component {
   componentDidMount() {
-    const { timesheetActions } = this.props;
+    const {
+      customerActions,
+      employeeActions,
+      timesheetActions,
+    } = this.props;
+    customerActions.index();
+    employeeActions.index();
     timesheetActions.index();
   }
 
   render() {
     const {
+      customersById,
+      employeesById,
       loading,
       onEdit,
       timesheet,
@@ -40,10 +56,13 @@ class TimesheetTable extends React.Component {
     } = this.props;
 
     const renderTableRow = timesheet => {
+      const customerName = (customersById[timesheet.customer_id] || {}).name;
+      const employeeName = (employeesById[timesheet.employee_id] || {}).name;
+
       return (
         <tr key={timesheet.id}>
-          <td>{timesheet.employee_id}</td>
-          <td>{timesheet.customer_id}</td>
+          <td>{employeeName}</td>
+          <td>{customerName}</td>
           <td>{timesheet.start_time}</td>
           <td>{timesheet.end_time}</td>
           <td>{timesheet.hours_off_duty}</td>
@@ -76,7 +95,7 @@ class TimesheetTable extends React.Component {
     };
 
     return (
-      <div className={cx({ loading: loading.index })}>
+      <div className={cx({ loading: loading.delete || loading.index })}>
         <SimpleTable
           objects={timesheets}
           renderTableRow={renderTableRow}
@@ -89,6 +108,7 @@ class TimesheetTable extends React.Component {
 
 TimesheetTable.propTypes = {
   loading: PropTypes.shape({
+    delete: PropTypes.bool,
     index: PropTypes.bool,
   }).isRequired,
   onEdit: PropTypes.func,

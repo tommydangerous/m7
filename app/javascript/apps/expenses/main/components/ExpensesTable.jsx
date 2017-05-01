@@ -76,7 +76,7 @@ class ExpensesTable extends React.Component {
     };
 
     return (
-      <div className={cx({ loading: loading.index })}>
+      <div className={cx({ loading: loading.delete || loading.index })}>
         <SimpleTable
           objects={expenses}
           renderTableRow={renderTableRow}
@@ -88,16 +88,17 @@ class ExpensesTable extends React.Component {
 }
 
 ExpensesTable.propTypes = {
-  onEdit: PropTypes.func,
   expenses: PropTypes.arrayOf(ExpenseShape),
   loading: PropTypes.shape({
+    delete: PropTypes.bool,
     index: PropTypes.bool,
   }).isRequired,
+  onEdit: PropTypes.func,
 };
 
 ExpensesTable.defaultProps = {
-  onEdit() {},
   expenses: [],
+  onEdit() {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

@@ -87,10 +87,13 @@ export default function generate(opts = {}) {
     }
 
     case DELETE.FAILED: {
-      return state;
+      return combine(state, {
+        errors: { ...errors, delete: error },
+        loading: { ...loading, delete: false },
+      });
     }
     case DELETE.STARTED: {
-      return state;
+      return combine(state, { loading: { ...loading, delete: true } });
     }
     case DELETE.SUCCEEDED: {
       delete objectsByIdUpdated[objectsByIdKey][query.id];

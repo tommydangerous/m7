@@ -53,7 +53,6 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
       });
     })
     .catch(error => {
-      debugger
       if (failedActionType) {
         dispatch(requestFailed(failedActionType, error));
       }

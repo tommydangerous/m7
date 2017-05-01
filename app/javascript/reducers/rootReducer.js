@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 // Reducers
 import customerReducers from './customerReducers';
+import employeeReducers from './employeeReducers';
 import expenseReducers from './expenseReducers';
 import expensegroupingReducers from './expensegroupingReducers';
 import inventoryitemReducers from './inventoryitemReducers';
@@ -14,6 +15,7 @@ import vendorReducers from './vendorReducers';
 
 export default combineReducers({
   customer: customerReducers,
+  employee: employeeReducers,
   expense: expenseReducers,
   expensegrouping: expensegroupingReducers,
   inventoryitem: inventoryitemReducers,
