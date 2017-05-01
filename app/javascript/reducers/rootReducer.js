@@ -4,11 +4,11 @@ import { combineReducers } from 'redux';
 import loginReducers from './loginReducers';
 import expenseReducers from './expenseReducers';
 import modalReducers from './modalReducers';
-import postReducers from './postReducers';
+import vendorReducers from './vendorReducers';
 
 export default combineReducers({
   expense: expenseReducers,
   login: loginReducers,
   modal: modalReducers,
-  posts: postReducers,
+  vendor: vendorReducers,
 });

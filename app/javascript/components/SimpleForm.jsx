@@ -76,6 +76,29 @@ export default class SimpleForm extends React.Component {
       });
   }
 
+  fields() {
+    const { fields } = this.props;
+    if (!Array.isArray(fields)) {
+      const sorted = Object
+        .keys(fields)
+        .map(key => {
+          const obj = fields[key];
+          obj.name = key;
+          return obj;
+        })
+        .sort((a, b) => {
+          if (a.order > b.order) {
+            return 1;
+          } else if (a.order < b.order) {
+            return -1;
+          }
+          return 0;
+        });
+      return sorted;
+    }
+    return fields;
+  }
+
   submitFormPayload() {
     const payload = Object.assign({}, this.state);
     // delete payload['errors'];
@@ -145,7 +168,7 @@ export default class SimpleForm extends React.Component {
 
   renderField() {
     const _this = this;
-    return this.props.fields.map(function(hash) {
+    return this.fields().map(function(hash) {
       var header;
       if (hash.label) {
         header = (
@@ -282,7 +305,10 @@ export default class SimpleForm extends React.Component {
 SimpleForm.propTypes = {
   error: PropTypes.string,
   header: PropTypes.string,
-  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fields: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.object),
+    PropTypes.object,
+  ]).isRequired,
   loading: PropTypes.bool,
   onClickCancel: PropTypes.func,
   onSubmitForm: PropTypes.func.isRequired,

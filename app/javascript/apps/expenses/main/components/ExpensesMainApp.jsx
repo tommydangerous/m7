@@ -5,45 +5,35 @@ import React from 'react';
 
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
+import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
 
-import * as expenseRootSelector from '../../../../selectors/expenseSelectors';
-import * as modalRootSelector from '../../../../selectors/modalSelectors';
+import * as expenseSelectors from '../../../../selectors/expenseSelectors';
+import * as modalSelectors from '../../../../selectors/modalSelectors';
+import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
-import { CREATE_FORM_FIELDS } from '../utils/constants';
 import { OFFLINE_MODE } from '../../../../utils/constants';
 
+import ExpenseForm from './ExpenseForm';
 import ExpensesTable from './ExpensesTable';
 import Modal from '../../../../components/Modal';
-import SimpleForm from '../../../../components/SimpleForm';
+
 
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
-const expensesSorted = (expensesById) => {
-  return Object
-    .keys(expensesById)
-    .map(key => expensesById[key])
-    .sort((a, b) => {
-      if (a.date > b.date) {
-        return -1;
-      } else if (a.date < b.date) {
-        return 1;
-      }
-      return 0;
-    });
-};
-
 const mapStateToProps = state => ({
-  errors: expenseRootSelector.rootSelector(state).errors,
-  expenses: expensesSorted(expenseRootSelector.rootSelector(state).expensesById),
-  loading: expenseRootSelector.rootSelector(state).loading,
-  modalVisible: modalRootSelector.rootSelector(state).visible,
+  errors: expenseSelectors.rootSelector(state).errors,
+  expenses: expenseSelectors.sortedObjects(state),
+  loading: expenseSelectors.rootSelector(state).loading,
+  modalVisible: modalSelectors.rootSelector(state).visible,
+  vendors: vendorSelectors.sortedObjects(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
+  vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
 class ExpensesMainApp extends React.Component {
@@ -73,6 +63,8 @@ class ExpensesMainApp extends React.Component {
       loading,
       modalActions,
       modalVisible,
+      vendorActions,
+      vendors,
     } = this.props;
 
     return (
@@ -84,6 +76,7 @@ class ExpensesMainApp extends React.Component {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
+                vendorActions.index(),
                 modalActions.show();
               }}
             >
@@ -102,20 +95,19 @@ class ExpensesMainApp extends React.Component {
         </div>
 
         <Modal onClose={modalActions.hide} visible={modalVisible}>
-          <SimpleForm
+          <ExpenseForm
             error={errors.create ? errors.create.message : null}
-            header="Add a new expense"
-            fields={CREATE_FORM_FIELDS}
             loading={loading.create}
             onClickCancel={modalActions.hide}
             onSubmitForm={(payload) => {
-              return expenseActions.createExpense({ 'TimeEntry': payload })
+              return expenseActions.create({ 'TimeEntry': payload })
                 .then(response => {
                   if (!error) {
                     modalActions.hide();
                   }
                 });
             }}
+            vendors={vendors}
           />
         </Modal>
       </div>

@@ -1,6 +1,21 @@
 import { combine } from '../utils/reducer';
 import SimpleActionGenerator from '../actions/SimpleActionGenerator';
 
+const DEFAULT_RESET_STATES = {
+  create: null,
+  delete: null,
+  index: null,
+  show: null,
+  update: null,
+};
+
+const DEFAULT_RESET_STATE = {
+  errors: { ...DEFAULT_RESET_STATES },
+  loading: { ...DEFAULT_RESET_STATES },
+};
+
+const DEFAULT_INITIAL_STATE = combine(DEFAULT_RESET_STATE, {});
+
 export default function generate(opts = {}) {
   const {
     action: {
@@ -11,15 +26,11 @@ export default function generate(opts = {}) {
     name: pluralName,
     responseParsers,
     states: {
-      current: state,
+      current,
       initial,
       reset,
     },
   } = opts;
-  const {
-    errors,
-    loading,
-  } = state;
 
   const {
     CREATE,
@@ -28,8 +39,16 @@ export default function generate(opts = {}) {
     SHOW,
     UPDATE,
   } = SimpleActionGenerator({ name: pluralName });
-
   const objectsByIdKey = `${pluralName}ById`;
+
+  const initialState = { ...DEFAULT_INITIAL_STATE };
+  initialState[objectsByIdKey] = {};
+  const state = current || combine(initialState, initial);
+  const {
+    errors,
+    loading,
+  } = state;
+
   const objectsByIdUpdated = {};
   objectsByIdUpdated[objectsByIdKey] = { ...state[objectsByIdKey] };
 
@@ -48,7 +67,13 @@ export default function generate(opts = {}) {
         console.log(obj);
         objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
       });
-      return combine(combine(state, reset), objectsByIdUpdated);
+      return combine(
+        combine(
+          state,
+          combine(DEFAULT_RESET_STATE, reset),
+        ),
+        objectsByIdUpdated,
+      );
     }
 
     case CREATE.FAILED: {
@@ -63,7 +88,13 @@ export default function generate(opts = {}) {
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
       objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
-      return combine(combine(state, reset), objectsByIdUpdated);
+      return combine(
+        combine(
+          state,
+          combine(DEFAULT_RESET_STATE, reset),
+        ),
+        objectsByIdUpdated,
+      );
     }
 
     default: {

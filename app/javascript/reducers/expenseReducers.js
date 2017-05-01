@@ -1,4 +1,3 @@
-import { combine } from '../utils/reducer';
 import { OFFLINE_MODE } from '../utils/constants';
 import SimpleReducerGenerator from './SimpleReducerGenerator';
 
@@ -12,21 +11,12 @@ if (OFFLINE_MODE) {
   });
 }
 
-const RESET_STATE = {
-  errors: {
-    create: null,
-    index: null,
-  },
-  loading: {
-    create: null,
-    index: null,
-  },
-};
-const INITIAL_STATE = combine(RESET_STATE, {
+const RESET_STATE = {};
+const INITIAL_STATE = {
   expensesById: initialExpensesById,
-});
+};
 
-export default function reducers(state = INITIAL_STATE, action) {
+export default function reducers(state, action) {
   return SimpleReducerGenerator({
     action,
     name: 'expenses',
