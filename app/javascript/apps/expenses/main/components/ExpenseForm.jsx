@@ -6,12 +6,17 @@ import SimpleForm from '../../../../components/SimpleForm';
 import { CREATE_FORM_FIELDS } from '../utils/constants';
 
 const selectOptions = array => {
-  return array.map(obj => {
+  const arr = array.map(obj => {
     return {
       text: obj.name,
       value: obj.id,
     };
   });
+  return [{
+    disabled: true,
+    text: '',
+    value: '',
+  }].concat(arr);
 };
 
 export default function ExpenseForm({
@@ -20,11 +25,18 @@ export default function ExpenseForm({
   loading,
   onClickCancel,
   onSubmitForm,
+  qbaccounts,
   vendors,
 }) {
   const fields = { ...CREATE_FORM_FIELDS };
   fields.customer_id.options = selectOptions(customers);
   fields.vendor_id.options = selectOptions(vendors);
+
+  if (Object.keys(qbaccounts).length === 0) {
+    delete fields.qb_account_id;
+  } else {
+    fields.qb_account_id = selectOptions(qbaccounts);
+  }
 
   return (
     <SimpleForm

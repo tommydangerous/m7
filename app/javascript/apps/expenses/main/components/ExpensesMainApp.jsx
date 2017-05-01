@@ -6,6 +6,7 @@ import React from 'react';
 import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
+import * as qbaccountActionCreators from '../../../../action_creators/qbaccountActionCreators';
 import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
@@ -13,6 +14,7 @@ import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
 import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
+import * as qbaccountSelectors from '../../../../selectors/qbaccountSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import { OFFLINE_MODE } from '../../../../utils/constants';
@@ -30,6 +32,7 @@ const mapStateToProps = state => ({
   expenses: expenseSelectors.sortedObjects(state),
   loading: expenseSelectors.rootSelector(state).loading,
   modalVisible: modalSelectors.rootSelector(state).visible,
+  qbaccounts: qbaccountSelectors.sortedObjects(state),
   vendors: vendorSelectors.sortedObjects(state),
 });
 
@@ -37,6 +40,7 @@ const mapDispatchToProps = dispatch => ({
   customerActions: bindActionCreators(customerActionCreators, dispatch),
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
+  qbaccountActions: bindActionCreators(qbaccountActionCreators, dispatch),
   vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
@@ -69,6 +73,8 @@ class ExpensesMainApp extends React.Component {
       loading,
       modalActions,
       modalVisible,
+      qbaccountActions,
+      qbaccounts,
       vendorActions,
       vendors,
     } = this.props;
@@ -83,6 +89,7 @@ class ExpensesMainApp extends React.Component {
               onClick={(e) => {
                 e.preventDefault();
                 customerActions.index(),
+                qbaccountActions.index(),
                 vendorActions.index(),
                 modalActions.show();
               }}
@@ -115,6 +122,7 @@ class ExpensesMainApp extends React.Component {
                   }
                 });
             }}
+            qbaccounts={qbaccounts}
             vendors={vendors}
           />
         </Modal>

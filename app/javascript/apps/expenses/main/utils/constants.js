@@ -4,6 +4,11 @@ export const CREATE_FORM_FIELDS = {
     order: 1,
     type: 'select',
   },
+  qb_account_id: {
+    label: 'Account',
+    order: 2,
+    type: 'select',
+  },
   vendor_id: {
     label: 'Vendor',
     order: 0,
