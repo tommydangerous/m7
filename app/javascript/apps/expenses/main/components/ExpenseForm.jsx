@@ -5,7 +5,17 @@ import SimpleForm from '../../../../components/SimpleForm';
 
 import { CREATE_FORM_FIELDS } from '../utils/constants';
 
+const selectOptions = array => {
+  return array.map(obj => {
+    return {
+      text: obj.name,
+      value: obj.id,
+    };
+  });
+};
+
 export default function ExpenseForm({
+  customers,
   error,
   loading,
   onClickCancel,
@@ -13,12 +23,8 @@ export default function ExpenseForm({
   vendors,
 }) {
   const fields = { ...CREATE_FORM_FIELDS };
-  fields.vendor_id.options = vendors.map(vendor => {
-    return {
-      text: vendor.name,
-      value: vendor.id,
-    };
-  });
+  fields.customer_id.options = selectOptions(customers);
+  fields.vendor_id.options = selectOptions(vendors);
 
   return (
     <SimpleForm

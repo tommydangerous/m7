@@ -1,4 +1,9 @@
 export const CREATE_FORM_FIELDS = {
+  customer_id: {
+    label: 'Customer',
+    order: 1,
+    type: 'select',
+  },
   vendor_id: {
     label: 'Vendor',
     order: 0,

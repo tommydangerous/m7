@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
 import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
 
+import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
@@ -23,6 +25,7 @@ import Modal from '../../../../components/Modal';
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
+  customers: customerSelectors.sortedObjects(state),
   errors: expenseSelectors.rootSelector(state).errors,
   expenses: expenseSelectors.sortedObjects(state),
   loading: expenseSelectors.rootSelector(state).loading,
@@ -31,6 +34,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  customerActions: bindActionCreators(customerActionCreators, dispatch),
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
   vendorActions:bindActionCreators(vendorActionCreators, dispatch),
@@ -57,6 +61,8 @@ class ExpensesMainApp extends React.Component {
 
   render() {
     const {
+      customerActions,
+      customers,
       errors,
       expenseActions,
       expenses,
@@ -76,6 +82,7 @@ class ExpensesMainApp extends React.Component {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
+                customerActions.index(),
                 vendorActions.index(),
                 modalActions.show();
               }}
@@ -96,6 +103,7 @@ class ExpensesMainApp extends React.Component {
 
         <Modal onClose={modalActions.hide} visible={modalVisible}>
           <ExpenseForm
+            customers={customers}
             error={errors.create ? errors.create.message : null}
             loading={loading.create}
             onClickCancel={modalActions.hide}
