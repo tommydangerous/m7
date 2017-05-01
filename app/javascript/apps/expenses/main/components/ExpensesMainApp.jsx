@@ -3,24 +3,13 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
-import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
-import * as expensegroupingActionCreators
-  from '../../../../action_creators/expensegroupingActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
-import * as qbaccountActionCreators from '../../../../action_creators/qbaccountActionCreators';
-import * as qbclassActionCreators from '../../../../action_creators/qbclassActionCreators';
-import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
 
-import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
-import * as expensegroupingSelectors from '../../../../selectors/expensegroupingSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
-import * as qbaccountSelectors from '../../../../selectors/qbaccountSelectors';
-import * as qbclassSelectors from '../../../../selectors/qbclassSelectors';
-import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import { OFFLINE_MODE } from '../../../../utils/constants';
 
@@ -31,25 +20,15 @@ import Modal from '../../../../components/Modal';
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
-  customers: customerSelectors.sortedObjects(state),
   errors: expenseSelectors.rootSelector(state).errors,
-  expensegroupings: expensegroupingSelectors.sortedObjects(state),
   expenses: expenseSelectors.sortedObjects(state),
   loading: expenseSelectors.rootSelector(state).loading,
   modalVisible: modalSelectors.rootSelector(state).visible,
-  qbaccounts: qbaccountSelectors.sortedObjects(state),
-  qbclasses: qbclassSelectors.sortedObjects(state),
-  vendors: vendorSelectors.sortedObjects(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  customerActions: bindActionCreators(customerActionCreators, dispatch),
-  expensegroupingActions: bindActionCreators(expensegroupingActionCreators, dispatch),
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
-  qbaccountActions: bindActionCreators(qbaccountActionCreators, dispatch),
-  qbclassActions: bindActionCreators(qbclassActionCreators, dispatch),
-  vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
 class ExpensesMainApp extends React.Component {
@@ -73,22 +52,12 @@ class ExpensesMainApp extends React.Component {
 
   render() {
     const {
-      customerActions,
-      customers,
       errors,
-      expensegroupingActions,
-      expensegroupings,
       expenseActions,
       expenses,
       loading,
       modalActions,
       modalVisible,
-      qbaccountActions,
-      qbaccounts,
-      qbclassActions,
-      qbclasses,
-      vendorActions,
-      vendors,
     } = this.props;
 
     return (
@@ -100,11 +69,6 @@ class ExpensesMainApp extends React.Component {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                customerActions.index();
-                expensegroupingActions.index();
-                qbaccountActions.index();
-                qbclassActions.index();
-                vendorActions.index();
                 modalActions.show();
               }}
             >
@@ -124,9 +88,7 @@ class ExpensesMainApp extends React.Component {
 
         <Modal onClose={modalActions.hide} visible={modalVisible}>
           <ExpenseForm
-            customers={customers}
             error={errors.create ? errors.create.message : null}
-            expensegroupings={expensegroupings}
             loading={loading.create}
             onClickCancel={modalActions.hide}
             onSubmitForm={(payload) => {
@@ -137,9 +99,6 @@ class ExpensesMainApp extends React.Component {
                   }
                 });
             }}
-            qbaccounts={qbaccounts}
-            qbclasses={qbclasses}
-            vendors={vendors}
           />
         </Modal>
       </div>
