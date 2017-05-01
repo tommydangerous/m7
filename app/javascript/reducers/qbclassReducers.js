@@ -6,9 +6,9 @@ const INITIAL_STATE = {};
 export default function reducers(state, action) {
   return SimpleReducerGenerator({
     action,
-    name: 'qbaccounts',
+    name: 'qbclasses',
     responseParsers: {
-      index: resp => resp.QbAccounts.map(obj => obj.QbAccount),
+      index: resp => resp.QbClasses.map(obj => obj.QbClass),
     },
     states: {
       current: state,

@@ -105,7 +105,6 @@ export default {
     const signature = generateSignature(pathWithQuery);
 
     const request = new Request(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
-    // debugger
     return fetch(request);
   }
 }

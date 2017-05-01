@@ -64,7 +64,7 @@ export default function generate(opts = {}) {
     }
     case INDEX.SUCCEEDED: {
       responseParsers.index(response).forEach(obj => {
-        console.log(obj);
+        // console.log(obj);
         objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
       });
       return combine(

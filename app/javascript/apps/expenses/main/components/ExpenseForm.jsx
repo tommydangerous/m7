@@ -22,20 +22,34 @@ const selectOptions = array => {
 export default function ExpenseForm({
   customers,
   error,
+  expensegroupings,
   loading,
   onClickCancel,
   onSubmitForm,
   qbaccounts,
+  qbclasses,
   vendors,
 }) {
   const fields = { ...CREATE_FORM_FIELDS };
   fields.customer_id.options = selectOptions(customers);
   fields.vendor_id.options = selectOptions(vendors);
 
+  if (Object.keys(expensegroupings).length === 0) {
+    delete fields.expense_grouping_id;
+  } else {
+    fields.expense_grouping_id.options = selectOptions(expensegroupings);
+  }
+
   if (Object.keys(qbaccounts).length === 0) {
     delete fields.qb_account_id;
   } else {
-    fields.qb_account_id = selectOptions(qbaccounts);
+    fields.qb_account_id.options = selectOptions(qbaccounts);
+  }
+
+  if (Object.keys(qbclasses).length === 0) {
+    delete fields.qb_class_id;
+  } else {
+    fields.qb_class_id.options = selectOptions(qbclasses);
   }
 
   return (

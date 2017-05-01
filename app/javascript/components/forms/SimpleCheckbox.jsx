@@ -4,10 +4,9 @@ import React from 'react';
 // defaultValue: The default value of the select field
 // name: The name of the select parameter
 const propTypes = {
-  defaultValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
+  checked: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onChangeInput: PropTypes.func.isRequired,
-  value: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
 };
 
 class SimpleCheckbox extends React.Component {
@@ -21,14 +20,19 @@ class SimpleCheckbox extends React.Component {
   }
 
   render() {
+    const {
+      // defaultValue,
+      checked,
+      name,
+      value,
+    } = this.props;
     return (
       <div className="checkbox">
         <input
-          defaultValue={this.props.defaultValue}
-          name={this.props.name}
+          checked={checked}
+          name={name}
           onChange={this.onChangeInput}
           type="checkbox"
-          value={this.props.value}
         />
       </div>
     );
@@ -36,5 +40,9 @@ class SimpleCheckbox extends React.Component {
 };
 
 SimpleCheckbox.propTypes = propTypes;
+
+SimpleCheckbox.defaultProps = {
+  checked: false,
+};
 
 export default SimpleCheckbox;

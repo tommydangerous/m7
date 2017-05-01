@@ -80,7 +80,7 @@ export default class DatepickerInput extends React.Component {
   _formatDate(date) {
     const values = date.split('-');
     if (values.length == 3) {
-      return [values[1], values[0], values[2]].join('-');
+      return [values[2], values[1], values[0]].join('-');
     } else {
       return '';
     }

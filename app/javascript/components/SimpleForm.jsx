@@ -13,22 +13,29 @@ import SimpleSelectField from './forms/SimpleSelectField';
 import SimpleTextField from './forms/SimpleTextField';
 
 export default class SimpleForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.onAutocompleteLocation = this.onAutocompleteLocation.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onClickCancel = this.onClickCancel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
-    this.state = this.initialState();
+    this.state = this.initialState({ error: props.error });
   }
 
-  initialState() {
-    return {
-      // errors: null,
-      // loading: false,
+  initialState(opts = {}) {
+    const state = {
+      ...opts,
       timestamp: new Date(),
     };
+
+    this.fields().forEach(obj => {
+      if (obj.type === 'checkbox' && typeof obj.defaultValue !== 'undefined') {
+        state[obj.name] = obj.defaultValue;
+      }
+    });
+
+    return state;
   }
 
   onAutocompleteLocation(hash) {
@@ -45,11 +52,19 @@ export default class SimpleForm extends React.Component {
   }
 
   onChangeInput(e) {
-    this.state[e.target.name] = e.target.value;
+    const newState = {};
+    newState[e.target.name] = e.target.value;
+    this.setState(newState, () => console.log(this.state));
   }
 
   onChangeCheckbox(e) {
-    this.state[e.target.name] = !this.state[e.target.name];
+    const name = e.target.name;
+    this.onChangeInput({
+      target: {
+        name,
+        value: !this.state[name],
+      },
+    });
   }
 
   onClickCancel(e) {
@@ -62,18 +77,27 @@ export default class SimpleForm extends React.Component {
     e.preventDefault();
     // this.setState({ loading: true });
     const _this = this;
-    const promise = this.props.onSubmitForm(this.submitFormPayload());
+    const payload = this.submitFormPayload();
 
-    promise.then(
-      function(opts) {
-        _this.reset(opts ? opts.response : {});
-      },
-      function(xhr) {
-        _this.setState({
-          // errors: handleError(xhr),
-          loading: false,
+    const errors = this.validatePayload(payload);
+    if (Object.keys(errors).length === 0) {
+      const promise = this.props.onSubmitForm(payload);
+
+      promise.then(
+        function(opts) {
+          _this.reset(opts ? opts.response : {});
+        },
+        function(xhr) {
+          _this.setState({
+            // errors: handleError(xhr),
+            loading: false,
+          });
         });
-      });
+    } else {
+      const messages = Object.keys(errors).map(key => `${(errors[key].label)} is required`);
+      this.setState({ error: messages[0] });
+      console.log(messages);
+    }
   }
 
   fields() {
@@ -116,6 +140,20 @@ export default class SimpleForm extends React.Component {
     this.setState(Object.assign(state, this.initialState()));
   }
 
+  validatePayload(payload) {
+    const errors = {};
+    const fields = this.fields();
+
+    fields.forEach(obj => {
+      const key = obj.name;
+      if (!!obj.required && typeof payload[key] === 'undefined') {
+        errors[key] = obj;
+      }
+    });
+
+    return errors;
+  }
+
   renderCancelButton() {
     if (this.props.cancelUrl) {
       return (
@@ -133,12 +171,19 @@ export default class SimpleForm extends React.Component {
   }
 
   renderCheckbox(hash) {
+    let checked = this.props[hash.name];
+    if (typeof checked === 'undefined') {
+      checked = this.state[hash.name];
+    }
+    if (typeof checked === 'undefined') {
+      checked = hash.defaultValue;
+    }
+
     return (
       <SimpleCheckbox
-        defaultValue={this.props[hash.name]}
+        checked={checked}
         name={hash.name}
         onChangeInput={this.onChangeCheckbox}
-        value={this.props[hash.name]}
       />
     );
   }
@@ -156,7 +201,10 @@ export default class SimpleForm extends React.Component {
   }
 
   renderErrors() {
-    const { error } = this.props;
+    const {
+      error,
+    } = this.state;
+
     if (error) {
       return (
         <div className="background-red panel-body-small text-center text-contrast">
