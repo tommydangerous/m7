@@ -66,6 +66,7 @@ export default function reducers(state = INITIAL_STATE, action) {
       } = response;
       const expensesByIdUpdated = { ...expensesById };
       expenses.forEach(({ ExpenseEntry: obj }) => {
+        console.log(obj);
         expensesByIdUpdated[obj.id] = obj;
       });
       return combine(combine(state, RESET_STATE), { expensesById: expensesByIdUpdated });

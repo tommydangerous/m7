@@ -5,6 +5,9 @@ import React from 'react';
 
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
+
+import SimpleActionGenerator from '../../../../actions/SimpleActionGenerator';
+
 import * as expenseRootSelector from '../../../../selectors/expenseSelectors';
 import * as modalRootSelector from '../../../../selectors/modalSelectors';
 
@@ -15,9 +18,25 @@ import ExpensesTable from './ExpensesTable';
 import Modal from '../../../../components/Modal';
 import SimpleForm from '../../../../components/SimpleForm';
 
+import ExpenseShape from '../../../../shapes/ExpenseShape';
+
+const expensesSorted = (expensesById) => {
+  return Object
+    .keys(expensesById)
+    .map(key => expensesById[key])
+    .sort((a, b) => {
+      if (a.date > b.date) {
+        return -1;
+      } else if (a.date < b.date) {
+        return 1;
+      }
+      return 0;
+    });
+};
+
 const mapStateToProps = state => ({
   errors: expenseRootSelector.rootSelector(state).errors,
-  expensesById: expenseRootSelector.rootSelector(state).expensesById,
+  expenses: expensesSorted(expenseRootSelector.rootSelector(state).expensesById),
   loading: expenseRootSelector.rootSelector(state).loading,
   modalVisible: modalRootSelector.rootSelector(state).visible,
 });
@@ -37,6 +56,7 @@ class ExpensesMainApp extends React.Component {
   }
 
   componentDidMount() {
+    console.log(SimpleActionGenerator({ name: 'expense' }));
     if (!OFFLINE_MODE) {
       const { expenseActions } = this.props;
       expenseActions.fetchExpenses({
@@ -50,14 +70,11 @@ class ExpensesMainApp extends React.Component {
     const {
       errors,
       expenseActions,
-      expensesById,
+      expenses,
       loading,
       modalActions,
       modalVisible,
     } = this.props;
-
-    // TODO: sort by created_at
-    const expenses = Object.keys(expensesById).map(key => expensesById[key]);
 
     return (
       <div className="page-container">
@@ -109,13 +126,13 @@ class ExpensesMainApp extends React.Component {
 
 ExpensesMainApp.propTypes = {
   error: PropTypes.object,
-  expensesById: PropTypes.object,
+  expenses: PropTypes.arrayOf(ExpenseShape),
   loading: PropTypes.object,
 };
 
 ExpensesMainApp.defaultProps = {
   error: null,
-  expensesById: {},
+  expenses: [],
   loading: false,
 };
 

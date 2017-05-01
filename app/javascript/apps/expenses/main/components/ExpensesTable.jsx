@@ -9,17 +9,15 @@ import SimpleTable from '../../../../components/SimpleTable';
 const renderTableRow = (object) => {
   return (
     <tr key={object.id}>
-      <td>{`$${object.amount}`}</td>
-      <td>{object.customer_id}</td>
-      <td>{object.date}</td>
-      <td>{object.description}</td>
-      <td>{object.expenses_grouping_id}</td>
-      <td>{object.id}</td>
-      <td>{object.qb_account_id}</td>
-      <td>{object.qb_class_id}</td>
       <td>{object.vendor_id}</td>
+      <td>{object.customer_id}</td>
+      <td>{`$${object.amount}`}</td>
+      <td>{object.date}</td>
       <td>
         <a href="#">Edit</a>
+      </td>
+      <td>
+        <a href="#">Delete</a>
       </td>
     </tr>
   );

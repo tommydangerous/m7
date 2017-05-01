@@ -93,14 +93,10 @@ export const CREATE_FORM_FIELDS = [
 ];
 
 export const TABLE_HEADERS = [
-  'Amount',
-  'Customer',
-  'Date',
-  'Description',
-  'Group',
-  'ID',
-  'QB ID',
-  'QB Class',
   'Vendor',
+  'Customer',
+  'Amount',
+  'Date',
   'Edit',
+  'Delete',
 ];
