@@ -56,10 +56,9 @@ class ExpensesMainApp extends React.Component {
   }
 
   componentDidMount() {
-    console.log(SimpleActionGenerator({ name: 'expense' }));
     if (!OFFLINE_MODE) {
       const { expenseActions } = this.props;
-      expenseActions.fetchExpenses({
+      expenseActions.index({
         search_start_date: '2017-04-01',
         search_end_date: '2017-05-01',
       });

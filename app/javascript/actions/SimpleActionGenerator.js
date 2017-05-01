@@ -17,21 +17,19 @@ export default function generate(opts = {}) {
     name: pluraName,
   } = opts;
   const resource = pluraName.toUpperCase();
-  const dict = {};
+  const dict = {
+    'ATTRIBUTES': {
+      'UPDATED': `${resource}_ATTRIBUTES_UPDATED`,
+    },
+  };
 
   METHODS.forEach(method => {
+    dict[method] = {};
     STAGES.forEach(stage => {
-      const key = `${resource}_${method}_${stage}`;
-      dict[key] = key;
+      const actionType = `${resource}_${method}_${stage}`;
+      dict[method][stage] = actionType;
     });
   });
 
   return dict;
 }
-
-// Object.defineProperty(this, singular, {
-//   value: {},
-//   enumerable: true,
-//   configurable: true,
-//   writable: true,
-// });
