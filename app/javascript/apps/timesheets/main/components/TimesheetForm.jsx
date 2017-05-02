@@ -107,11 +107,12 @@ class TimesheetForm extends React.Component {
                 ...timesheet,
                 ...payload,
               },
-            }).then(response => {
-                if (!errors.update) {
-                  closeModal();
-                }
-              });
+            });
+          }}
+          onSubmitFormCallback={() => {
+            if (!errors.update) {
+              onClickCancel();
+            }
           }}
           submitFormButtonText="Update"
         />
@@ -128,11 +129,12 @@ class TimesheetForm extends React.Component {
         onSubmitForm={(payload) => {
           return timesheeetActions.create({
             'TimeEntry': payload,
-          }).then(response => {
-              if (!errors.create) {
-                onClickCancel();
-              }
-            });
+          });
+        }}
+        onSubmitFormCallback={() => {
+          if (!errors.create) {
+            onClickCancel();
+          }
         }}
       />
     );
@@ -143,6 +145,7 @@ TimesheetForm.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.shape({
     create: PropTypes.bool,
+    update: PropTypes.bool,
   }).isRequired,
   employees: PropTypes.arrayOf(PropTypes.object),
   inventoryitems: PropTypes.arrayOf(PropTypes.object),

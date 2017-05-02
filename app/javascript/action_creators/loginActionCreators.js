@@ -8,8 +8,8 @@ import {
   LOGOUT_RECEIVED,
 } from '../actions/loginActions';
 
-export function login(payload) {
-  return createGenericRequest('POST', '/api/login', { payload }, {
+export function login(query) {
+  return createGenericRequest('POST', '/api/login', { query }, {
     failedActionType: LOGIN_FAILED,
     startedActionType: LOGIN_REQUESTED,
     succeededActionType: LOGIN_RECEIVED,

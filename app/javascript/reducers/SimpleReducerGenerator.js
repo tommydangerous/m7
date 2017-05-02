@@ -128,6 +128,34 @@ export default function generate(opts = {}) {
       );
     }
 
+    case UPDATE.FAILED: {
+      return combine(state, {
+        errors: { ...errors, update: error },
+        loading: { ...loading, update: false },
+      });
+    }
+    case UPDATE.STARTED: {
+      return combine(state, { loading: { ...loading, update: true } });
+    }
+    case UPDATE.SUCCEEDED: {
+      const id = payload.id;
+      const currentObj = objectsByIdUpdated[objectsByIdKey][id];
+      const updatedObj = responseParsers.update(response);
+      objectsByIdUpdated[objectsByIdKey][id] = {
+        ...currentObj,
+        ...updatedObj,
+        // This is required since the server response is incomplete
+        ...responseParsers.create(payload),
+      };
+      return combine(
+        combine(
+          state,
+          combine(DEFAULT_RESET_STATE, reset),
+        ),
+        objectsByIdUpdated,
+      );
+    }
+
     case ATTRIBUTES.UPDATED: {
       const dict = {};
       dict[nameSingular] = combine(state[nameSingular], action[nameSingular]);

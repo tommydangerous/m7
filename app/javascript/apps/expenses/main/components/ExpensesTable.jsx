@@ -29,7 +29,11 @@ class ExpensesTable extends React.Component {
   componentDidMount() {
     if (!OFFLINE_MODE) {
       const { expenseActions } = this.props;
-      expenseActions.index();
+      // TODO: can we render expenses from other vendors?
+      expenseActions.index({
+        search_end_date: '2018-01-01',
+        search_start_date: '2016-01-01',
+      });
     }
   }
 

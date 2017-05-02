@@ -86,6 +86,7 @@ export default class SimpleForm extends React.Component {
       promise.then(
         function(opts) {
           _this.reset(opts ? opts.response : {});
+          _this.props.onSubmitFormCallback();
         },
         function(xhr) {
           _this.setState({
@@ -96,7 +97,6 @@ export default class SimpleForm extends React.Component {
     } else {
       const messages = Object.keys(errors).map(key => `${(errors[key].label)} is required`);
       this.setState({ error: messages[0] });
-      console.log(messages);
     }
   }
 
@@ -365,6 +365,7 @@ SimpleForm.propTypes = {
   loading: PropTypes.bool,
   onClickCancel: PropTypes.func,
   onSubmitForm: PropTypes.func.isRequired,
+  onSubmitFormCallback: PropTypes.func,
   submitFormButtonText: PropTypes.string,
 };
 
@@ -373,5 +374,6 @@ SimpleForm.defaultProps = {
   error: null,
   loading: false,
   onClickCancel() {},
+  onSubmitFormCallback() {},
   submitFormButtonText: null,
 };

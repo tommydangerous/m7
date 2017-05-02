@@ -65,8 +65,11 @@ export default {
     };
 
     const data = {
-      method,
       credentials: 'include',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      method,
     };
 
     if (isLoggedIn()) {
@@ -81,8 +84,10 @@ export default {
       };
     }
 
-    if (payload) {
-      queryParams = { ...transformPayload(payload), ...queryParams };
+    if (method === POST) {
+      if (payload) {
+        data.body = $.param({ ...transformPayload(payload) });
+      }
     }
 
     if (query) {
