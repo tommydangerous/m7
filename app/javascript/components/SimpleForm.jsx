@@ -20,12 +20,14 @@ export default class SimpleForm extends React.Component {
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onClickCancel = this.onClickCancel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
-    this.state = this.initialState({ error: props.error });
+    this.state = this.initialState();
   }
 
   initialState(opts = {}) {
+    const { error } = this.props;
     const state = {
       ...opts,
+      error,
       timestamp: new Date(),
     };
 
@@ -74,27 +76,20 @@ export default class SimpleForm extends React.Component {
   }
 
   onSubmitForm(e) {
-    // This method (this.props.onSubmitForm) needs to return a promise
     e.preventDefault();
-    // this.setState({ loading: true });
+
     const _this = this;
     const payload = this.submitFormPayload();
 
     const errors = this.validatePayload(payload);
     if (Object.keys(errors).length === 0) {
       const promise = this.props.onSubmitForm(payload);
-
       promise.then(
-        function(opts) {
-          _this.reset(opts ? opts.response : {});
-          _this.props.onSubmitFormCallback();
+        opts => {
+          // _this.reset(opts ? opts.response : {});
+          // _this.props.onSubmitFormCallback();
         },
-        function(xhr) {
-          _this.setState({
-            // errors: handleError(xhr),
-            loading: false,
-          });
-        });
+        xhr => {});
     } else {
       const messages = Object.keys(errors).map(key => `${(errors[key].label)} is required`);
       this.setState({ error: messages[0] });
@@ -126,8 +121,7 @@ export default class SimpleForm extends React.Component {
 
   submitFormPayload() {
     const payload = Object.assign({}, this.state);
-    // delete payload['errors'];
-    // delete payload['loading'];
+    delete payload['error'];
     delete payload['timestamp'];
     return payload;
   }

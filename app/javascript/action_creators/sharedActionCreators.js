@@ -47,7 +47,9 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
         if (!!text) {
           json = JSON.parse(text);
         }
-        if (succeededActionType) {
+        if (json.error && failedActionType) {
+          dispatch(requestFailed(failedActionType, json.error));
+        } else if (succeededActionType) {
           dispatch(requestSucceeded(succeededActionType, json, data));
         }
       });

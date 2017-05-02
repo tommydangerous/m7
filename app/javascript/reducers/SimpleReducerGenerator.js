@@ -10,9 +10,25 @@ const DEFAULT_RESET_STATES = {
   update: null,
 };
 
+const DEFAULT_RESET_STATES_FOR_SUCCESSES = {
+  create: 0,
+  delete: 0,
+  index: 0,
+  show: 0,
+  update: 0,
+};
+
 const DEFAULT_RESET_STATE = {
   errors: { ...DEFAULT_RESET_STATES },
   loading: { ...DEFAULT_RESET_STATES },
+};
+
+const getTempId = () => (new Date).getTime();
+
+const updateSuccesses = (key, dict) => {
+  const updated = { ...dict };
+  updated[key] += 1;
+  return updated;
 };
 
 export default function generate(opts = {}) {
@@ -50,15 +66,18 @@ export default function generate(opts = {}) {
 
   const resetState = { ...DEFAULT_RESET_STATE };
   const nameSingular = singularName || singularize(pluralName);
-  resetState[nameSingular] = {};
+  resetState[nameSingular] = null;
 
-  const initialState = combine(resetState, {});
+  const initialState = combine(resetState, {
+    successes: { ...DEFAULT_RESET_STATES_FOR_SUCCESSES },
+  });
   initialState[objectsByIdKey] = {};
 
   const state = current || combine(initialState, initial);
   const {
     errors,
     loading,
+    successes,
   } = state;
 
   const objectsByIdUpdated = {};
@@ -76,13 +95,21 @@ export default function generate(opts = {}) {
     }
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
-      objectsByIdUpdated[objectsByIdKey][obj.id] = obj;
+      const id = obj.id || getTempId();
+      objectsByIdUpdated[objectsByIdKey][id] = {
+        id,
+        ...obj,
+        ...responseParsers.create(payload),
+      };
       return combine(
         combine(
           state,
           combine(DEFAULT_RESET_STATE, reset),
         ),
-        objectsByIdUpdated,
+        {
+          ...objectsByIdUpdated,
+          successes: updateSuccesses('create', successes),
+        },
       );
     }
 
@@ -138,7 +165,7 @@ export default function generate(opts = {}) {
       return combine(state, { loading: { ...loading, update: true } });
     }
     case UPDATE.SUCCEEDED: {
-      const id = payload.id;
+      const id = payload.id || getTempId();
       const currentObj = objectsByIdUpdated[objectsByIdKey][id];
       let updatedObj = {};
       if (responseParsers.update) {
@@ -156,7 +183,10 @@ export default function generate(opts = {}) {
           state,
           combine(DEFAULT_RESET_STATE, reset),
         ),
-        objectsByIdUpdated,
+        {
+          ...objectsByIdUpdated,
+          successes: updateSuccesses('update', successes),
+        },
       );
     }
 

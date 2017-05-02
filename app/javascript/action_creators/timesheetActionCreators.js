@@ -1,10 +1,31 @@
 import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 
+const calculateDuration = (startTime, endTime) => {
+  let hours = 0;
+  let minutes = 0;
+
+  if (startTime && endTime) {
+    const arr1 = startTime.split(':')
+    const arr2 = endTime.split(':')
+
+    if (arr1[0] || arr2[0]) {
+      hours = Math.abs(parseInt(arr2[0] || 0) - parseInt(arr1[0] || 0));
+    }
+
+    if (arr1[1] || arr2[1]) {
+      minutes = Math.abs(parseInt(arr2[1] || 0) - parseInt(arr1[1] || 0)) / 60;
+    }
+  }
+  return hours + minutes;
+};
+
 const sharedPayloadParser = payload => {
   return {
     'TimeEntry': {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
+      duration: calculateDuration(payload.start_time, payload.end_time),
+      type: 'Employee',
     },
   };
 };

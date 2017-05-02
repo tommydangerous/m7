@@ -19,6 +19,7 @@ import SimpleTable from '../../../../components/SimpleTable';
 import TimesheetShape from '../../../../shapes/TimesheetShape';
 
 const mapStateToProps = state => ({
+  errors: timesheetSelectors.rootSelector(state).errors,
   loading: timesheetSelectors.rootSelector(state).loading,
   customersById: customerSelectors.rootSelector(state).customersById,
   employeesById: employeeSelectors.rootSelector(state).employeesById,
@@ -47,6 +48,7 @@ class TimesheetTable extends React.Component {
     const {
       customersById,
       employeesById,
+      errors,
       loading,
       onEdit,
       timesheet,
@@ -95,18 +97,32 @@ class TimesheetTable extends React.Component {
     };
 
     return (
-      <div className={cx({ loading: loading.delete || loading.index })}>
-        <SimpleTable
-          objects={timesheets}
-          renderTableRow={renderTableRow}
-          tableHeaders={TABLE_HEADERS}
-        />
+      <div>
+        <h1>
+          Timesheets
+        </h1>
+        {errors.index && errors.index.message && (
+          <div className="background-red panel-body-small space-1 text-center text-contrast">
+            {errors.index.message}
+          </div>
+        )}
+        <div className={cx({ loading: loading.delete || loading.index })}>
+          <SimpleTable
+            objects={timesheets}
+            renderTableRow={renderTableRow}
+            tableHeaders={TABLE_HEADERS}
+          />
+        </div>
       </div>
     );
   }
 }
 
 TimesheetTable.propTypes = {
+  errors: PropTypes.shape({
+    delete: PropTypes.object,
+    index: PropTypes.object,
+  }).isRequired,
   loading: PropTypes.shape({
     delete: PropTypes.bool,
     index: PropTypes.bool,

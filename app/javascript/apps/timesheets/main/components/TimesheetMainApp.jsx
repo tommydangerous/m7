@@ -14,8 +14,8 @@ import TimesheetTable from './TimesheetTable';
 import Modal from '../../../../components/Modal';
 
 const mapStateToProps = state => ({
-  errors: timesheetSelectors.rootSelector(state).errors,
   modalVisible: modalSelectors.rootSelector(state).visible,
+  successes: timesheetSelectors.rootSelector(state).successes,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -23,62 +23,72 @@ const mapDispatchToProps = dispatch => ({
   timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
 });
 
-function TimesheetMainApp({
-  errors,
-  modalActions,
-  modalVisible,
-  timesheetActions,
-}) {
-  const closeModal = () => {
-    timesheetActions.selfSelected(null);
-    modalActions.hide();
-  };
+class TimesheetMainApp extends React.Component {
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      successes: {
+        create: c1,
+        update: u1,
+      },
+    } = prevProps;
+    const {
+      successes: {
+        create: c2,
+        update: u2,
+      },
+    } = this.props;
+    if (c2 > c1 || u2 > u1) {
+      this.props.modalActions.hide();
+    }
+  }
 
-  return (
-    <div className="page-container">
-      <div className="row space-bottom-lg space-top-lg">
-        <div className="col-sm-12">
-          <a
-            className="btn btn-primary pull-right"
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              modalActions.show();
-            }}
-          >
-            Add time
-          </a>
-          <h1>
-            Timesheets
-          </h1>
-          {errors.index && (
-            <div className="background-red panel-body-small space-1 text-center text-contrast">
-              {errors.index.message}
-            </div>
-          )}
-          <TimesheetTable
-            onEdit={() => modalActions.show()}
-          />
+  render() {
+    const {
+      modalActions,
+      modalVisible,
+      timesheetActions,
+    } = this.props;
+
+    const closeModal = () => {
+      timesheetActions.selfSelected(null);
+      modalActions.hide();
+    };
+
+    return (
+      <div className="page-container">
+        <div className="row space-bottom-lg space-top-lg">
+          <div className="col-sm-12">
+            <a
+              className="btn btn-primary pull-right"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                modalActions.show();
+              }}
+            >
+              Add time
+            </a>
+
+            <TimesheetTable
+              onEdit={() => modalActions.show()}
+            />
+          </div>
         </div>
-      </div>
 
-      <Modal onClose={closeModal} visible={modalVisible}>
-        {modalVisible && (
-          <TimesheetForm
-            onClickCancel={closeModal}
-          />
-        )}
-      </Modal>
-    </div>
-  );
+        <Modal onClose={closeModal} visible={modalVisible}>
+          {modalVisible && (
+            <TimesheetForm
+              onClickCancel={closeModal}
+            />
+          )}
+        </Modal>
+      </div>
+    );
+  }
 }
 
-TimesheetMainApp.propTypes = {
-  errors: PropTypes.object,
-};
+TimesheetMainApp.propTypes = {};
 
-TimesheetMainApp.defaultProps = {
-  errors: null,
-};
+TimesheetMainApp.defaultProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimesheetMainApp);

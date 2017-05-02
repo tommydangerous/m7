@@ -101,16 +101,11 @@ class TimesheetForm extends React.Component {
           header="Edit time"
           loading={loading.update}
           onClickCancel={onClickCancel}
-          onSubmitForm={(payload) => {
+          onSubmitForm={payload => {
             return timesheeetActions.update(timesheet.id, {
               ...timesheet,
               ...payload,
             });
-          }}
-          onSubmitFormCallback={() => {
-            if (!errors.update) {
-              onClickCancel();
-            }
           }}
           submitFormButtonText="Update"
         />
@@ -125,11 +120,6 @@ class TimesheetForm extends React.Component {
         loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={timesheeetActions.create}
-        onSubmitFormCallback={() => {
-          if (!errors.create) {
-            onClickCancel();
-          }
-        }}
       />
     );
   }
@@ -137,18 +127,24 @@ class TimesheetForm extends React.Component {
 
 TimesheetForm.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
+  employees: PropTypes.arrayOf(PropTypes.object),
+  errors: PropTypes.shape({
+    create: PropTypes.object,
+    update: PropTypes.object,
+  }).isRequired,
+  inventoryitems: PropTypes.arrayOf(PropTypes.object),
   loading: PropTypes.shape({
     create: PropTypes.bool,
     update: PropTypes.bool,
   }).isRequired,
-  employees: PropTypes.arrayOf(PropTypes.object),
-  inventoryitems: PropTypes.arrayOf(PropTypes.object),
+  onClickCancel: PropTypes.func,
 };
 
 TimesheetForm.defaultProps = {
   customers: [],
   employees: [],
   inventoryitems: [],
+  onClickCancel() {},
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimesheetForm);
