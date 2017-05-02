@@ -19,6 +19,40 @@ const generateSignature = (pathWithQuery) => {
   return shaObj.getHash('HEX');
 };
 
+const transformBoolean = val => {
+  if (typeof val === 'boolean') {
+    if (val) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
+  }
+  return val;
+}
+
+const transformPayload = (payload) => {
+  const dict = {};
+  Object.keys(payload).forEach(key1 => {
+    const val1 = payload[key1];
+    if (typeof val1 === 'object') {
+      Object.keys(val1).forEach(key2 => {
+        const val2 = val1[key2];
+        if (typeof val2 === 'object') {
+          Object.keys(val2).forEach(key3 => {
+            const val3 = val2[key3];
+            dict[`${key1}[${key2}][${key3}]`] = val3;
+          });
+        } else {
+          dict[`${key1}[${key2}]`] = val2;
+        }
+      });
+    } else {
+      dict[key1] = val1;
+    }
+  });
+  return dict;
+};
+
 export default {
   request(method, endpoint, opts = {}) {
     const {
@@ -31,58 +65,24 @@ export default {
     };
 
     const data = {
-      // dataType: 'json',
       method,
       credentials: 'include',
-      // credentials: 'same-origin',
-      // mode: 'cors',
     };
 
     if (isLoggedIn()) {
-      // const {
-      //   session_id: sessionId,
-      //   session_name: sessionName,
-      // } = getCurrentSession();
+      const {
+        session_id: sessionId,
+        session_name: sessionName,
+      } = getCurrentSession();
 
       queryParams = {
         // session_name: sessionId,
-        // z_ca: 42137,
         ...queryParams,
       };
-      // queryParams[sessionName] = sessionId;
-
-      // document.cookie = `${sessionName}=${sessionId}`;
-
-      // const headers = new Headers({
-        // 'Content-Type': 'application/json',
-        // 'Cookie': `${sessionName}=${sessionId}`,
-        // 'Cookie': 'IMPRESARIO=tsukcilka56g7mmqkst4am97l2',
-        // 'Authorization': ' ',
-        // 'User-Agent': null,
-        // 'Accept': 'application/json',
-        // 'Connection': 'keep-alive',
-        // 'Origin': null,
-        // 'Content-Type': 'application/json',
-        // 'Cache': 'no-cache',
-      // });
-
-      // data.headers = headers;
-
     }
 
     if (payload) {
-      const transformedPayload = {};
-      Object.keys(payload).forEach(key => {
-        const val1 = payload[key];
-        if (typeof val1 === "object") {
-          Object.keys(val1).forEach(key2 => {
-            transformedPayload[`${key}[${key2}]`] = val1[key2];
-          });
-        } else {
-          transformedPayload[key] = val1;
-        }
-      });
-      queryParams = { ...transformedPayload, ...queryParams };
+      queryParams = { ...transformPayload(payload), ...queryParams };
     }
 
     if (query) {

@@ -9,7 +9,7 @@ import * as modalActionCreators from '../../../../action_creators/modalActionCre
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
 
-// import TimesheetForm from './TimesheetForm';
+import TimesheetForm from './TimesheetForm';
 import TimesheetTable from './TimesheetTable';
 import Modal from '../../../../components/Modal';
 
@@ -63,11 +63,11 @@ function TimesheetMainApp({
       </div>
 
       <Modal onClose={closeModal} visible={modalVisible}>
-        {/*modalVisible && (
+        {modalVisible && (
           <TimesheetForm
             onClickCancel={closeModal}
           />
-        )*/}
+        )}
       </Modal>
     </div>
   );

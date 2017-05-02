@@ -159,8 +159,9 @@ class ExpenseForm extends React.Component {
         loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={(payload) => {
-          return expenseActions.create({ 'ExpenseEntry': payload })
-            .then(response => {
+          return expenseActions.create({
+            'ExpenseEntry': payload,
+          }).then(response => {
               if (!errors.create) {
                 onClickCancel();
               }

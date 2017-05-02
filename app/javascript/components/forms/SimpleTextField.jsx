@@ -46,11 +46,11 @@ export default class SimpleTextField extends React.Component {
         )}
         <input
           autoComplete={this.props.autoComplete}
+          defaultValue={this.props.value}
           name={this.props.name}
           onChange={this.onChangeInput}
           placeholder={this.props.placeholder}
           type="text"
-          value={this.props.value}
         />
       </div>
     );
