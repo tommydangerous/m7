@@ -140,7 +140,11 @@ export default function generate(opts = {}) {
     case UPDATE.SUCCEEDED: {
       const id = payload.id;
       const currentObj = objectsByIdUpdated[objectsByIdKey][id];
-      const updatedObj = responseParsers.update(response);
+      let updatedObj = {};
+      if (responseParsers.update) {
+        updatedObj = responseParsers.update(response);
+      }
+
       objectsByIdUpdated[objectsByIdKey][id] = {
         ...currentObj,
         ...updatedObj,

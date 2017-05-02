@@ -16,19 +16,21 @@ const INITIAL_STATE = {
   expensesById: initialExpensesById,
 };
 
+const singleObjectParser = resp => {
+  const { ExpenseEntry } = resp;
+  return {
+    ...ExpenseEntry,
+    billable: ExpenseEntry.billable.toLowerCase() === 'yes',
+  };
+};
+
 export default function reducers(state, action) {
   return SimpleReducerGenerator({
     action,
     name: 'expenses',
     responseParsers: {
-      index: resp => resp.ExpenseEntries.map(obj => {
-        const { ExpenseEntry } = obj;
-        return {
-          ...ExpenseEntry,
-          billable: ExpenseEntry.billable.toLowerCase() === 'yes',
-        };
-      }),
-      create: resp => resp.ExpenseEntry,
+      index: resp => resp.ExpenseEntries.map(obj => singleObjectParser(obj)),
+      create: singleObjectParser,
     },
     singularName: 'expense',
     states: {

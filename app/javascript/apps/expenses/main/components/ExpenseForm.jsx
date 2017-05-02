@@ -136,15 +136,14 @@ class ExpenseForm extends React.Component {
           onClickCancel={onClickCancel}
           onSubmitForm={(payload) => {
             return expenseActions.update(expense.id, {
-              'ExpenseEntry': {
-                ...expense,
-                ...payload,
-              },
-            }).then(response => {
-                if (!errors.update) {
-                  closeModal();
-                }
-              });
+              ...expense,
+              ...payload,
+            });
+          }}
+          onSubmitFormCallback={() => {
+            if (!errors.update) {
+              onClickCancel();
+            }
           }}
           submitFormButtonText="Update"
         />
@@ -158,14 +157,11 @@ class ExpenseForm extends React.Component {
         header="Add a new expense"
         loading={loading.create}
         onClickCancel={onClickCancel}
-        onSubmitForm={(payload) => {
-          return expenseActions.create({
-            'ExpenseEntry': payload,
-          }).then(response => {
-              if (!errors.create) {
-                onClickCancel();
-              }
-            });
+        onSubmitForm={expenseActions.create}
+        onSubmitFormCallback={() => {
+          if (!errors.create) {
+            onClickCancel();
+          }
         }}
       />
     );
