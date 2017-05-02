@@ -22,6 +22,7 @@ import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
   customersById: customerSelectors.rootSelector(state).customersById,
+  errors: expenseSelectors.rootSelector(state).errors,
   loading: expenseSelectors.rootSelector(state).loading,
   expenses: expenseSelectors.sortedObjects(state),
   vendorsById: vendorSelectors.rootSelector(state).vendorsById,
@@ -56,6 +57,7 @@ class ExpensesTable extends React.Component {
   render() {
     const {
       customersById,
+      errors,
       expenseActions,
       expenses,
       loading,
@@ -84,8 +86,7 @@ class ExpensesTable extends React.Component {
             >
               Edit
             </a>
-          </td>
-          <td>
+            {" / "}
             <a
               href="#"
               onClick={e => {
@@ -101,18 +102,33 @@ class ExpensesTable extends React.Component {
     };
 
     return (
-      <div className={cx({ loading: loading.delete || loading.index })}>
-        <SimpleTable
-          objects={expenses}
-          renderTableRow={renderTableRow}
-          tableHeaders={TABLE_HEADERS}
-        />
+      <div>
+        <h1 className="hide-sm">
+          Expenses
+        </h1>
+        {errors.index && (
+          <div className="background-red panel-body-small space-1 text-center text-contrast">
+            {errors.index.message}
+          </div>
+        )}
+
+        <div className={cx({ loading: loading.delete || loading.index })}>
+          <SimpleTable
+            objects={expenses}
+            renderTableRow={renderTableRow}
+            tableHeaders={TABLE_HEADERS}
+          />
+        </div>
       </div>
     );
   }
 }
 
 ExpensesTable.propTypes = {
+  errors: PropTypes.shape({
+    delete: PropTypes.object,
+    index: PropTypes.object,
+  }).isRequired,
   expenses: PropTypes.arrayOf(ExpenseShape),
   loading: PropTypes.shape({
     delete: PropTypes.bool,

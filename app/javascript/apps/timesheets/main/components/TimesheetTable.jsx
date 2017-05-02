@@ -9,10 +9,12 @@ import { TABLE_HEADERS } from '../utils/constants';
 import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as employeeActionCreators from '../../../../action_creators/employeeActionCreators';
 import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
+import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as employeeSelectors from '../../../../selectors/employeeSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
+import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import SimpleTable from '../../../../components/SimpleTable';
 
@@ -24,12 +26,14 @@ const mapStateToProps = state => ({
   customersById: customerSelectors.rootSelector(state).customersById,
   employeesById: employeeSelectors.rootSelector(state).employeesById,
   timesheets: timesheetSelectors.sortedObjects(state),
+  vendorsById: vendorSelectors.rootSelector(state).vendorsById,
 });
 
 const mapDispatchToProps = dispatch => ({
   customerActions: bindActionCreators(customerActionCreators, dispatch),
   employeeActions: bindActionCreators(employeeActionCreators, dispatch),
   timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
+  vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
 class TimesheetTable extends React.Component {
@@ -38,10 +42,13 @@ class TimesheetTable extends React.Component {
       customerActions,
       employeeActions,
       timesheetActions,
+      vendorActions,
     } = this.props;
+
     customerActions.index();
     employeeActions.index();
     timesheetActions.index();
+    vendorActions.index();
   }
 
   render() {
@@ -54,39 +61,37 @@ class TimesheetTable extends React.Component {
       timesheet,
       timesheetActions,
       timesheets,
-      timesheetsById
+      timesheetsById,
+      vendorsById,
     } = this.props;
 
-    const renderTableRow = timesheet => {
-      const customerName = (customersById[timesheet.customer_id] || {}).name;
-      const employeeName = (employeesById[timesheet.employee_id] || {}).name;
+    const renderTableRow = obj => {
+      const customerName = (customersById[obj.customer_id] || {}).name;
+      const employeeName = (employeesById[obj.employee_id] || {}).name;
+      const vendorName = (vendorsById[obj.vendor_id] || {}).name;
 
       return (
-        <tr key={timesheet.id}>
-          <td>{employeeName}</td>
+        <tr key={obj.id}>
+          <td>{employeeName || vendorName}</td>
           <td>{customerName}</td>
-          <td>{timesheet.start_time}</td>
-          <td>{timesheet.end_time}</td>
-          <td>{timesheet.hours_off_duty}</td>
-          <td>{timesheet.duration}</td>
+          <td>{obj.duration}</td>
           <td>
             <a
               href="#"
               onClick={e => {
                 e.preventDefault();
-                timesheetActions.selfSelected(timesheet);
+                timesheetActions.selfSelected(obj);
                 onEdit();
               }}
             >
               Edit
             </a>
-          </td>
-          <td>
+            {" / "}
             <a
               href="#"
               onClick={e => {
                 e.preventDefault();
-                timesheetActions.deleteObject(timesheet.id);
+                timesheetActions.deleteObject(obj.id);
               }}
             >
               Delete
@@ -98,7 +103,7 @@ class TimesheetTable extends React.Component {
 
     return (
       <div>
-        <h1>
+        <h1 className="hide-sm">
           Timesheets
         </h1>
         {errors.index && errors.index.message && (

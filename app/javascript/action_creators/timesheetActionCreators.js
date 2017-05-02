@@ -1,5 +1,7 @@
 import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 
+import { roundNumber } from '../utils/numberTransformers';
+
 const calculateDuration = (startTime, endTime) => {
   let hours = 0;
   let minutes = 0;
@@ -20,12 +22,21 @@ const calculateDuration = (startTime, endTime) => {
 };
 
 const sharedPayloadParser = payload => {
+  let type;
+  if (!!payload.employee_id) {
+    type = 'Employee';
+  } else if (!!payload.vendor_id) {
+    type = 'Vendor';
+  }
+
   return {
     'TimeEntry': {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
-      duration: calculateDuration(payload.start_time, payload.end_time),
-      type: 'Employee',
+      duration: roundNumber(
+        calculateDuration(payload.start_time, payload.end_time),
+      ),
+      type,
     },
   };
 };

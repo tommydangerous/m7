@@ -22,25 +22,25 @@ function HeaderMainApp({ loginActions }) {
 
   return (
     <ul className="nav pull-right list-unstyled">
-      <li className="pull-left" id="app-header">
+      <li className="hide-sm pull-left">
         <a className="link-block link-reset" href="#">
           {user.first_name}
         </a>
       </li>
 
-      <li className="pull-left" id="app-header">
+      <li className="pull-left">
         <a className="link-block link-reset" href="/timesheets">
           Timesheets
         </a>
       </li>
 
-      <li className="pull-left" id="app-header">
+      <li className="pull-left">
         <a className="link-block link-reset" href="/expenses">
           Expenses
         </a>
       </li>
 
-      <li className="pull-left" id="app-header">
+      <li className="pull-left">
         <a
           className="link-block link-reset"
           href="#"

@@ -5,7 +5,6 @@ const minYear = now.add(-5, 'year');
 const minDate = new Date(minYear.year(), 0, 0);
 
 export const CREATE_FORM_FIELDS = {
-  // duration: 5.75
   // qb_class_id
   // type: Employee, Vendor
 
@@ -71,15 +70,16 @@ export const CREATE_FORM_FIELDS = {
     required: true,
     type: 'text',
   },
+  // vendor_id: {
+  //   label: 'Vendor',
+  //   order: 0,
+  //   type: 'select',
+  // },
 };
 
 export const TABLE_HEADERS = [
-  'Employee',
+  'Employee or Vendor',
   'Customer',
-  'Start',
-  'End',
-  'Hours off duty',
   'Duration',
-  'Edit',
-  'Delete',
+  '',
 ];

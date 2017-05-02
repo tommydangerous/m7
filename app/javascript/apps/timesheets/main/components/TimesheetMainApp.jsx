@@ -56,23 +56,21 @@ class TimesheetMainApp extends React.Component {
 
     return (
       <div className="page-container">
-        <div className="row space-bottom-lg space-top-lg">
-          <div className="col-sm-12">
-            <a
-              className="btn btn-primary pull-right"
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                modalActions.show();
-              }}
-            >
-              Add time
-            </a>
+        <div className="space-bottom-lg space-top-lg">
+          <a
+            className="btn btn-primary pull-right space-bottom-sm"
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              modalActions.show();
+            }}
+          >
+            Add time
+          </a>
 
-            <TimesheetTable
-              onEdit={() => modalActions.show()}
-            />
-          </div>
+          <TimesheetTable
+            onEdit={() => modalActions.show()}
+          />
         </div>
 
         <Modal onClose={closeModal} visible={modalVisible}>

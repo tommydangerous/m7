@@ -3,24 +3,14 @@
 ## Description
 Web client for the Minute7 application.
 
-## Development TODOs
-- [ ] Expensing API
-- [ ] Time tracking UI
-- [ ] Time tracking API
-
-## DevOps TODOs
-- [ ] Launch EC2 instance
-- [ ] Setup Nginx
-- [ ] Setup Puma
-- [ ] Deploy to production
-- [ ] Use Docker
-
 ## Setup
+Install libraries.
 ```
+$ npm install
 $ gem install rails
 $ bundle install
-$ npm install
 ```
+Copy contents of `.env.sample` and save into a file named `.env` in the app’s root directory.
 
 ## Run development server
 This will run Rails server, webpack dev server, and webpack watcher for asset bundling.

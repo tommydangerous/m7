@@ -72,6 +72,5 @@ export const TABLE_HEADERS = [
   'Customer',
   'Amount',
   'Date',
-  'Edit',
-  'Delete',
+  '',
 ];

@@ -8,11 +8,13 @@ import * as employeeActionCreators from '../../../../action_creators/employeeAct
 import * as inventoryitemActionCreators
   from '../../../../action_creators/inventoryitemActionCreators';
 import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
+import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as employeeSelectors from '../../../../selectors/employeeSelectors';
 import * as inventoryitemSelectors from '../../../../selectors/inventoryitemSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
+import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import SimpleForm from '../../../../components/SimpleForm';
 import SimpleFormWithStore from '../../../../components/SimpleFormWithStore';
@@ -45,6 +47,7 @@ const mapStateToProps = state => ({
   inventoryitems: inventoryitemSelectors.sortedObjects(state),
   timesheet: timesheetSelectors.rootSelector(state).timesheet,
   loading: timesheetSelectors.rootSelector(state).loading,
+  vendors: vendorSelectors.sortedObjects(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -52,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
   employeeActions:bindActionCreators(employeeActionCreators, dispatch),
   inventoryitemActions: bindActionCreators(inventoryitemActionCreators, dispatch),
   timesheeetActions: bindActionCreators(timesheetActionCreators, dispatch),
+  vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
 class TimesheetForm extends React.Component {
@@ -63,12 +67,15 @@ class TimesheetForm extends React.Component {
       employees,
       inventoryitemActions,
       inventoryitems,
+      vendorActions,
+      vendors,
     } = this.props;
 
     [
       [customers, customerActions],
       [employees, employeeActions],
       [inventoryitems, inventoryitemActions],
+      // [vendors, vendorActions],
     ].forEach(arr => {
       if (arr[0].length === 0) {
         arr[1].index();
@@ -86,12 +93,14 @@ class TimesheetForm extends React.Component {
       onClickCancel,
       timesheet,
       timesheeetActions,
+      vendors,
     } = this.props;
 
     const fields = { ...CREATE_FORM_FIELDS };
     fields.customer_id.options = selectOptions(customers);
     fields.employee_id.options = selectOptions(employees);
     fields.inventory_item_id.options = selectOptions(inventoryitems);
+    // fields.vendor_id.options = selectOptions(vendors);
 
     if (timesheet) {
       return (
