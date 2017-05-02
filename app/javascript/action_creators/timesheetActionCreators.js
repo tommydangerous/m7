@@ -1,7 +1,20 @@
 import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 
+const sharedPayloadParser = payload => {
+  return {
+    'TimeEntry': {
+      ...payload,
+      billable: payload.billable ? 'Yes' : 'No',
+    },
+  };
+};
+
 const generator = SimpleActionCreatorGenerator({
   name: 'timesheets',
+  payloadParsers: {
+    create: sharedPayloadParser,
+    update: sharedPayloadParser,
+  },
 });
 
 export function attributesUpdated(opts) {

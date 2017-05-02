@@ -19,6 +19,17 @@ export default function generate(opts = {}) {
   });
 
   class SimpleFormWithStore extends SimpleForm {
+    onChangeCheckbox(e) {
+      const name = e.target.name;
+      const value = !this.props[name];
+      this.onChangeInput({
+        target: {
+          name,
+          value,
+        },
+      });
+    }
+
     onChangeInput(e) {
       const dict = {};
       dict[e.target.name] = e.target.value;

@@ -103,10 +103,8 @@ class TimesheetForm extends React.Component {
           onClickCancel={onClickCancel}
           onSubmitForm={(payload) => {
             return timesheeetActions.update(timesheet.id, {
-              'TimeEntry': {
-                ...timesheet,
-                ...payload,
-              },
+              ...timesheet,
+              ...payload,
             });
           }}
           onSubmitFormCallback={() => {
@@ -126,11 +124,7 @@ class TimesheetForm extends React.Component {
         header="Add a new time"
         loading={loading.create}
         onClickCancel={onClickCancel}
-        onSubmitForm={(payload) => {
-          return timesheeetActions.create({
-            'TimeEntry': payload,
-          });
-        }}
+        onSubmitForm={payload => timesheeetActions.create({ ...payload })}
         onSubmitFormCallback={() => {
           if (!errors.create) {
             onClickCancel();

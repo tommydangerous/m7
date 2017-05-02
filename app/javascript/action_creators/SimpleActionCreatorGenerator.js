@@ -5,6 +5,7 @@ import SimpleActionGenerator from '../actions/SimpleActionGenerator';
 export default function generate(opts = {}) {
   const {
     name: pluralName,
+    payloadParsers,
     singularName,
   } = opts;
 
@@ -25,7 +26,11 @@ export default function generate(opts = {}) {
     },
 
     create: (payload = {}) => {
-      return createGenericRequest('POST', `/api/${pluralName}/add`, { payload }, {
+      let dict = { ...payload };
+      if (payloadParsers.create) {
+        dict = payloadParsers.create(dict);
+      }
+      return createGenericRequest('POST', `/api/${pluralName}/add`, { payload: dict }, {
         failedActionType: actions.CREATE.FAILED,
         startedActionType: actions.CREATE.STARTED,
         succeededActionType: actions.CREATE.SUCCEEDED,
@@ -57,11 +62,12 @@ export default function generate(opts = {}) {
     },
 
     update: (id, payload = {}) => {
-      const updatedPayload = {
-        ...payload,
-        id,
-      };
-      return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: updatedPayload }, {
+      let dict = { ...payload };
+      if (payloadParsers.update) {
+        dict = payloadParsers.update(dict);
+      }
+      dict.id = id;
+      return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: dict }, {
         failedActionType: actions.UPDATE.FAILED,
         startedActionType: actions.UPDATE.STARTED,
         succeededActionType: actions.UPDATE.SUCCEEDED,

@@ -51,20 +51,21 @@ export default class SimpleForm extends React.Component {
     });
   }
 
+  onChangeCheckbox(e) {
+    const name = e.target.name;
+    const value = !this.state[name];
+    this.onChangeInput({
+      target: {
+        name,
+        value,
+      },
+    });
+  }
+
   onChangeInput(e) {
     const newState = {};
     newState[e.target.name] = e.target.value;
     this.setState(newState, () => console.log(this.state));
-  }
-
-  onChangeCheckbox(e) {
-    const name = e.target.name;
-    this.onChangeInput({
-      target: {
-        name,
-        value: !this.state[name],
-      },
-    });
   }
 
   onClickCancel(e) {

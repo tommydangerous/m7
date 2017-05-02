@@ -4,7 +4,7 @@ export default PropTypes.shape({
   account_id: PropTypes.string,
   account_user_id: PropTypes.string,
   approved: PropTypes.string,
-  billable: PropTypes.string,
+  billable: PropTypes.bool,
   created: PropTypes.string,
   customer_id: PropTypes.string,
   date: PropTypes.string,

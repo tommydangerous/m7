@@ -3,20 +3,27 @@ import SimpleReducerGenerator from './SimpleReducerGenerator';
 const RESET_STATE = {};
 const INITIAL_STATE = {};
 
+const singleObjectParser = resp => {
+  const { TimeEntry } = resp;
+  return {
+    ...TimeEntry,
+    billable: TimeEntry.billable.toLowerCase() === 'yes',
+  };
+};
+
 export default function reducers(state, action) {
   return SimpleReducerGenerator({
     action,
     name: 'timesheets',
     responseParsers: {
-      index: resp => resp.TimeEntries.map(obj => obj.TimeEntry),
-      create: resp => resp.TimeEntry,
+      index: resp => resp.TimeEntries.map(obj => singleObjectParser(obj)),
+      create: singleObjectParser,
       update: resp => {
         const {
           id,
-          TimeEntry,
         } = resp.m7;
         return {
-          ...TimeEntry,
+          ...singleObjectParser(resp.m7),
           id,
         };
       },

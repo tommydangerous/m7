@@ -5,7 +5,7 @@ export default PropTypes.shape({
   account_user_id: PropTypes.string, // Actually number
   amount: PropTypes.string, // Actually number
   approved: PropTypes.string, // Yes, No... actually bool
-  billable: PropTypes.string, // Yes, No... actually bool
+  billable: PropTypes.bool, // Yes, No... actually bool
   created: PropTypes.string,
   customer_id: PropTypes.string, // Actually number
   date: PropTypes.string,

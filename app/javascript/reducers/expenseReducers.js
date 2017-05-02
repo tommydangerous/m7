@@ -21,7 +21,13 @@ export default function reducers(state, action) {
     action,
     name: 'expenses',
     responseParsers: {
-      index: resp => resp.ExpenseEntries.map(obj => obj.ExpenseEntry),
+      index: resp => resp.ExpenseEntries.map(obj => {
+        const { ExpenseEntry } = obj;
+        return {
+          ...ExpenseEntry,
+          billable: ExpenseEntry.billable.toLowerCase() === 'yes',
+        };
+      }),
       create: resp => resp.ExpenseEntry,
     },
     singularName: 'expense',
