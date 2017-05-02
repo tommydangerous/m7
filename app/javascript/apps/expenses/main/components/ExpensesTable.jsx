@@ -6,9 +6,13 @@ import React from 'react';
 
 import { TABLE_HEADERS } from '../utils/constants';
 
+import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
+import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
+import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
+import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import { OFFLINE_MODE } from '../../../../utils/constants';
 
@@ -17,18 +21,30 @@ import SimpleTable from '../../../../components/SimpleTable';
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
+  customersById: customerSelectors.rootSelector(state).customersById,
   loading: expenseSelectors.rootSelector(state).loading,
   expenses: expenseSelectors.sortedObjects(state),
+  vendorsById: vendorSelectors.rootSelector(state).vendorsById,
 });
 
 const mapDispatchToProps = dispatch => ({
+  customerActions: bindActionCreators(customerActionCreators, dispatch),
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
+  vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
 class ExpensesTable extends React.Component {
   componentDidMount() {
+    const {
+      customerActions,
+      expenseActions,
+      vendorActions,
+    } = this.props;
+
+    customerActions.index();
+    vendorActions.index();
+
     if (!OFFLINE_MODE) {
-      const { expenseActions } = this.props;
       // TODO: can we render expenses from other vendors?
       expenseActions.index({
         search_end_date: '2018-01-01',
@@ -39,25 +55,30 @@ class ExpensesTable extends React.Component {
 
   render() {
     const {
+      customersById,
       expenseActions,
       expenses,
       loading,
       onEdit,
+      vendorsById,
     } = this.props;
 
-    const renderTableRow = expense => {
+    const renderTableRow = obj => {
+      const customerName = (customersById[obj.customer_id] || {}).name;
+      const vendorName = (vendorsById[obj.vendor_id] || {}).name;
+
       return (
-        <tr key={expense.id}>
-          <td>{expense.vendor_id}</td>
-          <td>{expense.customer_id}</td>
-          <td>{`$${expense.amount}`}</td>
-          <td>{expense.date}</td>
+        <tr key={obj.id}>
+          <td>{vendorName}</td>
+          <td>{customerName}</td>
+          <td>{`$${obj.amount}`}</td>
+          <td>{obj.date}</td>
           <td>
             <a
               href="#"
               onClick={e => {
                 e.preventDefault();
-                expenseActions.selfSelected(expense);
+                expenseActions.selfSelected(obj);
                 onEdit();
               }}
             >
@@ -69,7 +90,7 @@ class ExpensesTable extends React.Component {
               href="#"
               onClick={e => {
                 e.preventDefault();
-                expenseActions.deleteObject(expense.id);
+                expenseActions.deleteObject(obj.id);
               }}
             >
               Delete

@@ -65,16 +65,16 @@ const mapDispatchToProps = dispatch => ({
 class ExpenseForm extends React.Component {
   componentDidMount() {
     const {
-      customers,
-      expensegroupings,
-      qbaccounts,
-      qbclasses,
-      vendors,
       customerActions,
+      customers,
       expensegroupingActions,
+      expensegroupings,
       qbaccountActions,
+      qbaccounts,
       qbclassActions,
+      qbclasses,
       vendorActions,
+      vendors,
     } = this.props;
 
     [
