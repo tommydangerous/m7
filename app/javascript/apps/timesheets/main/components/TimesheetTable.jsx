@@ -47,7 +47,9 @@ class TimesheetTable extends React.Component {
 
     customerActions.index();
     employeeActions.index();
-    timesheetActions.index();
+    timesheetActions.index({
+      employee_id: 'All',
+    });
     vendorActions.index();
   }
 
@@ -67,12 +69,17 @@ class TimesheetTable extends React.Component {
 
     const renderTableRow = obj => {
       const customerName = (customersById[obj.customer_id] || {}).name;
-      const employeeName = (employeesById[obj.employee_id] || {}).name;
-      const vendorName = (vendorsById[obj.vendor_id] || {}).name;
+
+      let name;
+      if (obj.type === 'Employee') {
+        name = (employeesById[obj.employee_id] || {}).name;
+      } else {
+        name = (vendorsById[obj.employee_id] || {}).name;
+      }
 
       return (
         <tr key={obj.id}>
-          <td>{employeeName || vendorName}</td>
+          <td>{`${name} (${obj.type})`}</td>
           <td>{customerName}</td>
           <td>{obj.duration}</td>
           <td>
