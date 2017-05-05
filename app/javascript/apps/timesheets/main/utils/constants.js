@@ -76,8 +76,9 @@ export const CREATE_FORM_FIELDS = {
 };
 
 export const TABLE_HEADERS = [
-  'Employee or Vendor',
+  'Name',
   'Customer',
   'Duration',
+  'Date',
   '',
 ];

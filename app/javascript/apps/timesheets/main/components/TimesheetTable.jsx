@@ -82,6 +82,7 @@ class TimesheetTable extends React.Component {
           <td>{`${name} (${obj.type})`}</td>
           <td>{customerName}</td>
           <td>{obj.duration}</td>
+          <td>{obj.date}</td>
           <td>
             <a
               href="#"

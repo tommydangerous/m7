@@ -27,12 +27,18 @@ $user-image-size: $spacing * 1.8;
   }
 
   .nav > li > a {
+    height: $header-height;
     line-height: $header-height;
     padding-left: $page-side-spacing;
     padding-right: $page-side-spacing;
 
     &:hover {
       background-color: $hover-background-color;
+    }
+
+    i {
+      font-size: $header-height * 0.5;
+      line-height: $header-height;
     }
   }
 

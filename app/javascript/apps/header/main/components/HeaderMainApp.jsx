@@ -23,8 +23,8 @@ function HeaderMainApp({ loginActions }) {
   return (
     <ul className="nav pull-right list-unstyled">
       <li className="hide-sm pull-left">
-        <a className="link-block link-reset" href="#">
-          {user.first_name}
+        <a className="link-block link-reset" href="#" onClick={e => e.preventDefault()}>
+          <i className="fa fa-clock-o" aria-hidden="true"></i>
         </a>
       </li>
 
