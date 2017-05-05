@@ -23,7 +23,7 @@ function LoginApp({ login, loginActions, redirect_url }) {
   } = login;
 
   if (isLoggedIn()) {
-    window.location = '/expenses';
+    window.location = '/timesheets';
     return <div />;
   }
 

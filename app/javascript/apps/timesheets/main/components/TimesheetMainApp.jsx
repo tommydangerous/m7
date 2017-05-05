@@ -24,6 +24,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class TimesheetMainApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const {
       successes: {
@@ -38,21 +43,24 @@ class TimesheetMainApp extends React.Component {
       },
     } = this.props;
     if (c2 > c1 || u2 > u1) {
-      this.props.modalActions.hide();
+      this.closeModal();
     }
+  }
+
+  closeModal() {
+    const {
+      timesheetActions,
+      modalActions,
+    } = this.props;
+    timesheetActions.selfSelected(null);
+    modalActions.hide();
   }
 
   render() {
     const {
       modalActions,
       modalVisible,
-      timesheetActions,
     } = this.props;
-
-    const closeModal = () => {
-      timesheetActions.selfSelected(null);
-      modalActions.hide();
-    };
 
     return (
       <div className="page-container">
@@ -68,15 +76,13 @@ class TimesheetMainApp extends React.Component {
             Add time
           </a>
 
-          <TimesheetTable
-            onEdit={() => modalActions.show()}
-          />
+          <TimesheetTable onEdit={modalActions.show} />
         </div>
 
-        <Modal onClose={closeModal} visible={modalVisible}>
+        <Modal onClose={this.closeModal} visible={modalVisible}>
           {modalVisible && (
             <TimesheetForm
-              onClickCancel={closeModal}
+              onClickCancel={this.closeModal}
             />
           )}
         </Modal>
