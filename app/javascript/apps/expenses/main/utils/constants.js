@@ -8,7 +8,7 @@ export const CREATE_FORM_FIELDS = {
   amount: {
     label: 'Amount',
     numberOnly: true,
-    order: 6,
+    order: [6, 0],
     placeholder: '$00.00',
     required: true,
     scale: 2,
@@ -22,14 +22,14 @@ export const CREATE_FORM_FIELDS = {
   },
   customer_id: {
     label: 'Customer',
-    order: 1,
+    order: [0, 1],
     required: false,
     type: 'select',
   },
   date: {
     label: 'Date',
     minDate,
-    order: 7,
+    order: [6, 1],
     required: true,
     type: 'date',
   },
@@ -61,7 +61,7 @@ export const CREATE_FORM_FIELDS = {
   },
   vendor_id: {
     label: 'Vendor',
-    order: 0,
+    order: [0, 0],
     required: true,
     type: 'select',
   },

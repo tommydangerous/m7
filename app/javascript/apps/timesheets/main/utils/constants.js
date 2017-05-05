@@ -6,7 +6,6 @@ const minDate = new Date(minYear.year(), 0, 0);
 
 export const CREATE_FORM_FIELDS = {
   // qb_class_id
-  // type: Employee, Vendor
 
   billable: {
     defaultValue: true,
@@ -37,12 +36,12 @@ export const CREATE_FORM_FIELDS = {
   },
   employee_id: {
     label: 'Employee',
-    order: 0,
+    order: [0, 0],
     type: 'select',
   },
   end_time: {
     label: 'End time',
-    order: 5,
+    order: [4, 1],
     placeholder: 'HH:MM',
     required: true,
     type: 'text',
@@ -50,7 +49,7 @@ export const CREATE_FORM_FIELDS = {
   hours_off_duty: {
     label: 'Hours off duty',
     numberOnly: true,
-    order: 6,
+    order: [4, 2],
     placeholder: '5.25',
     required: true,
     scale: 2,
@@ -64,14 +63,14 @@ export const CREATE_FORM_FIELDS = {
   },
   start_time: {
     label: 'Start time',
-    order: 4,
+    order: [4, 0],
     placeholder: 'HH:MM',
     required: true,
     type: 'text',
   },
   vendor_id: {
     label: 'Vendor',
-    order: 0,
+    order: [0, 1],
     type: 'select',
   },
 };

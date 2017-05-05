@@ -107,9 +107,11 @@ export default class SimpleForm extends React.Component {
           return obj;
         })
         .sort((a, b) => {
-          if (a.order > b.order) {
+          const aOrder = Array.isArray(a.order) ? a.order[0] : a.order;
+          const bOrder = Array.isArray(b.order) ? b.order[0] : b.order;
+          if (aOrder > bOrder) {
             return 1;
-          } else if (a.order < b.order) {
+          } else if (aOrder < bOrder) {
             return -1;
           }
           return 0;
@@ -117,6 +119,18 @@ export default class SimpleForm extends React.Component {
       return sorted;
     }
     return fields;
+  }
+
+  fieldsGroupedByOrder() {
+    const group = {};
+    this.fields().forEach(hash => {
+      const order = Array.isArray(hash.order) ? hash.order[0] : hash.order;
+      if (!group[order]) {
+        group[order] = [];
+      }
+      group[order].push(hash);
+    });
+    return group;
   }
 
   submitFormPayload() {
@@ -215,44 +229,71 @@ export default class SimpleForm extends React.Component {
     }
   }
 
-  renderField() {
+  renderAllFields() {
     const _this = this;
-    return this.fields().map(function(hash) {
-      var header;
-      if (hash.label) {
-        header = (
-          <label>
-            {hash.label}
-          </label>
-        );
-      }
-      var field;
-      switch (hash.type) {
-        case 'date':
-          field = _this.renderDateField(hash);
-          break;
-        case 'checkbox':
-          field = _this.renderCheckbox(hash);
-          break;
-        case 'location':
-          field = _this.renderLocationField(hash);
-          break;
-        case 'select':
-          field = _this.renderSelectField(hash);
-          break;
-        case 'text':
-          field = _this.renderTextField(hash);
-          break;
-        case 'textarea':
-          field = _this.renderTextarea(hash);
-          break;
-      };
+    const group = this.fieldsGroupedByOrder();
+
+    return Object.keys(group).sort((a, b) => a - b).map(order => {
+      const arr = group[order];
+      const row = arr.sort((c, d) => {
+        if (Array.isArray(c.order) && Array.isArray(d.order)) {
+          return c.order[1] - d.order[1];
+        }
+        return 0;
+      }).map(hash => {
+        let field;
+        let header;
+
+        const {
+          label,
+          name,
+          type,
+        } = hash;
+
+        if (label) {
+          header = (
+            <label>
+              {label}
+            </label>
+          );
+        }
+
+        switch (type) {
+          case 'date':
+            field = _this.renderDateField(hash);
+            break;
+          case 'checkbox':
+            field = _this.renderCheckbox(hash);
+            break;
+          case 'location':
+            field = _this.renderLocationField(hash);
+            break;
+          case 'select':
+            field = _this.renderSelectField(hash);
+            break;
+          case 'text':
+            field = _this.renderTextField(hash);
+            break;
+          case 'textarea':
+            field = _this.renderTextarea(hash);
+            break;
+        };
+
+        const col = `col-sm-${12 / arr.length}`;
+
+        return (
+          <div className={`${col} space-2`} key={name}>
+            {header}
+            {field}
+          </div>
+        )
+      });
+
       return (
-        <div className="space-2" key={hash.name}>
-          {header}
-          {field}
+        <div className="row" key={arr.map(h => h.name).join('-')}>
+          {row}
         </div>
-      )
+      );
     });
   }
 
@@ -327,8 +368,8 @@ export default class SimpleForm extends React.Component {
         <div className="panel">
           {this.renderHeader()}
           <form action="#" onSubmit={this.onSubmitForm}>
-            <div className="panel-body">
-              {this.renderField()}
+            <div className="space-bottom-md space-top-md">
+              {this.renderAllFields()}
               {this.props.children}
             </div>
 
