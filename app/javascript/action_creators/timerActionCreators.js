@@ -3,6 +3,7 @@ import {
   TIMER_RESET,
   TIMER_SAVE,
   TIMER_START,
+  TIMER_UNSAVE,
 } from '../actions/timerActions';
 
 export function pause() {
@@ -26,5 +27,11 @@ export function save() {
 export function start() {
   return {
     type: TIMER_START,
+  };
+}
+
+export function unsave() {
+  return {
+    type: TIMER_UNSAVE,
   };
 }

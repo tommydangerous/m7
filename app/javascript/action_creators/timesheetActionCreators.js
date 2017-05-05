@@ -2,26 +2,8 @@ import moment from 'moment';
 
 import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 
+import { calculateDuration, durationToTime } from '../utils/timeFunctions';
 import { roundNumber } from '../utils/numberTransformers';
-
-const calculateDuration = (startTime, endTime) => {
-  let hours = 0;
-  let minutes = 0;
-
-  if (startTime && endTime) {
-    const arr1 = startTime.split(':')
-    const arr2 = endTime.split(':')
-
-    if (arr1[0] || arr2[0]) {
-      hours = Math.abs(parseInt(arr2[0] || 0) - parseInt(arr1[0] || 0));
-    }
-
-    if (arr1[1] || arr2[1]) {
-      minutes = Math.abs(parseInt(arr2[1] || 0) - parseInt(arr1[1] || 0)) / 60;
-    }
-  }
-  return hours + minutes;
-};
 
 const sharedPayloadParser = payload => {
   let duration = payload.duration;
@@ -40,12 +22,12 @@ const sharedPayloadParser = payload => {
 
   if (duration) {
     if (!endTime && !startTime) {
-      const now = moment();
-      endTime = `${now.hours()}:${now.minutes() < 10 ? 0 : ''}${now.minutes()}`;
-
-      const durationToSeconds = duration * 60 * 60;
-      const beforeNow = moment(now.valueOf() - (durationToSeconds * 1000));
-      startTime = `${beforeNow.hours()}:${beforeNow.minutes() < 10 ? 0 : ''}${beforeNow.minutes()}`;
+      const {
+        endTime: et,
+        startTime: st,
+      } = durationToTime(duration);
+      endTime = et;
+      startTime = st;
     }
   } else if (endTime && startTime) {
     duration = roundNumber(calculateDuration(startTime, endTime));

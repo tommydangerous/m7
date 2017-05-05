@@ -5,6 +5,7 @@ import {
   TIMER_RESET,
   TIMER_SAVE,
   TIMER_START,
+  TIMER_UNSAVE,
 } from '../actions/timerActions';
 
 import {
@@ -25,6 +26,7 @@ const getStateFromStorage = () => {
 const RESET_STATE = {
   active: false,
   endTime: null,
+  saved: false,
   startTime: null,
 };
 const INITIAL_STATE = combine(RESET_STATE, getStateFromStorage());
@@ -40,16 +42,16 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(state, RESET_STATE);
     }
     case TIMER_SAVE: {
-      const {
-        endTime,
-        startTime,
-      } = getStateFromStorage();
-      const endDate = moment(parseInt(endTime));
-      const endString = `${endDate.hours()}:${endDate.minutes()}`;
-      const startDate = moment(parseInt(startTime));
-      const startString = `${startDate.hours()}:${startDate.minutes()}`;
-      console.log(startString, endString);
-      return combine(state, {});
+      // const {
+      //   endTime,
+      //   startTime,
+      // } = getStateFromStorage();
+      // const endDate = moment(parseInt(endTime));
+      // const endString = `${endDate.hours()}:${endDate.minutes()}`;
+      // const startDate = moment(parseInt(startTime));
+      // const startString = `${startDate.hours()}:${startDate.minutes()}`;
+      // console.log(startString, endString);
+      return combine(state, { saved: true });
     }
     case TIMER_START: {
       const {
@@ -77,6 +79,9 @@ export default function reducers(state = INITIAL_STATE, action) {
         endTime: moment().valueOf(),
       });
       return combine(state, getStateFromStorage());
+    }
+    case TIMER_UNSAVE: {
+      return combine(state, { saved: false });
     }
     default: {
       return state;

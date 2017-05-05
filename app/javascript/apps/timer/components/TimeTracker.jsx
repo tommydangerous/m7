@@ -117,6 +117,7 @@ class TimeTracker extends React.Component {
       startTime,
       onClickCancel,
       timerActions,
+      timesheetActions,
     } = this.props;
     const {
       seconds,

@@ -8,11 +8,14 @@ import { getCurrentUser, isLoggedIn } from '../../../../stores/appLocalStorage';
 
 import * as loginActionCreators from '../../../../action_creators/loginActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
+import * as timerActionCreators from '../../../../action_creators/timerActionCreators';
+import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
 
 import * as modalSelectors from '../../../../selectors/modalSelectors';
 import * as timerSelectors from '../../../../selectors/timerSelectors';
 
 import Modal from '../../../../components/Modal';
+import TimesheetForm from '../../../timesheets/main/components/TimesheetForm';
 import TimeTracker from '../../../timer/components/TimeTracker';
 
 const mapStateToProps = state => ({
@@ -23,6 +26,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loginActions: bindActionCreators(loginActionCreators, dispatch),
   modalActions: bindActionCreators(modalActionCreators, dispatch),
+  timerActions: bindActionCreators(timerActionCreators, dispatch),
+  timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
 });
 
 function HeaderMainApp({
@@ -30,12 +35,20 @@ function HeaderMainApp({
   modalActions,
   modalVisible,
   timer,
+  timerActions,
+  timesheetActions,
 }) {
   if (!isLoggedIn()) {
     return <div />;
   }
 
   const user = getCurrentUser();
+
+  const closeModal = () => {
+    timerActions.unsave();
+    timesheetActions.selfSelected(null);
+    modalActions.hide();
+  };
 
   return (
     <div>
@@ -83,9 +96,20 @@ function HeaderMainApp({
         </li>
       </ul>
 
-      <Modal onClose={modalActions.hide} visible={modalVisible}>
-        {modalVisible && (
-          <TimeTracker onClickCancel={modalActions.hide} />
+      <Modal onClose={closeModal} visible={modalVisible}>
+        {modalVisible && !timer.saved && (
+          <TimeTracker
+            onClickCancel={closeModal}
+          />
+        )}
+
+        {modalVisible && timer.saved && (
+          <TimesheetForm
+            duration={
+              Math.round(((timer.endTime - timer.startTime) / 10) / (60 * 60)) / 100
+            }
+            onClickCancel={closeModal}
+          />
         )}
       </Modal>
     </div>
