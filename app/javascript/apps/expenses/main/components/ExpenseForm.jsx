@@ -28,10 +28,10 @@ const FormWithStore = SimpleFormWithStore({
   selector: state => expenseSelectors.rootSelector(state).expense,
 });
 
-const selectOptions = array => {
+const selectOptions = (array, opts = {}) => {
   const arr = array.map(obj => {
     return {
-      text: obj.name,
+      text: opts.textKey ? obj[opts.textKey] : obj.name,
       value: obj.id,
     };
   });
@@ -111,7 +111,9 @@ class ExpenseForm extends React.Component {
     if (Object.keys(expensegroupings).length === 0) {
       delete fields.expense_grouping_id;
     } else {
-      fields.expense_grouping_id.options = selectOptions(expensegroupings);
+      fields.expense_grouping_id.options = selectOptions(expensegroupings, {
+        textKey: 'description',
+      });
     }
 
     if (Object.keys(qbaccounts).length === 0) {

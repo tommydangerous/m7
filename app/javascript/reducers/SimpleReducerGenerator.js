@@ -36,6 +36,7 @@ export default function generate(opts = {}) {
     action,
     name: pluralName,
     responseParsers,
+    saveParsers,
     singularName,
     states: {
       current,
@@ -96,11 +97,19 @@ export default function generate(opts = {}) {
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
       const id = obj.id || getTempId();
+
+      let updatedPayload = payload;
+      if (saveParsers.create) {
+        updatedPayload = saveParsers.create(payload);
+      }
+
       objectsByIdUpdated[objectsByIdKey][id] = {
         id,
         ...obj,
-        ...responseParsers.create(payload),
+        // This is required since the server response is incomplete
+        ...updatedPayload,
       };
+
       return combine(
         combine(
           state,
@@ -172,11 +181,16 @@ export default function generate(opts = {}) {
         updatedObj = responseParsers.update(response);
       }
 
+      let updatedPayload = payload;
+      if (saveParsers.update) {
+        updatedPayload = saveParsers.update(payload);
+      }
+
       objectsByIdUpdated[objectsByIdKey][id] = {
         ...currentObj,
         ...updatedObj,
         // This is required since the server response is incomplete
-        ...responseParsers.create(payload),
+        ...updatedPayload,
       };
       return combine(
         combine(

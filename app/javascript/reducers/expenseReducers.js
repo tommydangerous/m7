@@ -16,11 +16,11 @@ const INITIAL_STATE = {
   expensesById: initialExpensesById,
 };
 
-const singleObjectParser = resp => {
-  const { ExpenseEntry } = resp;
+const singleObjectParser = obj => {
   return {
-    ...ExpenseEntry,
-    billable: ExpenseEntry.billable.toLowerCase() === 'yes',
+    ...obj,
+    billable: obj.billable.toLowerCase() === 'yes',
+    id: parseInt(obj.id),
   };
 };
 
@@ -29,8 +29,13 @@ export default function reducers(state, action) {
     action,
     name: 'expenses',
     responseParsers: {
-      index: resp => resp.ExpenseEntries.map(obj => singleObjectParser(obj)),
+      index: resp => resp.ExpenseEntries.map(obj => singleObjectParser(obj.ExpenseEntry)),
       create: singleObjectParser,
+      update: singleObjectParser,
+    },
+    saveParsers: {
+      create: payload => singleObjectParser(payload.ExpenseEntry),
+      update: payload => singleObjectParser(payload.ExpenseEntry),
     },
     singularName: 'expense',
     states: {

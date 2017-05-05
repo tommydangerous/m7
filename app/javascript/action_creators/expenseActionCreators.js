@@ -5,7 +5,6 @@ const sharedPayloadParser = payload => {
     'ExpenseEntry': {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
-      // qb_account_id: 623244,
     },
   };
 };

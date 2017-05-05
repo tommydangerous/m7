@@ -1,3 +1,4 @@
+import { RESPONSE_APP_KEY } from '../api/constants';
 import Api from '../api/Api';
 
 export function requestFailed(type, error) {
@@ -50,7 +51,13 @@ export function createGenericRequest(httpMethod, endpoint, data, options = {}) {
         if (json.error && failedActionType) {
           dispatch(requestFailed(failedActionType, json.error));
         } else if (succeededActionType) {
-          dispatch(requestSucceeded(succeededActionType, json, data));
+          dispatch(
+            requestSucceeded(
+              succeededActionType,
+              !!json[RESPONSE_APP_KEY] ? json[RESPONSE_APP_KEY] : json,
+              data,
+            ),
+          );
         }
       });
     })

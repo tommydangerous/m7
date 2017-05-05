@@ -12,7 +12,7 @@ export default PropTypes.shape({
   description: PropTypes.string,
   expense_grouping_id: PropTypes.string, // Actually number
   exported: PropTypes.string, // Yes, No... actually bool
-  id: PropTypes.string, // Actually number
+  id: PropTypes.number, // Actually number
   modified: PropTypes.string,
   qb_account_id: PropTypes.string, // Actually number
   qb_class_id: PropTypes.string, // Actually number

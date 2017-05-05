@@ -8,7 +8,7 @@ export default function reducers(state, action) {
     action,
     name: 'expensegroupings',
     responseParsers: {
-      index: resp => resp.ExpenseGroupings.map(obj => obj.ExpenseGrouping),
+      index: resp => Object.values(resp.ExpenseGroupings),
     },
     states: {
       current: state,

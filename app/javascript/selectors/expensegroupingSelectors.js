@@ -8,9 +8,9 @@ export function sortedObjects(state) {
     .keys(objectsById)
     .map(key => objectsById[key])
     .sort((a, b) => {
-      if (a.name > b.name) {
+      if (a.description > b.description) {
         return 1;
-      } else if (a.name < b.name) {
+      } else if (a.description < b.description) {
         return -1;
       }
       return 0;
