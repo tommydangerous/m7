@@ -21,12 +21,16 @@ export default function reducers(state, action) {
       update: resp => {
         const {
           id,
-        } = resp.m7;
+        } = resp;
         return {
-          ...singleObjectParser(resp.m7),
+          ...singleObjectParser(resp),
           id,
         };
       },
+    },
+    saveParsers: {
+      create: singleObjectParser,
+      update: singleObjectParser,
     },
     states: {
       current: state,
