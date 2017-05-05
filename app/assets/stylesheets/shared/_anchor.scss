@@ -11,6 +11,10 @@
   }
 }
 
+.link-disabled {
+  opacity: 0.5;
+}
+
 .link-media {
   &:hover {
     text-decoration: none;

@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import cx from 'classnames';
 import moment from 'moment';
 import React from 'react';
 
@@ -129,18 +130,37 @@ class TimeTracker extends React.Component {
 
         <div className="panel-body">
           <div className="row">
-            {startTime && seconds}
-            <br />
-            {startTime && this.renderHours()}
-            <br />
-            {startTime && this.renderMinutes()}
-            <br />
-            {startTime && this.renderSeconds()}
+            <div className="col-sm-4 text-center">
+              <p className="text-muted">
+                HOURS
+              </p>
+              <h2>
+                {startTime ? this.renderHours() : '00'}
+              </h2>
+            </div>
+
+            <div className="col-sm-4 text-center">
+              <p className="text-muted">
+                MINUTES
+              </p>
+              <h2>
+                {startTime ? this.renderMinutes() : '00'}
+              </h2>
+            </div>
+
+            <div className="col-sm-4 text-center">
+              <p className="text-muted">
+                SECONDS
+              </p>
+              <h2>
+                {startTime ? this.renderSeconds() : '00'}
+              </h2>
+            </div>
           </div>
         </div>
 
         <div className="panel-footer">
-          <div>
+          <div className="pull-left">
             <a
               className="btn"
               href="#"
@@ -149,11 +169,26 @@ class TimeTracker extends React.Component {
                 onClickCancel();
               }}
             >
-              Cancel
+              Close
             </a>
+          </div>
+
+          <div>
+            {startTime && (
+              <button
+                className={cx('btn', { 'link-disabled': active })}
+                disabled={active}
+                onClick={e => {
+                  e.preventDefault();
+                  timerActions.save();
+                }}
+              >
+                Save
+              </button>
+            )}
 
             <button
-              className="btn btn-primary"
+              className={cx('btn', { 'btn-primary': !active })}
               onClick={e => {
                 e.preventDefault();
                 if (active) {
