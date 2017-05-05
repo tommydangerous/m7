@@ -17,7 +17,7 @@ export default PropTypes.shape({
   end_time: PropTypes.string,
   exported: PropTypes.string,
   hours_off_duty: PropTypes.string,
-  duration: PropTypes.oneOfType([
+  id: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
   ]),

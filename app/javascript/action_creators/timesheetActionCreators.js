@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 
 import { roundNumber } from '../utils/numberTransformers';
@@ -22,7 +24,10 @@ const calculateDuration = (startTime, endTime) => {
 };
 
 const sharedPayloadParser = payload => {
+  let duration = payload.duration;
   let employeeId;
+  let endTime = payload.end_time;
+  let startTime = payload.start_time;
   let type;
 
   if (!!payload.employee_id) {
@@ -33,14 +38,27 @@ const sharedPayloadParser = payload => {
     type = 'Vendor';
   }
 
+  if (duration) {
+    if (!endTime && !startTime) {
+      const now = moment();
+      endTime = `${now.hours()}:${now.minutes() < 10 ? 0 : ''}${now.minutes()}`;
+
+      const durationToSeconds = duration * 60 * 60;
+      const beforeNow = moment(now.valueOf() - (durationToSeconds * 1000));
+      startTime = `${beforeNow.hours()}:${beforeNow.minutes() < 10 ? 0 : ''}${beforeNow.minutes()}`;
+    }
+  } else if (endTime && startTime) {
+    duration = roundNumber(calculateDuration(startTime, endTime));
+  }
+
   return {
     'TimeEntry': {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
-      duration: roundNumber(
-        calculateDuration(payload.start_time, payload.end_time),
-      ),
+      duration,
       employee_id: employeeId,
+      end_time: endTime,
+      start_time: startTime,
       type,
     },
   };

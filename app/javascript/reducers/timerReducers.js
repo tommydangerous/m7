@@ -31,8 +31,6 @@ const INITIAL_STATE = combine(RESET_STATE, getStateFromStorage());
 
 export default function reducers(state = INITIAL_STATE, action) {
   const {
-    endTime,
-    startTime,
     type,
   } = action;
 
@@ -42,7 +40,15 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(state, RESET_STATE);
     }
     case TIMER_SAVE: {
-      console.log('TIMER_SAVE');
+      const {
+        endTime,
+        startTime,
+      } = getStateFromStorage();
+      const endDate = moment(parseInt(endTime));
+      const endString = `${endDate.hours()}:${endDate.minutes()}`;
+      const startDate = moment(parseInt(startTime));
+      const startString = `${startDate.hours()}:${startDate.minutes()}`;
+      console.log(startString, endString);
       return combine(state, {});
     }
     case TIMER_START: {

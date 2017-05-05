@@ -22,9 +22,17 @@ export const CREATE_FORM_FIELDS = {
   date: {
     label: 'Date',
     minDate,
-    order: 7,
+    order: [5, 0],
     required: true,
     type: 'date',
+  },
+  duration: {
+    label: 'Duration',
+    numberOnly: true,
+    order: [4, 2],
+    placeholder: '# of hours',
+    scale: 2,
+    type: 'text',
   },
   description: {
     label: 'Description',
@@ -43,13 +51,12 @@ export const CREATE_FORM_FIELDS = {
     label: 'End time',
     order: [4, 1],
     placeholder: 'HH:MM',
-    required: true,
     type: 'text',
   },
   hours_off_duty: {
     label: 'Hours off duty',
     numberOnly: true,
-    order: [4, 2],
+    order: [5, 1],
     placeholder: '5.25',
     required: true,
     scale: 2,
@@ -65,7 +72,6 @@ export const CREATE_FORM_FIELDS = {
     label: 'Start time',
     order: [4, 0],
     placeholder: 'HH:MM',
-    required: true,
     type: 'text',
   },
   vendor_id: {
