@@ -75,7 +75,7 @@ class TimesheetForm extends React.Component {
       [customers, customerActions],
       [employees, employeeActions],
       [inventoryitems, inventoryitemActions],
-      // [vendors, vendorActions],
+      [vendors, vendorActions],
     ].forEach(arr => {
       if (arr[0].length === 0) {
         arr[1].index();
@@ -100,7 +100,7 @@ class TimesheetForm extends React.Component {
     fields.customer_id.options = selectOptions(customers);
     fields.employee_id.options = selectOptions(employees);
     fields.inventory_item_id.options = selectOptions(inventoryitems);
-    // fields.vendor_id.options = selectOptions(vendors);
+    fields.vendor_id.options = selectOptions(vendors);
 
     if (timesheet) {
       return (

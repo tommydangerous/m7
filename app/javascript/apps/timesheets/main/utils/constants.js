@@ -38,7 +38,6 @@ export const CREATE_FORM_FIELDS = {
   employee_id: {
     label: 'Employee',
     order: 0,
-    required: true,
     type: 'select',
   },
   end_time: {
@@ -70,11 +69,11 @@ export const CREATE_FORM_FIELDS = {
     required: true,
     type: 'text',
   },
-  // vendor_id: {
-  //   label: 'Vendor',
-  //   order: 0,
-  //   type: 'select',
-  // },
+  vendor_id: {
+    label: 'Vendor',
+    order: 0,
+    type: 'select',
+  },
 };
 
 export const TABLE_HEADERS = [

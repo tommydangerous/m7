@@ -22,10 +22,14 @@ const calculateDuration = (startTime, endTime) => {
 };
 
 const sharedPayloadParser = payload => {
+  let employeeId;
   let type;
+
   if (!!payload.employee_id) {
+    employeeId = payload.employee_id;
     type = 'Employee';
   } else if (!!payload.vendor_id) {
+    employeeId = payload.vendor_id;
     type = 'Vendor';
   }
 
@@ -36,6 +40,7 @@ const sharedPayloadParser = payload => {
       duration: roundNumber(
         calculateDuration(payload.start_time, payload.end_time),
       ),
+      employee_id: employeeId,
       type,
     },
   };
