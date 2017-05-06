@@ -20,18 +20,26 @@ export default function LoginForm({
       method="POST"
       onSubmit={submit}
     >
+      <label htmlFor="email">
+        Email
+      </label>
       <input
         autoComplete="on"
         className="space-1"
+        id="email"
         onChange={(e) => onInputChange('email', e.target.value)}
         placeholder="Email"
         type="text"
         value={email}
       />
 
+      <label htmlFor="password">
+        Password
+      </label>
       <input
-        className="space-1"
         autoComplete="off"
+        className="space-2"
+        id="password"
         onChange={(e) => onInputChange('password', e.target.value)}
         placeholder="Password"
         type="password"

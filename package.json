@@ -30,6 +30,7 @@
     "prop-types": "^15.5.8",
     "rails-erb-loader": "^5.0.0",
     "react": "^15.5.4",
+    "react-document-title": "^2.0.3",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",

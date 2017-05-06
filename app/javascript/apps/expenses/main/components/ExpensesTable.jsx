@@ -77,6 +77,7 @@ class ExpensesTable extends React.Component {
         obj.date,
         <div className="text-right">
           <a
+            className="link-reset"
             href="#"
             onClick={e => {
               e.preventDefault();
@@ -88,6 +89,7 @@ class ExpensesTable extends React.Component {
           </a>
           {' '}
           <a
+            className="link-reset"
             href="#"
             onClick={e => {
               e.preventDefault();

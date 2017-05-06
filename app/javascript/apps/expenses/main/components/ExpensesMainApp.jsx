@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import DocumentTitle from 'react-document-title';
 import React from 'react';
 
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
@@ -64,6 +65,8 @@ class ExpensesMainApp extends React.Component {
 
     return (
       <div className="page-container">
+        <DocumentTitle title="Expenses" />
+
         <div className="space-bottom-lg space-top-lg">
           <a
             className="btn btn-primary pull-right space-bottom-sm"

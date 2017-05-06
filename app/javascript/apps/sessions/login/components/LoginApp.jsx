@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title';
 import React from 'react';
 
 import { isLoggedIn } from '../../../../stores/appLocalStorage';
@@ -37,10 +38,14 @@ class LoginApp extends React.Component {
 
     return (
       <div className="page-container">
+        <DocumentTitle title="Login" />
+
         <div className="row space-bottom-lg space-top-lg">
-          <div className="col-md-6 col-center">
+          <div className="col-md-4 col-center">
             <div className="panel-body">
-              <h1>Hello</h1>
+              <h2 className="space-bottom-sm">
+                Minute7
+              </h2>
 
               <LoginForm
                 email={email}
