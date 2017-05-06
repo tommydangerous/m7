@@ -124,7 +124,7 @@ class HeaderMainApp extends React.Component {
 
           <li className="pull-left">
             <a className="link-block link-reset" href="/timesheets">
-              Timesheets
+              Time
             </a>
           </li>
 

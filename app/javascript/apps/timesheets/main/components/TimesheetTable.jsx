@@ -16,6 +16,7 @@ import * as employeeSelectors from '../../../../selectors/employeeSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
+import SimpleResponsiveTable from '../../../../components/SimpleResponsiveTable';
 import SimpleTable from '../../../../components/SimpleTable';
 
 import TimesheetShape from '../../../../shapes/TimesheetShape';
@@ -66,6 +67,46 @@ class TimesheetTable extends React.Component {
       timesheetsById,
       vendorsById,
     } = this.props;
+
+    const renderColumnsForRow = obj => {
+      const customerName = (customersById[obj.customer_id] || {}).name;
+
+      let name;
+      if (obj.type === 'Employee') {
+        name = (employeesById[obj.employee_id] || {}).name;
+      } else {
+        name = (vendorsById[obj.employee_id] || {}).name;
+      }
+
+      return [
+        `${name} (${obj.type})`,
+        customerName,
+        obj.duration,
+        obj.date,
+        <div>
+          <a
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              timesheetActions.selfSelected(obj);
+              onEdit();
+            }}
+          >
+            Edit
+          </a>
+          {" / "}
+          <a
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              timesheetActions.deleteObject(obj.id);
+            }}
+          >
+            Delete
+          </a>
+        </div>,
+      ];
+    };
 
     const renderTableRow = obj => {
       const customerName = (customersById[obj.customer_id] || {}).name;
@@ -122,10 +163,11 @@ class TimesheetTable extends React.Component {
           )}
         </div>
         <div className={cx({ loading: loading.delete || loading.index })}>
-          <SimpleTable
+          <SimpleResponsiveTable
+            headers={TABLE_HEADERS}
             objects={timesheets}
-            renderTableRow={renderTableRow}
-            tableHeaders={TABLE_HEADERS}
+            renderColumnsForRow={renderColumnsForRow}
+            widths={[4, 2, 2, 2, 2]}
           />
         </div>
       </div>

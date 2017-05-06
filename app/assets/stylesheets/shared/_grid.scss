@@ -36,6 +36,8 @@ $grid-large: (
 
 .row {
   @include grid-container;
+  margin-left: -1 * $spacing;
+  margin-right: -1 * $spacing;
 }
 
 @include grid-media($grid-small){
