@@ -87,7 +87,7 @@ class TimesheetTable extends React.Component {
       }
 
       return (
-        <div className="row space-2" key={obj.id}>
+        <div className="row space-1" key={obj.id}>
           <div className="col-sm-12">
             <div
               className="panel panel-body link-hover"
@@ -129,7 +129,7 @@ class TimesheetTable extends React.Component {
                   )}
                 </div>
                 <div className="col-md-4 col-sm-12 text-muted text-right-md text-tiny">
-                  {durationStrings.join(' ')} | {customerName}
+                  {durationStrings.join(' ')}, {customerName}
                 </div>
               </div>
             </div>

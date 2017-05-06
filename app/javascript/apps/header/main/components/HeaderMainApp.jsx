@@ -144,7 +144,7 @@ class HeaderMainApp extends React.Component {
                   history.push('/timesheets');
                 }}
               >
-                Time
+                Timesheets
               </a>
             </li>
 
@@ -189,7 +189,7 @@ class HeaderMainApp extends React.Component {
                           history.push('/timesheets');
                         }}
                       >
-                        Time
+                        Timesheets
                       </a>
                     </li>
                     <li className="show-sm">

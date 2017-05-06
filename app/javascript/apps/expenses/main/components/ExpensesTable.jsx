@@ -2,35 +2,38 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
+import moment from 'moment';
 import React from 'react';
 
 import { TABLE_HEADERS } from '../utils/constants';
 
 import * as customerActionCreators from '../../../../action_creators/customerActionCreators';
 import * as expenseActionCreators from '../../../../action_creators/expenseActionCreators';
+import * as qbaccountActionCreators from '../../../../action_creators/qbaccountActionCreators';
 import * as vendorActionCreators from '../../../../action_creators/vendorActionCreators';
 
 import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as expenseSelectors from '../../../../selectors/expenseSelectors';
+import * as qbaccountSelectors from '../../../../selectors/qbaccountSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import { OFFLINE_MODE } from '../../../../utils/constants';
-
-import SimpleResponsiveTable from '../../../../components/SimpleResponsiveTable';
 
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
 const mapStateToProps = state => ({
   customersById: customerSelectors.rootSelector(state).customersById,
   errors: expenseSelectors.rootSelector(state).errors,
-  loading: expenseSelectors.rootSelector(state).loading,
   expenses: expenseSelectors.sortedObjects(state),
+  loading: expenseSelectors.rootSelector(state).loading,
+  qbaccountsById: qbaccountSelectors.rootSelector(state).qbaccountsById,
   vendorsById: vendorSelectors.rootSelector(state).vendorsById,
 });
 
 const mapDispatchToProps = dispatch => ({
   customerActions: bindActionCreators(customerActionCreators, dispatch),
   expenseActions: bindActionCreators(expenseActionCreators, dispatch),
+  qbaccountActions: bindActionCreators(qbaccountActionCreators, dispatch),
   vendorActions:bindActionCreators(vendorActionCreators, dispatch),
 });
 
@@ -39,10 +42,12 @@ class ExpensesTable extends React.Component {
     const {
       customerActions,
       expenseActions,
+      qbaccountActions,
       vendorActions,
     } = this.props;
 
     customerActions.index();
+    qbaccountActions.index();
     vendorActions.index();
 
     if (!OFFLINE_MODE) {
@@ -63,31 +68,68 @@ class ExpensesTable extends React.Component {
       expenses,
       loading,
       onEdit,
+      qbaccountsById,
       vendorsById,
     } = this.props;
 
-    const renderColumnsForRow = obj => {
-      const customerName = (customersById[obj.customer_id] || {}).name;
+    const renderRow = obj => {
+      const accountName = (qbaccountsById[obj.qb_account_id] || {}).name;
       const vendorName = (vendorsById[obj.vendor_id] || {}).name;
+      const customerName = (customersById[obj.customer_id] || {}).name;
+      const date = moment(obj.date);
+      const amount = `$${obj.amount % 1 === 0 ? Math.round(obj.amount) : obj.amount}`;
 
-      return [
-        vendorName,
-        customerName,
-        `$${obj.amount}`,
-        obj.date,
-        <div className="text-right">
-          <a
-            className="link-reset"
-            href="#"
-            onClick={e => {
-              e.preventDefault();
-              expenseActions.deleteObject(obj.id);
-            }}
-          >
-            <i className="fa fa-trash-o" aria-hidden="true" />
-          </a>
+      return (
+        <div className="row space-1" key={obj.id}>
+          <div className="col-sm-12">
+            <div
+              className="panel panel-body link-hover"
+              onClick={() => {
+                onEdit();
+                expenseActions.selfSelected(obj);
+              }}
+            >
+              <div className="row">
+                <div className="col-sm-8">
+                  <b className="text-muted text-tiny text-uppercase">
+                    {accountName}
+                  </b>
+                  <h5>
+                    {vendorName}
+                  </h5>
+                </div>
+
+                <div className="col-sm-4">
+                  <div className="pull-right text-muted text-center">
+                    <b className="text-tiny text-uppercase">
+                      {date.format('MMMM')}
+                    </b>
+                    <p>
+                      {date.format('D')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="row space-top-2">
+                <div className="col-md-8 col-sm-12">
+                  {obj.description && obj.description}
+                  {!obj.description && (
+                    <i className="text-muted">
+                      No description
+                    </i>
+                  )}
+                </div>
+                <div className="col-md-4 col-sm-12 text-muted text-right-md text-tiny">
+                  <div className="show-sm space-top-1" />
+                  {amount}, {customerName}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      ];
+      );
     };
 
     return (
@@ -107,19 +149,7 @@ class ExpensesTable extends React.Component {
         </div>
 
         <div className={cx({ loading: loading.delete || loading.index })}>
-          <SimpleResponsiveTable
-            headers={TABLE_HEADERS}
-            objects={expenses}
-            onClickRow={obj => {
-              expenseActions.selfSelected(obj);
-              onEdit();
-            }}
-            renderColumnsForRow={renderColumnsForRow}
-            widths={{
-              md: [4, 3, 2, 2, 1],
-              sm: [12, 10, 0, 0, 2],
-            }}
-          />
+          {expenses.map(obj => renderRow(obj))}
         </div>
       </div>
     );
