@@ -109,7 +109,6 @@ export default {
     const pathWithQuery = `${endpoint}?${urlParamsSortedByKey}`;
     const signature = generateSignature(pathWithQuery);
 
-    const request = new Request(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
-    return fetch(request);
+    return fetch(`${BASE_URI}${pathWithQuery}&signature=${signature}`, data);
   }
 }

@@ -21,12 +21,11 @@ $ bundle exec foreman start -f Procfile.dev
 
 ## Deploy
 1. Precompile assets
-1. Deploy master to production server (todo)
-1. Run server
+1. Deploy to Heroku
 
 ```
 $ bundle exec rake assets:precompile RAILS_ENV=production
-$ bundle exec foreman start
+$ git heroku push master
 ```
 
 ## Technology stack
