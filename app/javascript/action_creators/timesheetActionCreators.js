@@ -5,7 +5,7 @@ import SimpleActionCreatorGenerator from './SimpleActionCreatorGenerator';
 import { calculateDuration, durationToTime } from '../utils/timeFunctions';
 import { roundNumber } from '../utils/numberTransformers';
 
-const sharedPayloadParser = payload => {
+const updatePayloadParser = payload => {
   let duration = payload.duration;
   let employeeId;
   let endTime = payload.end_time;
@@ -34,7 +34,7 @@ const sharedPayloadParser = payload => {
   }
 
   return {
-    'TimeEntry': {
+    TimeEntry: {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
       duration,
@@ -46,11 +46,25 @@ const sharedPayloadParser = payload => {
   };
 };
 
+const createPayloadParser = payload => {
+  const data = updatePayloadParser(payload);
+  let duration = data.TimeEntry.duration;
+  if (payload.hours_off_duty) {
+    duration -= payload.hours_off_duty;
+  }
+  return {
+    TimeEntry: {
+      ...data.TimeEntry,
+      duration,
+    },
+  };
+};
+
 const generator = SimpleActionCreatorGenerator({
   name: 'timesheets',
   payloadParsers: {
-    create: sharedPayloadParser,
-    update: sharedPayloadParser,
+    create: createPayloadParser,
+    update: updatePayloadParser,
   },
 });
 

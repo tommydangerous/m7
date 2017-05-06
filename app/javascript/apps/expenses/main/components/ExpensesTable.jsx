@@ -102,7 +102,7 @@ class ExpensesTable extends React.Component {
                 <div className="col-sm-4">
                   <div className="pull-right text-muted text-center">
                     <b className="text-tiny text-uppercase">
-                      {date.format('MMMM')}
+                      {date.format('MMM')}
                     </b>
                     <p>
                       {date.format('D')}
