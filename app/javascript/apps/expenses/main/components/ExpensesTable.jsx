@@ -81,18 +81,6 @@ class ExpensesTable extends React.Component {
             href="#"
             onClick={e => {
               e.preventDefault();
-              expenseActions.selfSelected(obj);
-              onEdit();
-            }}
-          >
-            <i className="fa fa-pencil-square-o" aria-hidden="true" />
-          </a>
-          {' '}
-          <a
-            className="link-reset"
-            href="#"
-            onClick={e => {
-              e.preventDefault();
               expenseActions.deleteObject(obj.id);
             }}
           >
@@ -122,10 +110,14 @@ class ExpensesTable extends React.Component {
           <SimpleResponsiveTable
             headers={TABLE_HEADERS}
             objects={expenses}
+            onClickRow={obj => {
+              expenseActions.selfSelected(obj);
+              onEdit();
+            }}
             renderColumnsForRow={renderColumnsForRow}
             widths={{
-              md: [4, 2, 2, 2, 2],
-              sm: [12, 8, 0, 0, 4],
+              md: [4, 3, 2, 2, 1],
+              sm: [12, 10, 0, 0, 2],
             }}
           />
         </div>

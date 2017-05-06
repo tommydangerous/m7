@@ -88,18 +88,6 @@ class TimesheetTable extends React.Component {
             href="#"
             onClick={e => {
               e.preventDefault();
-              timesheetActions.selfSelected(obj);
-              onEdit();
-            }}
-          >
-            <i className="fa fa-pencil-square-o" aria-hidden="true" />
-          </a>
-          {' '}
-          <a
-            className="link-reset"
-            href="#"
-            onClick={e => {
-              e.preventDefault();
               timesheetActions.deleteObject(obj.id);
             }}
           >
@@ -128,10 +116,14 @@ class TimesheetTable extends React.Component {
           <SimpleResponsiveTable
             headers={TABLE_HEADERS}
             objects={timesheets}
+            onClickRow={obj => {
+              timesheetActions.selfSelected(obj);
+              onEdit();
+            }}
             renderColumnsForRow={renderColumnsForRow}
             widths={{
-              md: [4, 2, 2, 2, 2],
-              sm: [12, 8, 0, 0, 4],
+              md: [4, 3, 2, 2, 1],
+              sm: [12, 10, 0, 0, 2],
             }}
           />
         </div>

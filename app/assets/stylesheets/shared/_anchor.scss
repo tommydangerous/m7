@@ -24,3 +24,9 @@
 .link-reset {
   color: inherit;
 }
+
+.link-hover {
+  &:hover {
+    cursor: pointer;
+  }
+}

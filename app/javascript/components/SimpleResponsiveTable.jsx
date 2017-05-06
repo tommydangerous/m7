@@ -1,4 +1,5 @@
 import { PropTypes } from 'prop-types';
+import cx from 'classnames';
 import React from 'react';
 
 const GRID_COLUMNS = 12;
@@ -34,13 +35,23 @@ const renderHeaders = (headers, widths) => {
 const renderRows = (opts = {}) => {
   const {
     objects,
+    onClickRow,
     renderColumnsForRow,
     widths,
   } = opts;
 
   return objects.map((obj, idx1) => {
     return (
-      <div className="row space-1" key={`row-${idx1}`}>
+      <div
+        className={cx('row space-1', { 'link-hover': !!onClickRow })}
+        key={`row-${idx1}`}
+        onClick={e => {
+          e.preventDefault();
+          if (onClickRow) {
+            onClickRow(obj);
+          }
+        }}
+      >
         <div className="border-top col-sm-12" />
 
         {renderColumnsForRow(obj).map((el, idx2) => {
@@ -61,6 +72,7 @@ const renderRows = (opts = {}) => {
 export default function SimpleResponsiveTable({
   headers,
   objects,
+  onClickRow,
   renderColumnsForRow,
   widths,
 }) {
@@ -69,7 +81,7 @@ export default function SimpleResponsiveTable({
       <div className="row hide-sm space-bottom-sm">
         {renderHeaders(headers, widths)}
       </div>
-      {renderRows({ objects, renderColumnsForRow, widths })}
+      {renderRows({ objects, onClickRow, renderColumnsForRow, widths })}
     </div>
   );
 }
