@@ -114,14 +114,14 @@ $user-image-size: $spacing * 1.8;
   border-bottom: 1px solid $border-color;
   border-left: 1px solid $border-color;
   border-top: 1px solid $border-color;
-  display: none;
+  // display: none;
   left: auto;
   max-width: none;
   min-width: $spacing * 10;
   position: absolute;
   right: 0;
   top: $header-height;
-  z-index: 3000;
+  z-index: 1000;
   @include border-bottom-left-radius;
 
   li:first-child {

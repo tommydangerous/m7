@@ -6,6 +6,7 @@ import customerReducers from './customerReducers';
 import employeeReducers from './employeeReducers';
 import expenseReducers from './expenseReducers';
 import expensegroupingReducers from './expensegroupingReducers';
+import headerReducers from './headerReducers';
 import inventoryitemReducers from './inventoryitemReducers';
 import loginReducers from './loginReducers';
 import modalReducers from './modalReducers';
@@ -20,6 +21,7 @@ export default combineReducers({
   employee: employeeReducers,
   expense: expenseReducers,
   expensegrouping: expensegroupingReducers,
+  header: headerReducers,
   inventoryitem: inventoryitemReducers,
   login: loginReducers,
   modal: modalReducers,

@@ -10,11 +10,13 @@ import { durationToTime } from '../../../../utils/timeFunctions';
 
 import { getCurrentUser, isLoggedIn } from '../../../../stores/appLocalStorage';
 
+import * as headerActionCreators from '../../../../action_creators/headerActionCreators';
 import * as loginActionCreators from '../../../../action_creators/loginActionCreators';
 import * as modalActionCreators from '../../../../action_creators/modalActionCreators';
 import * as timerActionCreators from '../../../../action_creators/timerActionCreators';
 import * as timesheetActionCreators from '../../../../action_creators/timesheetActionCreators';
 
+import * as headerSelectors from '../../../../selectors/headerSelectors';
 import * as modalSelectors from '../../../../selectors/modalSelectors';
 import * as timerSelectors from '../../../../selectors/timerSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
@@ -24,12 +26,14 @@ import TimesheetForm from '../../../timesheets/main/components/TimesheetForm';
 import TimeTracker from '../../../timer/components/TimeTracker';
 
 const mapStateToProps = state => ({
+  header: headerSelectors.rootSelector(state),
   successes: timesheetSelectors.rootSelector(state).successes,
   timer: timerSelectors.rootSelector(state),
   timesheets: timesheetSelectors.rootSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
+  headerActions: bindActionCreators(headerActionCreators, dispatch),
   loginActions: bindActionCreators(loginActionCreators, dispatch),
   timerActions: bindActionCreators(timerActionCreators, dispatch),
   timesheetActions: bindActionCreators(timesheetActionCreators, dispatch),
@@ -88,6 +92,8 @@ class HeaderMainApp extends React.Component {
 
   render() {
     const {
+      header,
+      headerActions,
       history,
       loginActions,
       timer,
@@ -101,6 +107,8 @@ class HeaderMainApp extends React.Component {
       visible,
     } = timer;
     const user = getCurrentUser();
+    const dropdownItemClasses =
+      'link-block link-media link-reset menu-item space-left-4 space-right-4';
 
     if (!isLoggedIn()) {
       return <div />;
@@ -116,6 +124,7 @@ class HeaderMainApp extends React.Component {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
+                  headerActions.hide();
                   timerActions.showModal();
                 }}
               >
@@ -126,22 +135,30 @@ class HeaderMainApp extends React.Component {
               </a>
             </li>
 
-            <li className="pull-left">
-              <Link
+            <li className="pull-left hide-sm">
+              <a
                 className="link-block link-reset"
-                to="/timesheets"
+                onClick={e => {
+                  e.preventDefault();
+                  headerActions.hide();
+                  history.push('/timesheets');
+                }}
               >
                 Time
-              </Link>
+              </a>
             </li>
 
-            <li className="pull-left">
-              <Link
+            <li className="pull-left hide-sm">
+              <a
                 className="link-block link-reset"
-                to="/expenses"
+                onClick={e => {
+                  e.preventDefault();
+                  headerActions.hide();
+                  history.push('/expenses');
+                }}
               >
                 Expenses
-              </Link>
+              </a>
             </li>
 
             <li className="pull-left">
@@ -150,12 +167,59 @@ class HeaderMainApp extends React.Component {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  loginActions.logOut();
-                  history.push('/login');
+                  if (header.visible) {
+                    headerActions.hide();
+                  } else {
+                    headerActions.show();
+                  }
                 }}
               >
-                Log Out
+                {user.first_name}
               </a>
+
+              {header.visible && (
+                <div className="header__dropdown-menu">
+                  <ul className="list-unstyled">
+                    <li className="show-sm">
+                      <a
+                        className={`border-bottom ${dropdownItemClasses}`}
+                        onClick={e => {
+                          e.preventDefault();
+                          headerActions.hide();
+                          history.push('/timesheets');
+                        }}
+                      >
+                        Time
+                      </a>
+                    </li>
+                    <li className="show-sm">
+                      <a
+                        className={`border-bottom ${dropdownItemClasses}`}
+                        onClick={e => {
+                          e.preventDefault();
+                          headerActions.hide();
+                          history.push('/expenses');
+                        }}
+                      >
+                        Expenses
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className={dropdownItemClasses}
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          loginActions.logOut();
+                          history.push('/login');
+                        }}
+                      >
+                        Log Out
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </li>
           </ul>
 
