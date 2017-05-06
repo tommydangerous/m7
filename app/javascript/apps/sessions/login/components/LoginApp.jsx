@@ -41,7 +41,7 @@ class LoginApp extends React.Component {
         <DocumentTitle title="Login" />
 
         <div className="row space-bottom-lg space-top-lg">
-          <div className="col-md-4 col-center">
+          <div className="col-md-6 col-center">
             <div className="panel-body">
               <h2 className="space-bottom-sm">
                 Minute7
