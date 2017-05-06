@@ -1,4 +1,4 @@
 .col-td,
 .col-th {
-  padding: $spacing-increment;
+  padding: ($spacing-increment * 2) $spacing-increment;
 }

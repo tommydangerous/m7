@@ -17,7 +17,6 @@ import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import SimpleResponsiveTable from '../../../../components/SimpleResponsiveTable';
-import SimpleTable from '../../../../components/SimpleTable';
 
 import TimesheetShape from '../../../../shapes/TimesheetShape';
 
@@ -83,8 +82,9 @@ class TimesheetTable extends React.Component {
         customerName,
         obj.duration,
         obj.date,
-        <div>
+        <div className="text-right">
           <a
+            className="link-reset"
             href="#"
             onClick={e => {
               e.preventDefault();
@@ -92,70 +92,32 @@ class TimesheetTable extends React.Component {
               onEdit();
             }}
           >
-            Edit
+            <i className="fa fa-pencil-square-o" aria-hidden="true" />
           </a>
-          {" / "}
+          {' '}
           <a
+            className="link-reset"
             href="#"
             onClick={e => {
               e.preventDefault();
               timesheetActions.deleteObject(obj.id);
             }}
           >
-            Delete
+            <i className="fa fa-trash-o" aria-hidden="true" />
           </a>
         </div>,
       ];
     };
 
-    const renderTableRow = obj => {
-      const customerName = (customersById[obj.customer_id] || {}).name;
-
-      let name;
-      if (obj.type === 'Employee') {
-        name = (employeesById[obj.employee_id] || {}).name;
-      } else {
-        name = (vendorsById[obj.employee_id] || {}).name;
-      }
-
-      return (
-        <tr key={obj.id}>
-          <td>{`${name} (${obj.type})`}</td>
-          <td>{customerName}</td>
-          <td>{obj.duration}</td>
-          <td>{obj.date}</td>
-          <td>
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                timesheetActions.selfSelected(obj);
-                onEdit();
-              }}
-            >
-              Edit
-            </a>
-            {" / "}
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                timesheetActions.deleteObject(obj.id);
-              }}
-            >
-              Delete
-            </a>
-          </td>
-        </tr>
-      );
-    };
-
     return (
       <div>
         <div className="clearfix">
-          <h1 className="hide-sm">
+          <h2 className="hide-sm">
             Timesheets
-          </h1>
+          </h2>
+          <h3 className="show-sm">
+            Timesheets
+          </h3>
           {errors.index && errors.index.message && (
             <div className="background-red panel-body-small space-1 text-center text-contrast">
               {errors.index.message}
@@ -167,7 +129,10 @@ class TimesheetTable extends React.Component {
             headers={TABLE_HEADERS}
             objects={timesheets}
             renderColumnsForRow={renderColumnsForRow}
-            widths={[4, 2, 2, 2, 2]}
+            widths={{
+              md: [4, 2, 2, 2, 2],
+              sm: [12, 8, 0, 0, 4],
+            }}
           />
         </div>
       </div>

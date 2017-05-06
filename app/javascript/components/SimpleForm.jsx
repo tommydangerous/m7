@@ -305,8 +305,11 @@ export default class SimpleForm extends React.Component {
   renderHeader() {
     if (this.props.header) {
       return (
-        <div className="panel-header">
-          {this.props.header}
+        <div>
+          <div className="panel-header">
+            {this.props.header}
+          </div>
+          <div className="panel-header-divider" />
         </div>
       );
     }
@@ -372,24 +375,28 @@ export default class SimpleForm extends React.Component {
         {this.renderErrors()}
         <div className="panel">
           {this.renderHeader()}
-          <form action="#" onSubmit={this.onSubmitForm}>
-            <div className="space-bottom-md space-top-md">
-              {this.renderAllFields()}
-              {this.props.children}
-            </div>
 
-            <div className="panel-footer">
-              <div>
-                {this.renderCancelButton()}
-                <button
-                  className={cx("btn btn-primary", { loading: loading })}
-                  disabled={loading}
-                >
-                  {this.props.submitFormButtonText ? this.props.submitFormButtonText : "Save"}
-                </button>
+          <div>
+            <form action="#" onSubmit={this.onSubmitForm}>
+
+              <div className="panel-body">
+                {this.renderAllFields()}
+                {this.props.children}
               </div>
-            </div>
-          </form>
+
+              <div className="panel-footer">
+                <div>
+                  {this.renderCancelButton()}
+                  <button
+                    className={cx("btn btn-primary", { loading: loading })}
+                    disabled={loading}
+                  >
+                    {this.props.submitFormButtonText ? this.props.submitFormButtonText : "Save"}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

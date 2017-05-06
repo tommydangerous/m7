@@ -122,6 +122,7 @@ class TimeTracker extends React.Component {
         <div className="panel-header">
           Time Tracker
         </div>
+        <div className="panel-header-divider" />
 
         <div className="panel-body">
           <div className="row">

@@ -1,9 +1,15 @@
 $slack: 40px * 2;
 
-$min-width-extra-small: 0px;
-$min-width-small: 320px + $slack;
-$min-width-medium: 640px + $slack;
-$min-width-large: 960px + $slack;
+$screen-size-increments: 160px;
+
+// $min-width-extra-small: 0px;
+// $min-width-small: 320px + $slack;
+// $min-width-medium: 640px + $slack;
+// $min-width-large: 960px + $slack;
+
+$min-width-small: 0px;
+$min-width-medium: ($screen-size-increments * 3) + $slack;
+$min-width-large: ($screen-size-increments * 6) + $slack;
 
 $max-width: $min-width-large + 280px;
 

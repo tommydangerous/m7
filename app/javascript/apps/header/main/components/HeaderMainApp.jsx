@@ -116,7 +116,7 @@ class HeaderMainApp extends React.Component {
               }}
             >
               <i
-                className={cx('fa fa-clock-o', { 'color-green': active })}
+                className={cx('fa fa-clock-o', { 'color-green': !active, 'color-red': active })}
                 aria-hidden="true"
               />
             </a>

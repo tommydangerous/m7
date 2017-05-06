@@ -39,18 +39,21 @@
 .page-container-full {
   margin-left: auto;
   margin-right: auto;
-  padding-left: $page-side-spacing;
-  padding-right: $page-side-spacing;
+  padding-left: $spacing;
+  padding-right: $spacing;
   width: auto;
   // @include outer-container;
 }
 
 .page-container {
   @include screen-md {
-    width: $min-width-medium;
+    max-width: $min-width-large;
+    min-width: $min-width-medium;
   }
+
   @include screen-lg {
-    width: $min-width-large;
+    max-width: $max-width;
+    min-width: $min-width-large;
   }
 }
 

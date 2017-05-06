@@ -16,7 +16,7 @@
   // @media(min-width: $min-width-small) and (max-width: $min-width-medium) {
   //   @content;
   // }
-  @media(max-width: $min-width-medium) {
+  @media(max-width: $min-width-medium - 1) {
     @content;
   }
 }
@@ -35,7 +35,7 @@
 
 // Medium
 @mixin screen-md {
-  @media(min-width: $min-width-medium) and (max-width: $min-width-large) {
+  @media(min-width: $min-width-medium) and (max-width: $min-width-large - 1) {
     @content;
   }
 }

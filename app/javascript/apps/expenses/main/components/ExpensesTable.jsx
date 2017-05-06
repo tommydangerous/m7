@@ -16,7 +16,7 @@ import * as vendorSelectors from '../../../../selectors/vendorSelectors';
 
 import { OFFLINE_MODE } from '../../../../utils/constants';
 
-import SimpleTable from '../../../../components/SimpleTable';
+import SimpleResponsiveTable from '../../../../components/SimpleResponsiveTable';
 
 import ExpenseShape from '../../../../shapes/ExpenseShape';
 
@@ -66,48 +66,49 @@ class ExpensesTable extends React.Component {
       vendorsById,
     } = this.props;
 
-    const renderTableRow = obj => {
+    const renderColumnsForRow = obj => {
       const customerName = (customersById[obj.customer_id] || {}).name;
       const vendorName = (vendorsById[obj.vendor_id] || {}).name;
 
-      return (
-        <tr key={obj.id}>
-          <td>{vendorName}</td>
-          <td>{customerName}</td>
-          <td>{`$${obj.amount}`}</td>
-          <td>{obj.date}</td>
-          <td>
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                expenseActions.selfSelected(obj);
-                onEdit();
-              }}
-            >
-              Edit
-            </a>
-            {" / "}
-            <a
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                expenseActions.deleteObject(obj.id);
-              }}
-            >
-              Delete
-            </a>
-          </td>
-        </tr>
-      );
+      return [
+        vendorName,
+        customerName,
+        `$${obj.amount}`,
+        obj.date,
+        <div className="text-right">
+          <a
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              expenseActions.selfSelected(obj);
+              onEdit();
+            }}
+          >
+            <i className="fa fa-pencil-square-o" aria-hidden="true" />
+          </a>
+          {' '}
+          <a
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              expenseActions.deleteObject(obj.id);
+            }}
+          >
+            <i className="fa fa-trash-o" aria-hidden="true" />
+          </a>
+        </div>
+      ];
     };
 
     return (
       <div>
         <div className="clearfix">
-          <h1 className="hide-sm">
+          <h2 className="hide-sm">
             Expenses
-          </h1>
+          </h2>
+          <h3 className="show-sm">
+            Expenses
+          </h3>
           {errors.index && (
             <div className="background-red panel-body-small space-1 text-center text-contrast">
               {errors.index.message}
@@ -116,10 +117,14 @@ class ExpensesTable extends React.Component {
         </div>
 
         <div className={cx({ loading: loading.delete || loading.index })}>
-          <SimpleTable
+          <SimpleResponsiveTable
+            headers={TABLE_HEADERS}
             objects={expenses}
-            renderTableRow={renderTableRow}
-            tableHeaders={TABLE_HEADERS}
+            renderColumnsForRow={renderColumnsForRow}
+            widths={{
+              md: [4, 2, 2, 2, 2],
+              sm: [12, 8, 0, 0, 4],
+            }}
           />
         </div>
       </div>
