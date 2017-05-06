@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import jsSHA from 'jssha';
 
 import {

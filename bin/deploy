@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+def execute_command(command)
+  return unless system command
+end
+
+def report_action(text)
+  puts "\n==> #{text}"
+end
+
+report_action("Precompiling assets")
+execute_command("bundle exec rake assets:precompile RAILS_ENV=production")
+
+report_action("Pushing to GitHub")
+execute_command("git add .")
+execute_command("git commit -m \"[auto] Precompiled assets before deploy\"")
+execute_command("git push origin master")
+
+report_action("Deploying to Heroku")
+execute_command("git push heroku master")
