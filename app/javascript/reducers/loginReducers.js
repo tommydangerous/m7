@@ -10,13 +10,14 @@ import { logIn, logOut } from '../stores/appLocalStorage';
 import { combine } from '../utils/reducer';
 
 const RESET_STATE = {
+  error: null,
   loading: false,
-  password: '',
   session: null,
   user: null,
 };
 const INITIAL_STATE = combine(RESET_STATE, {
   email: '',
+  password: '',
 });
 
 export default function reducers(state = INITIAL_STATE, action) {
@@ -34,7 +35,7 @@ export default function reducers(state = INITIAL_STATE, action) {
 
   switch (type) {
     case LOGIN_FAILED: {
-      return combine(state, RESET_STATE);
+      return combine(combine(state, RESET_STATE), { error: 'Login failed, please try again' });
     }
     case LOGIN_RECEIVED: {
       const {
@@ -50,7 +51,7 @@ export default function reducers(state = INITIAL_STATE, action) {
       return combine(state, { session, user });
     }
     case LOGIN_REQUESTED: {
-      return combine(state, { loading: true });
+      return combine(state, { error: null, loading: true });
     }
     case LOGIN_VALUE_CHANGED: {
       const fields = { email, password };

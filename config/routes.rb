@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  root "sessions#login"
-
-  get "login", to: "sessions#login"
-
-  get "test", to: "pages#test"
-
-  resources :expenses, only: :index
-  resources :timesheets, only: :index
+  root "pages#index"
+  get "expenses", to: "pages#index"
+  get "login", to: "pages#index"
+  get "timesheets", to: "pages#index"
 end

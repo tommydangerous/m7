@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router-dom'
 import React from 'react';
 
 import { isLoggedIn } from '../../../../stores/appLocalStorage';
@@ -15,49 +16,68 @@ const mapDispatchToProps = dispatch => ({
   loginActions: bindActionCreators(loginActionCreators, dispatch),
 });
 
-function LoginApp({ login, loginActions, redirect_url }) {
-  const {
-    email,
-    loading,
-    password,
-  } = login;
-
-  if (isLoggedIn()) {
-    window.location = '/timesheets';
-    return <div />;
+class LoginApp extends React.Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (isLoggedIn()) {
+      this.props.history.push('/timesheets');
+    }
   }
 
-  return (
-    <div className="page-container">
-      <div className="row space-bottom-lg space-top-lg">
-        <div className="col-md-6 col-center">
-          <h1>Hello</h1>
+  render() {
+    const {
+      history,
+      login: {
+        email,
+        error,
+        loading,
+        password,
+      },
+      loginActions,
+    } = this.props;
 
-          <LoginForm
-            email={email}
-            loading={loading}
-            onInputChange={loginActions.updateInputValue}
-            onSubmit={loginActions.login}
-            password={password}
-          />
+    return (
+      <div className="page-container">
+        <div className="row space-bottom-lg space-top-lg">
+          <div className="col-md-6 col-center">
+            <div className="panel-body">
+              <h1>Hello</h1>
+
+              <LoginForm
+                email={email}
+                loading={loading}
+                onInputChange={loginActions.updateInputValue}
+                onSubmit={loginActions.login}
+                password={password}
+              />
+
+              {error && (
+                <p className="color-red space-top-sm">
+                  {error}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 LoginApp.propTypes = {
   email: PropTypes.string,
+  error: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   loading: PropTypes.bool,
   password: PropTypes.string,
-  redirect_url: PropTypes.string,
 };
 
 LoginApp.defaultProps = {
   email: '',
+  error: null,
   loading: false,
   password: '',
-  redirect_url: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginApp);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginApp));

@@ -1,4 +1,5 @@
 import { createGenericRequest } from './sharedActionCreators';
+import Api from '../api/Api';
 
 import {
   LOGIN_FAILED,
@@ -9,11 +10,15 @@ import {
 } from '../actions/loginActions';
 
 export function login(query) {
-  return createGenericRequest('POST', '/api/login', { query }, {
-    failedActionType: LOGIN_FAILED,
-    startedActionType: LOGIN_REQUESTED,
-    succeededActionType: LOGIN_RECEIVED,
-  })
+  return dispatch => {
+    dispatch(started());
+    return Promise.resolve(Api.request('POST', '/api/login', { query }))
+      .then(resp => resp.json())
+      .then(json => dispatch(succeeded(json)))
+      .catch(error => {
+        dispatch(failed(error));
+      });
+  };
 }
 
 export function logOut() {
@@ -28,4 +33,16 @@ export function updateInputValue(key, value) {
     key,
     value,
   };
+}
+
+function failed() {
+  return { type: LOGIN_FAILED };
+}
+
+function started() {
+  return { type: LOGIN_REQUESTED };
+}
+
+function succeeded(response) {
+  return { type: LOGIN_RECEIVED, response };
 }

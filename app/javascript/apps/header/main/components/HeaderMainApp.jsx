@@ -1,6 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
+import { withRouter } from 'react-router-dom'
 import cx from 'classnames';
 import React from 'react';
 
@@ -86,6 +88,7 @@ class HeaderMainApp extends React.Component {
 
   render() {
     const {
+      history,
       loginActions,
       timer,
       timerActions,
@@ -104,71 +107,82 @@ class HeaderMainApp extends React.Component {
     }
 
     return (
-      <div>
-        <ul className="nav pull-right list-unstyled">
-          <li className="pull-left">
-            <a
-              className="link-block link-reset"
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                timerActions.showModal();
-              }}
-            >
-              <i
-                className={cx('fa fa-clock-o', { 'color-green': !active, 'color-red': active })}
-                aria-hidden="true"
+      <div className="header--primary">
+        <header>
+          <ul className="nav pull-right list-unstyled">
+            <li className="pull-left">
+              <a
+                className="link-block link-reset"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  timerActions.showModal();
+                }}
+              >
+                <i
+                  className={cx('fa fa-clock-o', { 'color-green': !active, 'color-red': active })}
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
+
+            <li className="pull-left">
+              <Link
+                className="link-block link-reset"
+                to="/timesheets"
+              >
+                Time
+              </Link>
+            </li>
+
+            <li className="pull-left">
+              <Link
+                className="link-block link-reset"
+                to="/expenses"
+              >
+                Expenses
+              </Link>
+            </li>
+
+            <li className="pull-left">
+              <a
+                className="link-block link-reset"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  loginActions.logOut();
+                  history.push('/login');
+                }}
+              >
+                Log Out
+              </a>
+            </li>
+          </ul>
+
+          <Modal onClose={this.closeModal} visible={visible}>
+            {visible && !saved && (
+              <TimeTracker
+                onClickCancel={this.closeModal}
               />
-            </a>
-          </li>
+            )}
 
-          <li className="pull-left">
-            <a className="link-block link-reset" href="/timesheets">
-              Time
-            </a>
-          </li>
-
-          <li className="pull-left">
-            <a className="link-block link-reset" href="/expenses">
-              Expenses
-            </a>
-          </li>
-
-          <li className="pull-left">
-            <a
-              className="link-block link-reset"
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                loginActions.logOut();
-                window.location = '/login';
-              }}
-            >
-              Log Out
-            </a>
-          </li>
-        </ul>
-
-        <Modal onClose={this.closeModal} visible={visible}>
-          {visible && !saved && (
-            <TimeTracker
-              onClickCancel={this.closeModal}
-            />
-          )}
-
-          {visible && saved && (
-            <TimesheetForm
-              initialState={this.timesheetFormInitialState()}
-              onClickCancel={this.closeModal}
-            />
-          )}
-        </Modal>
+            {visible && saved && (
+              <TimesheetForm
+                initialState={this.timesheetFormInitialState()}
+                onClickCancel={this.closeModal}
+              />
+            )}
+          </Modal>
+        </header>
       </div>
     );
   }
 }
 
 HeaderMainApp.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   loginActions: PropTypes.object,
   user: PropTypes.object,
 };
@@ -178,4 +192,4 @@ HeaderMainApp.defaultProps = {
   user: {},
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderMainApp);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderMainApp));

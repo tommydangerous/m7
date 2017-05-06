@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'
 
 // Reducers
 import customerReducers from './customerReducers';
@@ -27,4 +28,5 @@ export default combineReducers({
   timer: timerReducers,
   timesheet: timesheetReducers,
   vendor: vendorReducers,
+  routing: routerReducer,
 });
