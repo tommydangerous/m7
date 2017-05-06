@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import cx from 'classnames';
+import moment from 'moment';
 import React from 'react';
 
 import { TABLE_HEADERS } from '../utils/constants';
@@ -15,8 +16,6 @@ import * as customerSelectors from '../../../../selectors/customerSelectors';
 import * as employeeSelectors from '../../../../selectors/employeeSelectors';
 import * as timesheetSelectors from '../../../../selectors/timesheetSelectors';
 import * as vendorSelectors from '../../../../selectors/vendorSelectors';
-
-import SimpleResponsiveTable from '../../../../components/SimpleResponsiveTable';
 
 import TimesheetShape from '../../../../shapes/TimesheetShape';
 
@@ -67,34 +66,76 @@ class TimesheetTable extends React.Component {
       vendorsById,
     } = this.props;
 
-    const renderColumnsForRow = obj => {
-      const customerName = (customersById[obj.customer_id] || {}).name;
-
+    const renderRow = obj => {
       let name;
       if (obj.type === 'Employee') {
         name = (employeesById[obj.employee_id] || {}).name;
       } else {
         name = (vendorsById[obj.employee_id] || {}).name;
       }
+      const customerName = (customersById[obj.customer_id] || {}).name;
+      const date = moment(obj.date);
+      const hours = Math.floor(obj.duration);
+      const minutes = Math.floor((obj.duration - hours) * 60);
+      const durationStrings = [];
 
-      return [
-        `${name} (${obj.type})`,
-        customerName,
-        obj.duration,
-        obj.date,
-        <div className="text-right">
-          <a
-            className="link-reset"
-            href="#"
-            onClick={e => {
-              e.preventDefault();
-              timesheetActions.deleteObject(obj.id);
-            }}
-          >
-            <i className="fa fa-trash-o" aria-hidden="true" />
-          </a>
-        </div>,
-      ];
+      if (hours >= 1) {
+        durationStrings.push(`${hours} HR`);
+      }
+      if (hours === 0 || minutes >= 1) {
+        durationStrings.push(`${minutes} MIN`);
+      }
+
+      return (
+        <div className="row space-2" key={obj.id}>
+          <div className="col-sm-12">
+            <div
+              className="panel panel-body link-hover"
+              onClick={() => {
+                onEdit();
+                timesheetActions.selfSelected(obj);
+              }}
+            >
+              <div className="row">
+                <div className="col-sm-8">
+                  <b className="text-muted text-tiny text-uppercase">
+                    {obj.type}
+                  </b>
+                  <h5>
+                    {name}
+                  </h5>
+                </div>
+
+                <div className="col-sm-4">
+                  <div className="pull-right text-muted text-center">
+                    <b className="text-tiny text-uppercase">
+                      {date.format('MMMM')}
+                    </b>
+                    <p>
+                      {date.format('D')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+              <div className="row space-top-2">
+                <div className="col-md-8 col-sm-12">
+                  {obj.description && obj.description}
+                  {!obj.description && (
+                    <i className="text-muted">
+                      No description
+                    </i>
+                  )}
+                </div>
+                <div className="col-md-4 col-sm-12 text-muted text-right-md text-tiny">
+                  {durationStrings.join(' ')} | {customerName}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     };
 
     return (
@@ -113,19 +154,7 @@ class TimesheetTable extends React.Component {
           )}
         </div>
         <div className={cx({ loading: loading.delete || loading.index })}>
-          <SimpleResponsiveTable
-            headers={TABLE_HEADERS}
-            objects={timesheets}
-            onClickRow={obj => {
-              timesheetActions.selfSelected(obj);
-              onEdit();
-            }}
-            renderColumnsForRow={renderColumnsForRow}
-            widths={{
-              md: [4, 3, 2, 2, 1],
-              sm: [12, 10, 0, 0, 2],
-            }}
-          />
+          {timesheets.map(obj => renderRow(obj))}
         </div>
       </div>
     );

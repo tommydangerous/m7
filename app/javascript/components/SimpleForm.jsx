@@ -367,7 +367,9 @@ export default class SimpleForm extends React.Component {
 
   render() {
     const {
+      children,
       loading,
+      submitFormButtonText,
     } = this.props;
 
     return (
@@ -381,7 +383,7 @@ export default class SimpleForm extends React.Component {
 
               <div className="panel-body">
                 {this.renderAllFields()}
-                {this.props.children}
+                {children}
               </div>
 
               <div className="panel-footer">
@@ -391,7 +393,7 @@ export default class SimpleForm extends React.Component {
                     className={cx("btn btn-primary", { loading: loading })}
                     disabled={loading}
                   >
-                    {this.props.submitFormButtonText ? this.props.submitFormButtonText : "Save"}
+                    {submitFormButtonText ? submitFormButtonText : "Save"}
                   </button>
                 </div>
               </div>

@@ -12,17 +12,26 @@
   .text-center-sm {
     text-align: center;
   }
+  .text-right-sm {
+    text-align: right;
+  }
 }
 
 @include screen-md {
   .text-center-md {
     text-align: center;
   }
+  .text-right-md {
+    text-align: right;
+  }
 }
 
 @include screen-lg {
   .text-center-lg {
     text-align: center;
+  }
+  .text-right-lg {
+    text-align: right;
   }
 }
 
@@ -58,4 +67,12 @@
 
 .text-normal-line-height {
   line-height: inherit;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-tiny {
+  font-size: $font-size-0;
 }

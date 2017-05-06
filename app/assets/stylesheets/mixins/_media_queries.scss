@@ -35,7 +35,10 @@
 
 // Medium
 @mixin screen-md {
-  @media(min-width: $min-width-medium) and (max-width: $min-width-large - 1) {
+  // @media(min-width: $min-width-medium) and (max-width: $min-width-large - 1) {
+  //   @content;
+  // }
+  @media(min-width: $min-width-medium) {
     @content;
   }
 }
