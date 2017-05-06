@@ -63,3 +63,4 @@ gem "flutie"
 gem "font-awesome-rails"
 gem "refills"
 gem "responders"
+gem "rails_12factor", group: :production
