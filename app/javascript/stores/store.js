@@ -15,6 +15,8 @@ const enhancer = compose(
   devToolsEnhancer(),
 );
 
-const store = createStore(rootReducer, {}, enhancer);
+if (!window.store) {
+  window.store = createStore(rootReducer, {}, enhancer);
+}
 
-export default store;
+export default window.store;

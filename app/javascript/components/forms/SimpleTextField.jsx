@@ -9,7 +9,10 @@ const propTypes = {
   onChangeInput: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   scale: PropTypes.number,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 const defaultProps = {

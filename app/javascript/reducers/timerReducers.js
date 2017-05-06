@@ -1,6 +1,8 @@
 import moment from 'moment';
 
 import {
+  TIMER_MODAL_HIDE,
+  TIMER_MODAL_SHOW,
   TIMER_PAUSE,
   TIMER_RESET,
   TIMER_SAVE,
@@ -29,7 +31,10 @@ const RESET_STATE = {
   saved: false,
   startTime: null,
 };
-const INITIAL_STATE = combine(RESET_STATE, getStateFromStorage());
+const INITIAL_STATE = combine(RESET_STATE, {
+  ...getStateFromStorage(),
+  visible: false,
+});
 
 export default function reducers(state = INITIAL_STATE, action) {
   const {
@@ -37,20 +42,17 @@ export default function reducers(state = INITIAL_STATE, action) {
   } = action;
 
   switch (type) {
+    case TIMER_MODAL_HIDE: {
+      return combine(state, { visible: false });
+    }
+    case TIMER_MODAL_SHOW: {
+      return combine(state, { visible: true });
+    }
     case TIMER_RESET: {
       resetTimer();
-      return combine(state, RESET_STATE);
+      return combine(combine(state, RESET_STATE), getStateFromStorage());
     }
     case TIMER_SAVE: {
-      // const {
-      //   endTime,
-      //   startTime,
-      // } = getStateFromStorage();
-      // const endDate = moment(parseInt(endTime));
-      // const endString = `${endDate.hours()}:${endDate.minutes()}`;
-      // const startDate = moment(parseInt(startTime));
-      // const startString = `${startDate.hours()}:${startDate.minutes()}`;
-      // console.log(startString, endString);
       return combine(state, { saved: true });
     }
     case TIMER_START: {
@@ -71,7 +73,7 @@ export default function reducers(state = INITIAL_STATE, action) {
       }
       saveTimer(data);
 
-      return combine(combine(state, RESET_STATE), getStateFromStorage());
+      return combine(state, getStateFromStorage());
     }
     case TIMER_PAUSE: {
       saveTimer({

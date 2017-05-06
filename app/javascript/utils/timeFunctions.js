@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function calculateDuration(startTime, endTime) {
   let hours = 0;
   let minutes = 0;

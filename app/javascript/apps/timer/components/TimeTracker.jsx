@@ -29,7 +29,7 @@ class TimeTracker extends React.Component {
 
     this.mounted = false;
     this.state = {
-      seconds: null,
+      seconds: 0,
     };
     this.timerInterval = null;
   }
@@ -89,25 +89,19 @@ class TimeTracker extends React.Component {
 
   renderHours() {
     const { seconds } = this.state;
-    if (seconds) {
-      return Math.floor(seconds / (60 * 60));
-    }
+    return Math.floor(seconds / (60 * 60));
   }
 
   renderMinutes() {
     const { seconds } = this.state;
-    if (seconds) {
-      const r = seconds - (this.renderHours() * 60 * 60);
-      return Math.floor(r / 60);
-    }
+    const r = seconds - (this.renderHours() * 60 * 60);
+    return Math.floor(r / 60);
   }
 
   renderSeconds() {
     const { seconds } = this.state;
-    if (seconds) {
-      const r = seconds - ((this.renderHours() * 60 * 60) + (this.renderMinutes() * 60));
-      return Math.floor(r);
-    }
+    const r = seconds - ((this.renderHours() * 60 * 60) + (this.renderMinutes() * 60));
+    return Math.floor(r);
   }
 
   render() {
@@ -136,7 +130,7 @@ class TimeTracker extends React.Component {
                 HOURS
               </p>
               <h2>
-                {startTime ? this.renderHours() : '00'}
+                {this.renderHours()}
               </h2>
             </div>
 
@@ -145,7 +139,7 @@ class TimeTracker extends React.Component {
                 MINUTES
               </p>
               <h2>
-                {startTime ? this.renderMinutes() : '00'}
+                {this.renderMinutes()}
               </h2>
             </div>
 
@@ -154,56 +148,64 @@ class TimeTracker extends React.Component {
                 SECONDS
               </p>
               <h2>
-                {startTime ? this.renderSeconds() : '00'}
+                {this.renderSeconds()}
               </h2>
             </div>
           </div>
         </div>
 
         <div className="panel-footer">
-          <div className="pull-left">
-            <a
-              className="btn"
-              href="#"
-              onClick={e => {
-                e.preventDefault();
-                onClickCancel();
-              }}
-            >
-              Close
-            </a>
-          </div>
+          <button
+            className={cx('btn pull-left', { 'link-disabled': active })}
+            disabled={active}
+            onClick={e => {
+              e.preventDefault();
+              timerActions.save();
+            }}
+          >
+            Save
+          </button>
 
-          <div>
-            {startTime && (
-              <button
-                className={cx('btn', { 'link-disabled': active })}
-                disabled={active}
-                onClick={e => {
-                  e.preventDefault();
-                  timerActions.save();
-                }}
-              >
-                Save
-              </button>
-            )}
+          <button
+            className={cx('btn', { 'btn-primary': !active })}
+            onClick={e => {
+              e.preventDefault();
+              if (active) {
+                this.stopTimer();
+                timerActions.pause();
+              } else {
+                this.startTimer();
+                timerActions.start();
+              }
+            }}
+          >
+            {active ? 'Pause' : 'Start'}
+          </button>
+        </div>
 
-            <button
-              className={cx('btn', { 'btn-primary': !active })}
-              onClick={e => {
-                e.preventDefault();
-                if (active) {
-                  this.stopTimer();
-                  timerActions.pause();
-                } else {
-                  this.startTimer();
-                  timerActions.start();
-                }
-              }}
-            >
-              {active ? 'Pause' : 'Start'}
-            </button>
-          </div>
+        <div className="panel-footer">
+          <button
+            className={cx('btn pull-left', { 'link-disabled': active })}
+            disabled={active}
+            onClick={e => {
+              e.preventDefault();
+              this.setState({ seconds: 0 });
+              timerActions.reset();
+            }}
+          >
+            Reset
+          </button>
+
+          <a
+            className="btn"
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              onClickCancel();
+            }}
+          >
+            Close
+          </a>
         </div>
       </div>
     );

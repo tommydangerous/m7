@@ -86,9 +86,9 @@ class TimesheetForm extends React.Component {
   render() {
     const {
       customers,
-      duration,
       employees,
       errors,
+      initialState,
       inventoryitems,
       loading,
       onClickCancel,
@@ -124,10 +124,10 @@ class TimesheetForm extends React.Component {
 
     return (
       <SimpleForm
-        duration={duration}
         error={errors.create ? errors.create.message : null}
         fields={fields}
         header="Add a new time"
+        initialState={initialState}
         loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={timesheeetActions.create}

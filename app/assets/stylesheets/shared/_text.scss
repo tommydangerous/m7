@@ -2,11 +2,11 @@
   text-align: center;
 }
 
-@include screen-xs {
-  .text-center-xs {
-    text-align: center;
-  }
-}
+// @include screen-xs {
+//   .text-center-xs {
+//     text-align: center;
+//   }
+// }
 
 @include screen-sm {
   .text-center-sm {

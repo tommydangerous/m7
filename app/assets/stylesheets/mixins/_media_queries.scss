@@ -1,19 +1,22 @@
 // Extra small
-@mixin screen-xs {
-  @media(min-width: $min-width-extra-small) and (max-width: $min-width-small) {
-    @content;
-  }
-}
+// @mixin screen-xs {
+//   @media(min-width: $min-width-extra-small) and (max-width: $min-width-small) {
+//     @content;
+//   }
+// }
 
-@mixin screen-xs-min {
-  @media(min-width: $min-width-extra-small) {
-    @content;
-  }
-}
+// @mixin screen-xs-min {
+//   @media(min-width: $min-width-extra-small) {
+//     @content;
+//   }
+// }
 
 // Small
 @mixin screen-sm {
-  @media(min-width: $min-width-small) and (max-width: $min-width-medium) {
+  // @media(min-width: $min-width-small) and (max-width: $min-width-medium) {
+  //   @content;
+  // }
+  @media(max-width: $min-width-medium) {
     @content;
   }
 }

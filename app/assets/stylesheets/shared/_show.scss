@@ -1,11 +1,11 @@
-.show-xs {
-  @include screen-xs {
-    display: block;
-  }
-  @include screen-sm-min {
-    display: none;
-  }
-}
+// .show-xs {
+//   @include screen-xs {
+//     display: block;
+//   }
+//   @include screen-sm-min {
+//     display: none;
+//   }
+// }
 
 .show-sm {
   @include screen-sm-max {

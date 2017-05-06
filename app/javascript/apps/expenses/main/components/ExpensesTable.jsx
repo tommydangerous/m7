@@ -104,14 +104,16 @@ class ExpensesTable extends React.Component {
 
     return (
       <div>
-        <h1 className="hide-sm">
-          Expenses
-        </h1>
-        {errors.index && (
-          <div className="background-red panel-body-small space-1 text-center text-contrast">
-            {errors.index.message}
-          </div>
-        )}
+        <div className="clearfix">
+          <h1 className="hide-sm">
+            Expenses
+          </h1>
+          {errors.index && (
+            <div className="background-red panel-body-small space-1 text-center text-contrast">
+              {errors.index.message}
+            </div>
+          )}
+        </div>
 
         <div className={cx({ loading: loading.delete || loading.index })}>
           <SimpleTable

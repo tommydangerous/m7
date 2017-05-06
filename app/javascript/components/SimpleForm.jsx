@@ -15,12 +15,17 @@ import SimpleTextField from './forms/SimpleTextField';
 export default class SimpleForm extends React.Component {
   constructor(props) {
     super(props);
+
+    const initState = this.props.initialState || {};
+
     this.onAutocompleteLocation = this.onAutocompleteLocation.bind(this);
     this.onChangeInput = this.onChangeInput.bind(this);
     this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
     this.onClickCancel = this.onClickCancel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
-    this.state = this.initialState();
+    this.state = this.initialState({
+      ...initState,
+    });
   }
 
   initialState(opts = {}) {
@@ -67,7 +72,7 @@ export default class SimpleForm extends React.Component {
   onChangeInput(e) {
     const newState = {};
     newState[e.target.name] = e.target.value;
-    this.setState(newState, () => console.log(this.state));
+    this.setState(newState);
   }
 
   onClickCancel(e) {
@@ -352,7 +357,7 @@ export default class SimpleForm extends React.Component {
         onChangeInput={this.onChangeInput}
         placeholder={hash.placeholder}
         scale={hash.scale}
-        value={this.props[hash.name]}
+        value={this.state[hash.name] || this.props[hash.name]}
       />
     );
   }

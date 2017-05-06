@@ -1,10 +1,16 @@
 import {
+  TIMER_MODAL_HIDE,
+  TIMER_MODAL_SHOW,
   TIMER_PAUSE,
   TIMER_RESET,
   TIMER_SAVE,
   TIMER_START,
   TIMER_UNSAVE,
 } from '../actions/timerActions';
+
+export function hideModal() {
+  return { type: TIMER_MODAL_HIDE };
+}
 
 export function pause() {
   return {
@@ -22,6 +28,10 @@ export function save() {
   return {
     type: TIMER_SAVE,
   };
+}
+
+export function showModal() {
+  return { type: TIMER_MODAL_SHOW };
 }
 
 export function start() {

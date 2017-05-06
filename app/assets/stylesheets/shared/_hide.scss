@@ -2,14 +2,14 @@
   display: none;
 }
 
-.hide-xs {
-  @include screen-xs {
-    display: none;
-  }
-  @include screen-sm-min {
-    display: block;
-  }
-}
+// .hide-xs {
+//   @include screen-xs {
+//     display: none;
+//   }
+//   @include screen-sm-min {
+//     display: block;
+//   }
+// }
 
 .hide-sm {
   @include screen-sm-max {

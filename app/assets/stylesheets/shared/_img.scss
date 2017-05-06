@@ -74,9 +74,9 @@ img {
   overflow: hidden;
 }
 
-@include screen-xs {
-  @include image-sizing(xs);
-}
+// @include screen-xs {
+//   @include image-sizing(xs);
+// }
 
 @include screen-sm {
   @include image-sizing(sm);

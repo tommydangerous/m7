@@ -30,7 +30,7 @@ function LoginApp({ login, loginActions, redirect_url }) {
   return (
     <div className="page-container">
       <div className="row space-bottom-lg space-top-lg">
-        <div className="col-sm-6 col-center">
+        <div className="col-md-6 col-center">
           <h1>Hello</h1>
 
           <LoginForm
