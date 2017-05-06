@@ -148,7 +148,20 @@ class ExpenseForm extends React.Component {
             }
           }}
           submitFormButtonText="Update"
-        />
+        >
+          <a
+            className="link-reset"
+            href="#"
+            onClick={e => {
+              e.preventDefault();
+              expenseActions.deleteObject(expense.id);
+              onClickCancel();
+            }}
+            title="Delete"
+          >
+            <i className="fa fa-trash-o color-red" aria-hidden="true" />
+          </a>
+        </FormWithStore>
       );
     }
 
