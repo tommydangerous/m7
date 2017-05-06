@@ -210,6 +210,7 @@ class HeaderMainApp extends React.Component {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
+                          headerActions.hide();
                           loginActions.logOut();
                           history.push('/login');
                         }}
