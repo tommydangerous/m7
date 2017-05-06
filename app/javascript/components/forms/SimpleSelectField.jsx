@@ -39,6 +39,7 @@ class SimpleSelectField extends React.Component {
         <option
           disabled={selectOption.disabled && this.props.defaultValue}
           key={selectOption.value}
+          type={selectOption.type}
           value={selectOption.value}
         >
           {selectOption.text}

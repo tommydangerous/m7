@@ -40,6 +40,32 @@ const selectOptions = array => {
   }].concat(arr);
 };
 
+const selectOptionsForEmployeesAndVendors = opts => {
+  const {
+    employees,
+    vendors,
+  } = opts;
+  const arr1 = employees.map(obj => {
+    return {
+      text: obj.name,
+      type: 'Employee',
+      value: obj.id,
+    };
+  });
+  const arr2 = vendors.map(obj => {
+    return {
+      text: obj.name,
+      type: 'Vendor',
+      value: obj.id,
+    };
+  });
+  return [{
+    disabled: true,
+    text: '',
+    value: '',
+  }].concat(arr1).concat(arr2);
+};
+
 const mapStateToProps = state => ({
   customers: customerSelectors.sortedObjects(state),
   employees: employeeSelectors.sortedObjects(state),
@@ -59,6 +85,14 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class TimesheetForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      employeeOrVendorType: null,
+    };
+  }
+
   componentDidMount() {
     const {
       customerActions,
@@ -96,18 +130,28 @@ class TimesheetForm extends React.Component {
       timesheeetActions,
       vendors,
     } = this.props;
+    const {
+      employeeOrVendorType,
+    } = this.state;
 
     const fields = { ...CREATE_FORM_FIELDS };
     fields.customer_id.options = selectOptions(customers);
-    fields.employee_id.options = selectOptions(employees);
     fields.inventory_item_id.options = selectOptions(inventoryitems);
-    fields.vendor_id.options = selectOptions(vendors);
 
     if (timesheet) {
+      const label = timesheet.type;
+      const options = label === 'Employee' ? selectOptions(employees) : selectOptions(vendors);
       return (
         <FormWithStore
           error={errors.update ? errors.update.message : null}
-          fields={fields}
+          fields={{
+            ...fields,
+            employee_id: {
+              ...fields.employee_id,
+              label,
+              options,
+            },
+          }}
           header="Edit time"
           loading={loading.update}
           onClickCancel={onClickCancel}
@@ -138,9 +182,23 @@ class TimesheetForm extends React.Component {
     return (
       <SimpleForm
         error={errors.create ? errors.create.message : null}
-        fields={fields}
+        fields={{
+          ...fields,
+          employee_id: {
+            ...fields.employee_id,
+            onChangeParser: e => {
+              const type = e.target.options[e.target.selectedIndex].attributes.type.value;
+              this.setState({ employeeOrVendorType: type });
+              return e;
+            },
+            options: selectOptionsForEmployeesAndVendors({
+              employees,
+              vendors,
+            }),
+          },
+        }}
         header="Add a new time"
-        initialState={initialState}
+        initialState={{ ...initialState, type: employeeOrVendorType }}
         loading={loading.create}
         onClickCancel={onClickCancel}
         onSubmitForm={timesheeetActions.create}

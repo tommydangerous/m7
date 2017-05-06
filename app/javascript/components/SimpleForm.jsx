@@ -28,6 +28,21 @@ export default class SimpleForm extends React.Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.initialState) {
+      let changed = 0;
+      Object.keys(nextProps.initialState).forEach(key => {
+        if (nextProps.initialState[key] !== this.props.initialState[key]) {
+          changed++;
+        }
+      });
+
+      if (changed >= 1) {
+        this.setState({ ...nextProps.initialState });
+      }
+    }
+  }
+
   initialState(opts = {}) {
     const { error } = this.props;
     const state = {
@@ -270,6 +285,9 @@ export default class SimpleForm extends React.Component {
           case 'checkbox':
             field = _this.renderCheckbox(hash);
             break;
+          case 'hidden':
+            field = _this.renderHiddenField(hash);
+            break;
           case 'location':
             field = _this.renderLocationField(hash);
             break;
@@ -315,6 +333,16 @@ export default class SimpleForm extends React.Component {
     }
   }
 
+  renderHiddenField(hash) {
+    return (
+      <input
+        name={hash.name}
+        type="hidden"
+        value={hash.value}
+      />
+    );
+  }
+
   renderLocationField(hash) {
     const id = (new Date() + Math.random()).split(' ').join('');
     return (
@@ -333,7 +361,13 @@ export default class SimpleForm extends React.Component {
       <SimpleSelectField
         defaultValue={this.props[hash.name]}
         name={hash.name}
-        onChangeSelect={this.onChangeInput}
+        onChangeSelect={e => {
+          let el = e;
+          if (hash.onChangeParser) {
+            el = hash.onChangeParser(e);
+          }
+          this.onChangeInput(el);
+        }}
         options={hash.options}
       />
     );

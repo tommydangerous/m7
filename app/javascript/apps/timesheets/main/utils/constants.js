@@ -15,7 +15,7 @@ export const CREATE_FORM_FIELDS = {
   },
   customer_id: {
     label: 'Customer',
-    order: 1,
+    order: [1, 0],
     required: true,
     type: 'select',
   },
@@ -43,7 +43,7 @@ export const CREATE_FORM_FIELDS = {
     type: 'textarea',
   },
   employee_id: {
-    label: 'Employee',
+    label: 'Employee or vendor',
     order: [0, 0],
     type: 'select',
   },
@@ -63,7 +63,7 @@ export const CREATE_FORM_FIELDS = {
   },
   inventory_item_id: {
     label: 'Inventory item',
-    order: 2,
+    order: [1, 1],
     required: true,
     type: 'select',
   },
@@ -72,11 +72,6 @@ export const CREATE_FORM_FIELDS = {
     order: [4, 0],
     placeholder: 'HH:MM',
     type: 'text',
-  },
-  vendor_id: {
-    label: 'Vendor',
-    order: [0, 1],
-    type: 'select',
   },
 };
 

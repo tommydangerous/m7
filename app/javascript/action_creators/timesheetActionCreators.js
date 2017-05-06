@@ -7,18 +7,18 @@ import { roundNumber } from '../utils/numberTransformers';
 
 const updatePayloadParser = payload => {
   let duration = payload.duration;
-  let employeeId;
+  // let employeeId;
   let endTime = payload.end_time;
   let startTime = payload.start_time;
-  let type;
+  // let type;
 
-  if (!!payload.employee_id) {
-    employeeId = payload.employee_id;
-    type = 'Employee';
-  } else if (!!payload.vendor_id) {
-    employeeId = payload.vendor_id;
-    type = 'Vendor';
-  }
+  // if (!!payload.employee_id) {
+  //   employeeId = payload.employee_id;
+  //   type = 'Employee';
+  // } else if (!!payload.vendor_id) {
+  //   employeeId = payload.vendor_id;
+  //   type = 'Vendor';
+  // }
 
   if (duration) {
     if (!endTime && !startTime) {
@@ -38,24 +38,23 @@ const updatePayloadParser = payload => {
       ...payload,
       billable: payload.billable ? 'Yes' : 'No',
       duration,
-      employee_id: employeeId,
+      // employee_id: employeeId,
       end_time: endTime,
       start_time: startTime,
-      type,
+      // type,
     },
   };
 };
 
 const createPayloadParser = payload => {
-  const data = updatePayloadParser(payload);
-  let duration = data.TimeEntry.duration;
+  const data = updatePayloadParser(payload).TimeEntry;
   if (payload.hours_off_duty) {
-    duration -= payload.hours_off_duty;
+    data.duration = data.duration - payload.hours_off_duty;
   }
+
   return {
     TimeEntry: {
-      ...data.TimeEntry,
-      duration,
+      ...data,
     },
   };
 };
