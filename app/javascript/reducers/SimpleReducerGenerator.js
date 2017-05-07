@@ -23,8 +23,6 @@ const DEFAULT_RESET_STATE = {
   loading: { ...DEFAULT_RESET_STATES },
 };
 
-const getTempId = () => (new Date).getTime();
-
 const updateSuccesses = (key, dict) => {
   const updated = { ...dict };
   updated[key] += 1;
@@ -96,7 +94,7 @@ export default function generate(opts = {}) {
     }
     case CREATE.SUCCEEDED: {
       const obj = responseParsers.create(response);
-      const id = obj.id || getTempId();
+      const id = obj.id;
 
       let updatedPayload = payload;
       if (saveParsers.create) {
@@ -174,7 +172,7 @@ export default function generate(opts = {}) {
       return combine(state, { loading: { ...loading, update: true } });
     }
     case UPDATE.SUCCEEDED: {
-      const id = payload.id || getTempId();
+      const id = payload.id;
       const currentObj = objectsByIdUpdated[objectsByIdKey][id];
       let updatedObj = {};
       if (responseParsers.update) {

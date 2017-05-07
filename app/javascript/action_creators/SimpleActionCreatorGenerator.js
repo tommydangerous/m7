@@ -30,6 +30,9 @@ export default function generate(opts = {}) {
       if (payloadParsers.create) {
         dict = payloadParsers.create(dict);
       }
+      if (!!dict.id) {
+        delete dict.id;
+      }
       return createGenericRequest('POST', `/api/${pluralName}/add`, { payload: dict }, {
         failedActionType: actions.CREATE.FAILED,
         startedActionType: actions.CREATE.STARTED,
@@ -66,7 +69,10 @@ export default function generate(opts = {}) {
       if (payloadParsers.update) {
         dict = payloadParsers.update(dict);
       }
-      dict.id = id;
+      if (!!dict.id) {
+        delete dict.id;
+      }
+      // dict.id = id;
       return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: dict }, {
         failedActionType: actions.UPDATE.FAILED,
         startedActionType: actions.UPDATE.STARTED,
