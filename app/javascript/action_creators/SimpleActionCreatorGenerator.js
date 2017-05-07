@@ -69,15 +69,17 @@ export default function generate(opts = {}) {
       if (payloadParsers.update) {
         dict = payloadParsers.update(dict);
       }
-      if (!!dict.id) {
-        delete dict.id;
+      // TEMPORARY SAFEGUARD
+      if (id >= 2**32) {
+        throw 'Invalid ID';
+      } else {
+        dict.id = id;
+        return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: dict }, {
+          failedActionType: actions.UPDATE.FAILED,
+          startedActionType: actions.UPDATE.STARTED,
+          succeededActionType: actions.UPDATE.SUCCEEDED,
+        });
       }
-      // dict.id = id;
-      return createGenericRequest('POST', `/api/${pluralName}/edit`, { payload: dict }, {
-        failedActionType: actions.UPDATE.FAILED,
-        startedActionType: actions.UPDATE.STARTED,
-        succeededActionType: actions.UPDATE.SUCCEEDED,
-      });
     },
   };
 }
