@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "http://localhost:8080/packs/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 491);
+/******/ 	return __webpack_require__(__webpack_require__.s = 492);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -5910,10 +5910,6 @@ var DEFAULT_RESET_STATE = {
   loading: Object.assign({}, DEFAULT_RESET_STATES)
 };
 
-var getTempId = function getTempId() {
-  return new Date().getTime();
-};
-
 var updateSuccesses = function updateSuccesses(key, dict) {
   var updated = Object.assign({}, dict);
   updated[key] += 1;
@@ -5980,7 +5976,7 @@ function generate() {
     case CREATE.SUCCEEDED:
       {
         var obj = responseParsers.create(response);
-        var id = obj.id || getTempId();
+        var id = obj.id;
 
         var updatedPayload = payload;
         if (saveParsers.create) {
@@ -6045,7 +6041,7 @@ function generate() {
       }
     case UPDATE.SUCCEEDED:
       {
-        var _id = payload.id || getTempId();
+        var _id = payload.id;
         var currentObj = objectsByIdUpdated[objectsByIdKey][_id];
         var updatedObj = {};
         if (responseParsers.update) {
@@ -7575,23 +7571,23 @@ module.exports = React;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MemoryRouter__ = __webpack_require__(/*! ./MemoryRouter */ 453);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MemoryRouter__ = __webpack_require__(/*! ./MemoryRouter */ 456);
 /* unused harmony reexport MemoryRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Prompt__ = __webpack_require__(/*! ./Prompt */ 454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Prompt__ = __webpack_require__(/*! ./Prompt */ 457);
 /* unused harmony reexport Prompt */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Redirect__ = __webpack_require__(/*! ./Redirect */ 455);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Redirect__ = __webpack_require__(/*! ./Redirect */ 458);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_2__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(/*! ./Route */ 408);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(/*! ./Route */ 409);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(/*! ./Router */ 371);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(/*! ./StaticRouter */ 456);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(/*! ./StaticRouter */ 459);
 /* unused harmony reexport StaticRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(/*! ./Switch */ 457);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(/*! ./Switch */ 460);
 /* unused harmony reexport Switch */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__matchPath__ = __webpack_require__(/*! ./matchPath */ 372);
 /* unused harmony reexport matchPath */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__withRouter__ = __webpack_require__(/*! ./withRouter */ 458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__withRouter__ = __webpack_require__(/*! ./withRouter */ 461);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_8__withRouter__["a"]; });
 
 
@@ -9641,7 +9637,7 @@ module.exports = canDefineProperty;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_constants__ = __webpack_require__(/*! ../utils/constants */ 66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_constants__ = __webpack_require__(/*! ../utils/constants */ 65);
 /* harmony export (immutable) */ __webpack_exports__["b"] = getCurrentSession;
 /* harmony export (immutable) */ __webpack_exports__["h"] = getCurrentUser;
 /* harmony export (immutable) */ __webpack_exports__["c"] = getTimer;
@@ -12127,6 +12123,29 @@ module.exports = g;
 
 /***/ }),
 /* 65 */
+/* exports provided: LOCAL_STORAGE_KEY_SESSION, LOCAL_STORAGE_KEY_TIMER_ACTIVE, LOCAL_STORAGE_KEY_TIMER_END, LOCAL_STORAGE_KEY_TIMER_START, LOCAL_STORAGE_KEY_USER, OFFLINE_MODE */
+/* exports used: LOCAL_STORAGE_KEY_SESSION, LOCAL_STORAGE_KEY_USER, LOCAL_STORAGE_KEY_TIMER_ACTIVE, LOCAL_STORAGE_KEY_TIMER_END, LOCAL_STORAGE_KEY_TIMER_START, OFFLINE_MODE */
+/*!*******************************************!*\
+  !*** ./app/javascript/utils/constants.js ***!
+  \*******************************************/
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOCAL_STORAGE_KEY_SESSION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOCAL_STORAGE_KEY_TIMER_ACTIVE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LOCAL_STORAGE_KEY_TIMER_END; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LOCAL_STORAGE_KEY_TIMER_START; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOCAL_STORAGE_KEY_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return OFFLINE_MODE; });
+var LOCAL_STORAGE_KEY_SESSION = 'SESSION';
+var LOCAL_STORAGE_KEY_TIMER_ACTIVE = 'TIMER_ACTIVE';
+var LOCAL_STORAGE_KEY_TIMER_END = 'TIMER_END';
+var LOCAL_STORAGE_KEY_TIMER_START = 'TIMER_START';
+var LOCAL_STORAGE_KEY_USER = 'USER';
+var OFFLINE_MODE = false;
+
+/***/ }),
+/* 66 */
 /* unknown exports provided */
 /* exports used: default */
 /*!*******************************!*\
@@ -12184,29 +12203,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 	}
 }());
 
-
-/***/ }),
-/* 66 */
-/* exports provided: LOCAL_STORAGE_KEY_SESSION, LOCAL_STORAGE_KEY_TIMER_ACTIVE, LOCAL_STORAGE_KEY_TIMER_END, LOCAL_STORAGE_KEY_TIMER_START, LOCAL_STORAGE_KEY_USER, OFFLINE_MODE */
-/* exports used: LOCAL_STORAGE_KEY_SESSION, LOCAL_STORAGE_KEY_USER, LOCAL_STORAGE_KEY_TIMER_ACTIVE, LOCAL_STORAGE_KEY_TIMER_END, LOCAL_STORAGE_KEY_TIMER_START, OFFLINE_MODE */
-/*!*******************************************!*\
-  !*** ./app/javascript/utils/constants.js ***!
-  \*******************************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LOCAL_STORAGE_KEY_SESSION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LOCAL_STORAGE_KEY_TIMER_ACTIVE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LOCAL_STORAGE_KEY_TIMER_END; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LOCAL_STORAGE_KEY_TIMER_START; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LOCAL_STORAGE_KEY_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return OFFLINE_MODE; });
-var LOCAL_STORAGE_KEY_SESSION = 'SESSION';
-var LOCAL_STORAGE_KEY_TIMER_ACTIVE = 'TIMER_ACTIVE';
-var LOCAL_STORAGE_KEY_TIMER_END = 'TIMER_END';
-var LOCAL_STORAGE_KEY_TIMER_START = 'TIMER_START';
-var LOCAL_STORAGE_KEY_USER = 'USER';
-var OFFLINE_MODE = false;
 
 /***/ }),
 /* 67 */
@@ -28637,11 +28633,13 @@ var TIMER_UNSAVE = 'TIMER_UNSAVE';
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jssha__ = __webpack_require__(/*! jssha */ 402);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jssha___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jssha__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__constants__ = __webpack_require__(/*! ./constants */ 230);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_bootstrapData__ = __webpack_require__(/*! ../utils/bootstrapData */ 400);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stores_appLocalStorage__ = __webpack_require__(/*! ../stores/appLocalStorage */ 41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_whatwg_fetch__ = __webpack_require__(/*! whatwg-fetch */ 404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_whatwg_fetch__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jssha__ = __webpack_require__(/*! jssha */ 402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jssha___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jssha__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants__ = __webpack_require__(/*! ./constants */ 230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_bootstrapData__ = __webpack_require__(/*! ../utils/bootstrapData */ 400);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__ = __webpack_require__(/*! ../stores/appLocalStorage */ 41);
 var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
@@ -28657,11 +28655,12 @@ var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "sym
 
 
 
-var BASE_URI = __WEBPACK_IMPORTED_MODULE_1__constants__["b" /* SCHEME */] + '://' + __WEBPACK_IMPORTED_MODULE_1__constants__["c" /* BASE_PATH */];
+
+var BASE_URI = __WEBPACK_IMPORTED_MODULE_2__constants__["b" /* SCHEME */] + '://' + __WEBPACK_IMPORTED_MODULE_2__constants__["c" /* BASE_PATH */];
 
 var generateSignature = function generateSignature(pathWithQuery) {
-  var stringForDigest = '' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_bootstrapData__["a" /* getApiData */])('privateKey') + pathWithQuery;
-  var shaObj = new __WEBPACK_IMPORTED_MODULE_0_jssha___default.a('SHA-512', 'TEXT');
+  var stringForDigest = '' + __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_bootstrapData__["a" /* getApiData */])('privateKey') + pathWithQuery;
+  var shaObj = new __WEBPACK_IMPORTED_MODULE_1_jssha___default.a('SHA-512', 'TEXT');
   shaObj.update(stringForDigest);
   return shaObj.getHash('HEX');
 };
@@ -28707,7 +28706,7 @@ var transformPayload = function transformPayload(payload) {
         query = opts.query;
 
     var queryParams = {
-      api_key: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_bootstrapData__["a" /* getApiData */])('clientKey')
+      api_key: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_bootstrapData__["a" /* getApiData */])('clientKey')
     };
 
     var data = {
@@ -28718,15 +28717,15 @@ var transformPayload = function transformPayload(payload) {
       method: method
     };
 
-    if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__stores_appLocalStorage__["a" /* isLoggedIn */])()) {
-      var _getCurrentSession = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__stores_appLocalStorage__["b" /* getCurrentSession */])(),
+    if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])()) {
+      var _getCurrentSession = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["b" /* getCurrentSession */])(),
           sessionId = _getCurrentSession.session_id,
           sessionName = _getCurrentSession.session_name;
 
       queryParams = Object.assign({}, queryParams);
     }
 
-    if (method === __WEBPACK_IMPORTED_MODULE_1__constants__["d" /* POST */]) {
+    if (method === __WEBPACK_IMPORTED_MODULE_2__constants__["d" /* POST */]) {
       if (payload) {
         data.body = $.param(Object.assign({}, transformPayload(payload)));
       }
@@ -28750,8 +28749,7 @@ var transformPayload = function transformPayload(payload) {
     var pathWithQuery = endpoint + '?' + urlParamsSortedByKey;
     var signature = generateSignature(pathWithQuery);
 
-    var request = new Request('' + BASE_URI + pathWithQuery + '&signature=' + signature, data);
-    return fetch(request);
+    return fetch('' + BASE_URI + pathWithQuery + '&signature=' + signature, data);
   }
 });
 
@@ -28775,11 +28773,11 @@ exports.locationsAreEqual = exports.createLocation = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _resolvePathname = __webpack_require__(/*! resolve-pathname */ 459);
+var _resolvePathname = __webpack_require__(/*! resolve-pathname */ 462);
 
 var _resolvePathname2 = _interopRequireDefault(_resolvePathname);
 
-var _valueEqual = __webpack_require__(/*! value-equal */ 460);
+var _valueEqual = __webpack_require__(/*! value-equal */ 463);
 
 var _valueEqual2 = _interopRequireDefault(_valueEqual);
 
@@ -28909,40 +28907,7 @@ function createGenericRequest(httpMethod, endpoint, data) {
 
 /***/ }),
 /* 242 */,
-/* 243 */
-/* exports provided: mock */
-/* exports used: mock */
-/*!*****************************************!*\
-  !*** ./app/javascript/mocks/expense.js ***!
-  \*****************************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = mock;
-var randomInteger = function randomInteger() {
-  return Math.round(Math.random() * 10000) + 1;
-};
-var randomFloat = function randomFloat() {
-  return Math.round(randomInteger() * 100) / 100;
-};
-
-function mock() {
-  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return Object.assign({
-    amount: randomFloat(),
-    customer_id: randomInteger(),
-    date: '2017-12-25',
-    description: 'Swords and guns for everyone.',
-    expenses_grouping_id: randomInteger(),
-    id: randomInteger(),
-    qb_account_id: randomInteger(),
-    qb_class_id: randomInteger(),
-    vendor_id: randomInteger()
-  }, opts);
-}
-
-/***/ }),
+/* 243 */,
 /* 244 */
 /* exports provided: default */
 /* exports used: default */
@@ -29024,55 +28989,37 @@ function reducers(state, action) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_constants__ = __webpack_require__(/*! ../utils/constants */ 66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SimpleReducerGenerator__ = __webpack_require__(/*! ./SimpleReducerGenerator */ 14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mocks_expense__ = __webpack_require__(/*! ../mocks/expense */ 243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SimpleReducerGenerator__ = __webpack_require__(/*! ./SimpleReducerGenerator */ 14);
 /* harmony export (immutable) */ __webpack_exports__["a"] = reducers;
 
 
-
-
-
-var initialExpensesById = {};
-
-if (__WEBPACK_IMPORTED_MODULE_0__utils_constants__["f" /* OFFLINE_MODE */]) {
-  [__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__mocks_expense__["a" /* mock */])(), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__mocks_expense__["a" /* mock */])(), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__mocks_expense__["a" /* mock */])(), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__mocks_expense__["a" /* mock */])(), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__mocks_expense__["a" /* mock */])()].forEach(function (expense) {
-    initialExpensesById[expense.id] = expense;
-  });
-}
-
 var RESET_STATE = {};
-var INITIAL_STATE = {
-  expensesById: initialExpensesById
-};
+var INITIAL_STATE = {};
 
-var singleObjectParser = function singleObjectParser(obj) {
-  return Object.assign({}, obj, {
-    billable: obj.billable.toLowerCase() === 'yes',
-    id: parseInt(obj.id)
+var singleObjectParser = function singleObjectParser(resp) {
+  var ExpenseEntry = resp.ExpenseEntry;
+
+  return Object.assign({}, ExpenseEntry, {
+    billable: ExpenseEntry.billable.toLowerCase() === 'yes'
   });
 };
 
 function reducers(state, action) {
-  return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__SimpleReducerGenerator__["a" /* default */])({
+  return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__SimpleReducerGenerator__["a" /* default */])({
     action: action,
     name: 'expenses',
     responseParsers: {
       index: function index(resp) {
         return resp.ExpenseEntries.map(function (obj) {
-          return singleObjectParser(obj.ExpenseEntry);
+          return singleObjectParser(obj);
         });
       },
       create: singleObjectParser,
       update: singleObjectParser
     },
     saveParsers: {
-      create: function create(payload) {
-        return singleObjectParser(payload.ExpenseEntry);
-      },
-      update: function update(payload) {
-        return singleObjectParser(payload.ExpenseEntry);
-      }
+      create: singleObjectParser,
+      update: singleObjectParser
     },
     singularName: 'expense',
     states: {
@@ -29590,13 +29537,7 @@ function reducers(state, action) {
         });
       },
       create: singleObjectParser,
-      update: function update(resp) {
-        var id = resp.id;
-
-        return Object.assign({}, singleObjectParser(resp), {
-          id: id
-        });
-      }
+      update: singleObjectParser
     },
     saveParsers: {
       create: singleObjectParser,
@@ -42511,7 +42452,7 @@ Router.childContextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(/*! path-to-regexp */ 440);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(/*! path-to-regexp */ 443);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -45371,7 +45312,7 @@ f[d]>>>24));for(c=0;24>c;c+=1){k=B("SHA3-");for(d=0;5>d;d+=1)g[d]=A(b[d][0],b[d]
 
 var React = __webpack_require__(/*! react */ 5),
     PropTypes = __webpack_require__(/*! prop-types */ 7),
-    withSideEffect = __webpack_require__(/*! react-side-effect */ 426);
+    withSideEffect = __webpack_require__(/*! react-side-effect */ 427);
 
 function reducePropsToState(propsList) {
   var innermostProps = propsList[propsList.length - 1];
@@ -45410,8 +45351,479 @@ module.exports = withSideEffect(
 
 
 /***/ }),
-/* 404 */,
-/* 405 */
+/* 404 */
+/* unknown exports provided */
+/*!*********************************!*\
+  !*** ./~/whatwg-fetch/fetch.js ***!
+  \*********************************/
+/***/ (function(module, exports) {
+
+(function(self) {
+  'use strict';
+
+  if (self.fetch) {
+    return
+  }
+
+  var support = {
+    searchParams: 'URLSearchParams' in self,
+    iterable: 'Symbol' in self && 'iterator' in Symbol,
+    blob: 'FileReader' in self && 'Blob' in self && (function() {
+      try {
+        new Blob()
+        return true
+      } catch(e) {
+        return false
+      }
+    })(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  }
+
+  if (support.arrayBuffer) {
+    var viewClasses = [
+      '[object Int8Array]',
+      '[object Uint8Array]',
+      '[object Uint8ClampedArray]',
+      '[object Int16Array]',
+      '[object Uint16Array]',
+      '[object Int32Array]',
+      '[object Uint32Array]',
+      '[object Float32Array]',
+      '[object Float64Array]'
+    ]
+
+    var isDataView = function(obj) {
+      return obj && DataView.prototype.isPrototypeOf(obj)
+    }
+
+    var isArrayBufferView = ArrayBuffer.isView || function(obj) {
+      return obj && viewClasses.indexOf(Object.prototype.toString.call(obj)) > -1
+    }
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name)
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value)
+    }
+    return value
+  }
+
+  // Build a destructive iterator for the value list
+  function iteratorFor(items) {
+    var iterator = {
+      next: function() {
+        var value = items.shift()
+        return {done: value === undefined, value: value}
+      }
+    }
+
+    if (support.iterable) {
+      iterator[Symbol.iterator] = function() {
+        return iterator
+      }
+    }
+
+    return iterator
+  }
+
+  function Headers(headers) {
+    this.map = {}
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value)
+      }, this)
+    } else if (Array.isArray(headers)) {
+      headers.forEach(function(header) {
+        this.append(header[0], header[1])
+      }, this)
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name])
+      }, this)
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name)
+    value = normalizeValue(value)
+    var oldValue = this.map[name]
+    this.map[name] = oldValue ? oldValue+','+value : value
+  }
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)]
+  }
+
+  Headers.prototype.get = function(name) {
+    name = normalizeName(name)
+    return this.has(name) ? this.map[name] : null
+  }
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  }
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = normalizeValue(value)
+  }
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    for (var name in this.map) {
+      if (this.map.hasOwnProperty(name)) {
+        callback.call(thisArg, this.map[name], name, this)
+      }
+    }
+  }
+
+  Headers.prototype.keys = function() {
+    var items = []
+    this.forEach(function(value, name) { items.push(name) })
+    return iteratorFor(items)
+  }
+
+  Headers.prototype.values = function() {
+    var items = []
+    this.forEach(function(value) { items.push(value) })
+    return iteratorFor(items)
+  }
+
+  Headers.prototype.entries = function() {
+    var items = []
+    this.forEach(function(value, name) { items.push([name, value]) })
+    return iteratorFor(items)
+  }
+
+  if (support.iterable) {
+    Headers.prototype[Symbol.iterator] = Headers.prototype.entries
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result)
+      }
+      reader.onerror = function() {
+        reject(reader.error)
+      }
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader()
+    var promise = fileReaderReady(reader)
+    reader.readAsArrayBuffer(blob)
+    return promise
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader()
+    var promise = fileReaderReady(reader)
+    reader.readAsText(blob)
+    return promise
+  }
+
+  function readArrayBufferAsText(buf) {
+    var view = new Uint8Array(buf)
+    var chars = new Array(view.length)
+
+    for (var i = 0; i < view.length; i++) {
+      chars[i] = String.fromCharCode(view[i])
+    }
+    return chars.join('')
+  }
+
+  function bufferClone(buf) {
+    if (buf.slice) {
+      return buf.slice(0)
+    } else {
+      var view = new Uint8Array(buf.byteLength)
+      view.set(new Uint8Array(buf))
+      return view.buffer
+    }
+  }
+
+  function Body() {
+    this.bodyUsed = false
+
+    this._initBody = function(body) {
+      this._bodyInit = body
+      if (!body) {
+        this._bodyText = ''
+      } else if (typeof body === 'string') {
+        this._bodyText = body
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body
+      } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+        this._bodyText = body.toString()
+      } else if (support.arrayBuffer && support.blob && isDataView(body)) {
+        this._bodyArrayBuffer = bufferClone(body.buffer)
+        // IE 10-11 can't handle a DataView body.
+        this._bodyInit = new Blob([this._bodyArrayBuffer])
+      } else if (support.arrayBuffer && (ArrayBuffer.prototype.isPrototypeOf(body) || isArrayBufferView(body))) {
+        this._bodyArrayBuffer = bufferClone(body)
+      } else {
+        throw new Error('unsupported BodyInit type')
+      }
+
+      if (!this.headers.get('content-type')) {
+        if (typeof body === 'string') {
+          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+        } else if (this._bodyBlob && this._bodyBlob.type) {
+          this.headers.set('content-type', this._bodyBlob.type)
+        } else if (support.searchParams && URLSearchParams.prototype.isPrototypeOf(body)) {
+          this.headers.set('content-type', 'application/x-www-form-urlencoded;charset=UTF-8')
+        }
+      }
+    }
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyArrayBuffer) {
+          return Promise.resolve(new Blob([this._bodyArrayBuffer]))
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      }
+
+      this.arrayBuffer = function() {
+        if (this._bodyArrayBuffer) {
+          return consumed(this) || Promise.resolve(this._bodyArrayBuffer)
+        } else {
+          return this.blob().then(readBlobAsArrayBuffer)
+        }
+      }
+    }
+
+    this.text = function() {
+      var rejected = consumed(this)
+      if (rejected) {
+        return rejected
+      }
+
+      if (this._bodyBlob) {
+        return readBlobAsText(this._bodyBlob)
+      } else if (this._bodyArrayBuffer) {
+        return Promise.resolve(readArrayBufferAsText(this._bodyArrayBuffer))
+      } else if (this._bodyFormData) {
+        throw new Error('could not read FormData body as text')
+      } else {
+        return Promise.resolve(this._bodyText)
+      }
+    }
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      }
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    }
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase()
+    return (methods.indexOf(upcased) > -1) ? upcased : method
+  }
+
+  function Request(input, options) {
+    options = options || {}
+    var body = options.body
+
+    if (input instanceof Request) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read')
+      }
+      this.url = input.url
+      this.credentials = input.credentials
+      if (!options.headers) {
+        this.headers = new Headers(input.headers)
+      }
+      this.method = input.method
+      this.mode = input.mode
+      if (!body && input._bodyInit != null) {
+        body = input._bodyInit
+        input.bodyUsed = true
+      }
+    } else {
+      this.url = String(input)
+    }
+
+    this.credentials = options.credentials || this.credentials || 'omit'
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers)
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET')
+    this.mode = options.mode || this.mode || null
+    this.referrer = null
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(body)
+  }
+
+  Request.prototype.clone = function() {
+    return new Request(this, { body: this._bodyInit })
+  }
+
+  function decode(body) {
+    var form = new FormData()
+    body.trim().split('&').forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=')
+        var name = split.shift().replace(/\+/g, ' ')
+        var value = split.join('=').replace(/\+/g, ' ')
+        form.append(decodeURIComponent(name), decodeURIComponent(value))
+      }
+    })
+    return form
+  }
+
+  function parseHeaders(rawHeaders) {
+    var headers = new Headers()
+    rawHeaders.split(/\r?\n/).forEach(function(line) {
+      var parts = line.split(':')
+      var key = parts.shift().trim()
+      if (key) {
+        var value = parts.join(':').trim()
+        headers.append(key, value)
+      }
+    })
+    return headers
+  }
+
+  Body.call(Request.prototype)
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {}
+    }
+
+    this.type = 'default'
+    this.status = 'status' in options ? options.status : 200
+    this.ok = this.status >= 200 && this.status < 300
+    this.statusText = 'statusText' in options ? options.statusText : 'OK'
+    this.headers = new Headers(options.headers)
+    this.url = options.url || ''
+    this._initBody(bodyInit)
+  }
+
+  Body.call(Response.prototype)
+
+  Response.prototype.clone = function() {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    })
+  }
+
+  Response.error = function() {
+    var response = new Response(null, {status: 0, statusText: ''})
+    response.type = 'error'
+    return response
+  }
+
+  var redirectStatuses = [301, 302, 303, 307, 308]
+
+  Response.redirect = function(url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code')
+    }
+
+    return new Response(null, {status: status, headers: {location: url}})
+  }
+
+  self.Headers = Headers
+  self.Request = Request
+  self.Response = Response
+
+  self.fetch = function(input, init) {
+    return new Promise(function(resolve, reject) {
+      var request = new Request(input, init)
+      var xhr = new XMLHttpRequest()
+
+      xhr.onload = function() {
+        var options = {
+          status: xhr.status,
+          statusText: xhr.statusText,
+          headers: parseHeaders(xhr.getAllResponseHeaders() || '')
+        }
+        options.url = 'responseURL' in xhr ? xhr.responseURL : options.headers.get('X-Request-URL')
+        var body = 'response' in xhr ? xhr.response : xhr.responseText
+        resolve(new Response(body, options))
+      }
+
+      xhr.onerror = function() {
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.ontimeout = function() {
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.open(request.method, request.url, true)
+
+      if (request.credentials === 'include') {
+        xhr.withCredentials = true
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob'
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value)
+      })
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+    })
+  }
+  self.fetch.polyfill = true
+})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ }),
+/* 405 */,
+/* 406 */
 /* unknown exports provided */
 /* all exports used */
 /*!*******************************!*\
@@ -45477,7 +45889,7 @@ var isExtraneousPopstateEvent = exports.isExtraneousPopstateEvent = function isE
 };
 
 /***/ }),
-/* 406 */
+/* 407 */
 /* exports provided: default */
 /* exports used: default */
 /*!***************************************!*\
@@ -45585,7 +45997,7 @@ Link.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Link);
 
 /***/ }),
-/* 407 */
+/* 408 */
 /* exports provided: BrowserRouter, HashRouter, Link, MemoryRouter, NavLink, Prompt, Redirect, Route, Router, StaticRouter, Switch, matchPath, withRouter */
 /* exports used: withRouter */
 /*!****************************************!*\
@@ -45594,31 +46006,31 @@ Link.contextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(/*! ./BrowserRouter */ 441);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(/*! ./BrowserRouter */ 444);
 /* unused harmony reexport BrowserRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(/*! ./HashRouter */ 442);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(/*! ./HashRouter */ 445);
 /* unused harmony reexport HashRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(/*! ./Link */ 406);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(/*! ./Link */ 407);
 /* unused harmony reexport Link */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(/*! ./MemoryRouter */ 443);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(/*! ./MemoryRouter */ 446);
 /* unused harmony reexport MemoryRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(/*! ./NavLink */ 444);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(/*! ./NavLink */ 447);
 /* unused harmony reexport NavLink */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(/*! ./Prompt */ 445);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(/*! ./Prompt */ 448);
 /* unused harmony reexport Prompt */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(/*! ./Redirect */ 446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(/*! ./Redirect */ 449);
 /* unused harmony reexport Redirect */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(/*! ./Route */ 447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(/*! ./Route */ 450);
 /* unused harmony reexport Route */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(/*! ./Router */ 448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(/*! ./Router */ 451);
 /* unused harmony reexport Router */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(/*! ./StaticRouter */ 449);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(/*! ./StaticRouter */ 452);
 /* unused harmony reexport StaticRouter */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(/*! ./Switch */ 450);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(/*! ./Switch */ 453);
 /* unused harmony reexport Switch */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(/*! ./matchPath */ 451);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(/*! ./matchPath */ 454);
 /* unused harmony reexport matchPath */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(/*! ./withRouter */ 452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(/*! ./withRouter */ 455);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
 
 
@@ -45648,7 +46060,7 @@ Link.contextTypes = {
 
 
 /***/ }),
-/* 408 */
+/* 409 */
 /* exports provided: default */
 /* exports used: default */
 /*!************************************!*\
@@ -45797,7 +46209,6 @@ Route.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Route);
 
 /***/ }),
-/* 409 */,
 /* 410 */,
 /* 411 */,
 /* 412 */,
@@ -45809,7 +46220,8 @@ Route.childContextTypes = {
 /* 418 */,
 /* 419 */,
 /* 420 */,
-/* 421 */
+/* 421 */,
+/* 422 */
 /* unknown exports provided */
 /* all exports used */
 /*!**************************!*\
@@ -45861,7 +46273,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 422 */
+/* 423 */
 /* unknown exports provided */
 /* all exports used */
 /*!**************************************!*\
@@ -46009,7 +46421,7 @@ module.exports = getNative;
 
 
 /***/ }),
-/* 423 */
+/* 424 */
 /* unknown exports provided */
 /* all exports used */
 /*!***************************************!*\
@@ -46249,7 +46661,7 @@ module.exports = isArguments;
 
 
 /***/ }),
-/* 424 */
+/* 425 */
 /* unknown exports provided */
 /* all exports used */
 /*!***********************************!*\
@@ -46440,7 +46852,7 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 425 */
+/* 426 */
 /* unknown exports provided */
 /* all exports used */
 /*!********************************!*\
@@ -46456,9 +46868,9 @@ module.exports = isArray;
  * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <https://lodash.com/license>
  */
-var getNative = __webpack_require__(/*! lodash._getnative */ 422),
-    isArguments = __webpack_require__(/*! lodash.isarguments */ 423),
-    isArray = __webpack_require__(/*! lodash.isarray */ 424);
+var getNative = __webpack_require__(/*! lodash._getnative */ 423),
+    isArguments = __webpack_require__(/*! lodash.isarguments */ 424),
+    isArray = __webpack_require__(/*! lodash.isarray */ 425);
 
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
@@ -46687,7 +47099,7 @@ module.exports = keys;
 
 
 /***/ }),
-/* 426 */
+/* 427 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************!*\
@@ -46710,11 +47122,11 @@ var _react = __webpack_require__(/*! react */ 5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _exenv = __webpack_require__(/*! exenv */ 421);
+var _exenv = __webpack_require__(/*! exenv */ 422);
 
 var _exenv2 = _interopRequireDefault(_exenv);
 
-var _shallowequal = __webpack_require__(/*! shallowequal */ 427);
+var _shallowequal = __webpack_require__(/*! shallowequal */ 428);
 
 var _shallowequal2 = _interopRequireDefault(_shallowequal);
 
@@ -46822,7 +47234,7 @@ module.exports = function withSideEffect(reducePropsToState, handleStateChangeOn
 };
 
 /***/ }),
-/* 427 */
+/* 428 */
 /* unknown exports provided */
 /* all exports used */
 /*!*****************************************!*\
@@ -46833,7 +47245,7 @@ module.exports = function withSideEffect(reducePropsToState, handleStateChangeOn
 "use strict";
 
 
-var fetchKeys = __webpack_require__(/*! lodash.keys */ 425);
+var fetchKeys = __webpack_require__(/*! lodash.keys */ 426);
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 
@@ -46881,7 +47293,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 };
 
 /***/ }),
-/* 428 */
+/* 429 */
 /* exports provided: login, logOut, updateInputValue */
 /* all exports used */
 /*!***************************************************************!*\
@@ -46942,7 +47354,6 @@ function succeeded(response) {
 }
 
 /***/ }),
-/* 429 */,
 /* 430 */,
 /* 431 */
 /* unknown exports provided */
@@ -46977,7 +47388,7 @@ var _createTransitionManager = __webpack_require__(/*! ./createTransitionManager
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(/*! ./DOMUtils */ 405);
+var _DOMUtils = __webpack_require__(/*! ./DOMUtils */ 406);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47294,7 +47705,7 @@ var _createTransitionManager = __webpack_require__(/*! ./createTransitionManager
 
 var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
 
-var _DOMUtils = __webpack_require__(/*! ./DOMUtils */ 405);
+var _DOMUtils = __webpack_require__(/*! ./DOMUtils */ 406);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47783,147 +48194,462 @@ exports.default = createMemoryHistory;
 /* 437 */,
 /* 438 */,
 /* 439 */,
-/* 440 */
+/* 440 */,
+/* 441 */,
+/* 442 */
+/* unknown exports provided */
+/* all exports used */
+/*!****************************!*\
+  !*** ./~/isarray/index.js ***!
+  \****************************/
+/***/ (function(module, exports) {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+/* 443 */
 /* unknown exports provided */
 /* exports used: default */
 /*!***********************************!*\
   !*** ./~/path-to-regexp/index.js ***!
   \***********************************/
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+var isarray = __webpack_require__(/*! isarray */ 442)
 
 /**
- * Expose `pathtoRegexp`.
+ * Expose `pathToRegexp`.
  */
-
-module.exports = pathtoRegexp;
-
-/**
- * Match matching groups in a regular expression.
- */
-var MATCHING_GROUP_REGEXP = /\((?!\?)/g;
+module.exports = pathToRegexp
+module.exports.parse = parse
+module.exports.compile = compile
+module.exports.tokensToFunction = tokensToFunction
+module.exports.tokensToRegExp = tokensToRegExp
 
 /**
- * Normalize the given path string,
- * returning a regular expression.
+ * The main path matching regexp utility.
  *
- * An empty array should be passed,
- * which will contain the placeholder
- * key names. For example "/user/:id" will
- * then contain ["id"].
- *
- * @param  {String|RegExp|Array} path
- * @param  {Array} keys
- * @param  {Object} options
- * @return {RegExp}
- * @api private
+ * @type {RegExp}
  */
+var PATH_REGEXP = new RegExp([
+  // Match escaped characters that would otherwise appear in future matches.
+  // This allows the user to escape special characters that won't transform.
+  '(\\\\.)',
+  // Match Express-style parameters and un-named parameters with a prefix
+  // and optional suffixes. Matches appear as:
+  //
+  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+].join('|'), 'g')
 
-function pathtoRegexp(path, keys, options) {
-  options = options || {};
-  keys = keys || [];
-  var strict = options.strict;
-  var end = options.end !== false;
-  var flags = options.sensitive ? '' : 'i';
-  var extraOffset = 0;
-  var keysOffset = keys.length;
-  var i = 0;
-  var name = 0;
-  var m;
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse (str, options) {
+  var tokens = []
+  var key = 0
+  var index = 0
+  var path = ''
+  var defaultDelimiter = options && options.delimiter || '/'
+  var res
 
-  if (path instanceof RegExp) {
-    while (m = MATCHING_GROUP_REGEXP.exec(path.source)) {
-      keys.push({
-        name: name++,
-        optional: false,
-        offset: m.index
-      });
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0]
+    var escaped = res[1]
+    var offset = res.index
+    path += str.slice(index, offset)
+    index = offset + m.length
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1]
+      continue
     }
 
-    return path;
-  }
+    var next = str[index]
+    var prefix = res[2]
+    var name = res[3]
+    var capture = res[4]
+    var group = res[5]
+    var modifier = res[6]
+    var asterisk = res[7]
 
-  if (Array.isArray(path)) {
-    // Map array parts into regexps and return their source. We also pass
-    // the same keys and options instance into every generation to get
-    // consistent matching groups before we join the sources together.
-    path = path.map(function (value) {
-      return pathtoRegexp(value, keys, options).source;
-    });
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path)
+      path = ''
+    }
 
-    return new RegExp('(?:' + path.join('|') + ')', flags);
-  }
+    var partial = prefix != null && next != null && next !== prefix
+    var repeat = modifier === '+' || modifier === '*'
+    var optional = modifier === '?' || modifier === '*'
+    var delimiter = res[2] || defaultDelimiter
+    var pattern = capture || group
 
-  path = ('^' + path + (strict ? '' : path[path.length - 1] === '/' ? '?' : '/?'))
-    .replace(/\/\(/g, '/(?:')
-    .replace(/([\/\.])/g, '\\$1')
-    .replace(/(\\\/)?(\\\.)?:(\w+)(\(.*?\))?(\*)?(\?)?/g, function (match, slash, format, key, capture, star, optional, offset) {
-      slash = slash || '';
-      format = format || '';
-      capture = capture || '([^\\/' + format + ']+?)';
-      optional = optional || '';
-
-      keys.push({
-        name: key,
-        optional: !!optional,
-        offset: offset + extraOffset
-      });
-
-      var result = ''
-        + (optional ? '' : slash)
-        + '(?:'
-        + format + (optional ? slash : '') + capture
-        + (star ? '((?:[\\/' + format + '].+?)?)' : '')
-        + ')'
-        + optional;
-
-      extraOffset += result.length - match.length;
-
-      return result;
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
     })
-    .replace(/\*/g, function (star, index) {
-      var len = keys.length
+  }
 
-      while (len-- > keysOffset && keys[len].offset > index) {
-        keys[len].offset += 3; // Replacement length minus asterisk length.
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index)
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path)
+  }
+
+  return tokens
+}
+
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile (str, options) {
+  return tokensToFunction(parse(str, options))
+}
+
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
+}
+
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction (tokens) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length)
+
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (typeof tokens[i] === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
+    }
+  }
+
+  return function (obj, opts) {
+    var path = ''
+    var data = obj || {}
+    var options = opts || {}
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i]
+
+      if (typeof token === 'string') {
+        path += token
+
+        continue
       }
 
-      return '(.*)';
-    });
+      var value = data[token.name]
+      var segment
 
-  // This is a workaround for handling unnamed matching groups.
-  while (m = MATCHING_GROUP_REGEXP.exec(path)) {
-    var escapeCount = 0;
-    var index = m.index;
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix
+          }
 
-    while (path.charAt(--index) === '\\') {
-      escapeCount++;
+          continue
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined')
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty')
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j])
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment
+        }
+
+        continue
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+      }
+
+      path += token.prefix + segment
     }
 
-    // It's possible to escape the bracket.
-    if (escapeCount % 2 === 1) {
-      continue;
-    }
+    return path
+  }
+}
 
-    if (keysOffset + i === keys.length || keys[keysOffset + i].offset > m.index) {
-      keys.splice(keysOffset + i, 0, {
-        name: name++, // Unnamed matching groups must be consistently linear.
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString (str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup (group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1')
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys (re, keys) {
+  re.keys = keys
+  return re
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags (options) {
+  return options.sensitive ? '' : 'i'
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp (path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g)
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
         optional: false,
-        offset: m.index
-      });
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      })
     }
-
-    i++;
   }
 
-  // If the path is non-ending, match until the end or a slash.
-  path += (end ? '$' : (path[path.length - 1] === '/' ? '' : '(?=\\/|$)'));
+  return attachKeys(path, keys)
+}
 
-  return new RegExp(path, flags);
-};
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp (path, keys, options) {
+  var parts = []
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source)
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
+
+  return attachKeys(regexp, keys)
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp (path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options)
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  var strict = options.strict
+  var end = options.end !== false
+  var route = ''
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
+
+    if (typeof token === 'string') {
+      route += escapeString(token)
+    } else {
+      var prefix = escapeString(token.prefix)
+      var capture = '(?:' + token.pattern + ')'
+
+      keys.push(token)
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*'
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?'
+        } else {
+          capture = prefix + '(' + capture + ')?'
+        }
+      } else {
+        capture = prefix + '(' + capture + ')'
+      }
+
+      route += capture
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/')
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
+  }
+
+  if (end) {
+    route += '$'
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp (path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+  }
+
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+}
 
 
 /***/ }),
-/* 441 */
+/* 444 */
 /* exports provided: default */
 /*!************************************************!*\
   !*** ./~/react-router-dom/es/BrowserRouter.js ***!
@@ -47987,7 +48713,7 @@ BrowserRouter.propTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (BrowserRouter);
 
 /***/ }),
-/* 442 */
+/* 445 */
 /* exports provided: default */
 /*!*********************************************!*\
   !*** ./~/react-router-dom/es/HashRouter.js ***!
@@ -48050,7 +48776,7 @@ HashRouter.propTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (HashRouter);
 
 /***/ }),
-/* 443 */
+/* 446 */
 /* exports provided: default */
 /*!***********************************************!*\
   !*** ./~/react-router-dom/es/MemoryRouter.js ***!
@@ -48063,7 +48789,7 @@ HashRouter.propTypes = {
 
 
 /***/ }),
-/* 444 */
+/* 447 */
 /* exports provided: default */
 /*!******************************************!*\
   !*** ./~/react-router-dom/es/NavLink.js ***!
@@ -48076,7 +48802,7 @@ HashRouter.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(/*! prop-types */ 7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__(/*! react-router */ 24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(/*! ./Link */ 406);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(/*! ./Link */ 407);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -48144,7 +48870,7 @@ NavLink.defaultProps = {
 /* unused harmony default export */ var _unused_webpack_default_export = (NavLink);
 
 /***/ }),
-/* 445 */
+/* 448 */
 /* exports provided: default */
 /*!*****************************************!*\
   !*** ./~/react-router-dom/es/Prompt.js ***!
@@ -48157,7 +48883,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 446 */
+/* 449 */
 /* exports provided: default */
 /*!*******************************************!*\
   !*** ./~/react-router-dom/es/Redirect.js ***!
@@ -48170,7 +48896,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 447 */
+/* 450 */
 /* exports provided: default */
 /*!****************************************!*\
   !*** ./~/react-router-dom/es/Route.js ***!
@@ -48183,7 +48909,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 448 */
+/* 451 */
 /* exports provided: default */
 /*!*****************************************!*\
   !*** ./~/react-router-dom/es/Router.js ***!
@@ -48196,7 +48922,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 449 */
+/* 452 */
 /* exports provided: default */
 /*!***********************************************!*\
   !*** ./~/react-router-dom/es/StaticRouter.js ***!
@@ -48209,7 +48935,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 450 */
+/* 453 */
 /* exports provided: default */
 /*!*****************************************!*\
   !*** ./~/react-router-dom/es/Switch.js ***!
@@ -48222,7 +48948,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 451 */
+/* 454 */
 /* exports provided: default */
 /*!********************************************!*\
   !*** ./~/react-router-dom/es/matchPath.js ***!
@@ -48235,7 +48961,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 452 */
+/* 455 */
 /* exports provided: default */
 /* exports used: default */
 /*!*********************************************!*\
@@ -48249,7 +48975,7 @@ NavLink.defaultProps = {
 
 
 /***/ }),
-/* 453 */
+/* 456 */
 /* exports provided: default */
 /*!*******************************************!*\
   !*** ./~/react-router/es/MemoryRouter.js ***!
@@ -48313,7 +49039,7 @@ MemoryRouter.propTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (MemoryRouter);
 
 /***/ }),
-/* 454 */
+/* 457 */
 /* exports provided: default */
 /*!*************************************!*\
   !*** ./~/react-router/es/Prompt.js ***!
@@ -48403,7 +49129,7 @@ Prompt.contextTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (Prompt);
 
 /***/ }),
-/* 455 */
+/* 458 */
 /* exports provided: default */
 /* exports used: default */
 /*!***************************************!*\
@@ -48494,7 +49220,7 @@ Redirect.contextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Redirect);
 
 /***/ }),
-/* 456 */
+/* 459 */
 /* exports provided: default */
 /*!*******************************************!*\
   !*** ./~/react-router/es/StaticRouter.js ***!
@@ -48674,7 +49400,7 @@ StaticRouter.childContextTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (StaticRouter);
 
 /***/ }),
-/* 457 */
+/* 460 */
 /* exports provided: default */
 /*!*************************************!*\
   !*** ./~/react-router/es/Switch.js ***!
@@ -48764,7 +49490,7 @@ Switch.propTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (Switch);
 
 /***/ }),
-/* 458 */
+/* 461 */
 /* exports provided: default */
 /* exports used: default */
 /*!*****************************************!*\
@@ -48779,7 +49505,7 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(/*! hoist-non-react-statics */ 231);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(/*! ./Route */ 408);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(/*! ./Route */ 409);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -48814,7 +49540,7 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 459 */
+/* 462 */
 /* unknown exports provided */
 /* all exports used */
 /*!*************************************!*\
@@ -48895,7 +49621,7 @@ var resolvePathname = function resolvePathname(to) {
 module.exports = resolvePathname;
 
 /***/ }),
-/* 460 */
+/* 463 */
 /* unknown exports provided */
 /* all exports used */
 /*!********************************!*\
@@ -48946,9 +49672,6 @@ var valueEqual = function valueEqual(a, b) {
 exports.default = valueEqual;
 
 /***/ }),
-/* 461 */,
-/* 462 */,
-/* 463 */,
 /* 464 */,
 /* 465 */,
 /* 466 */,
@@ -48958,7 +49681,8 @@ exports.default = valueEqual;
 /* 470 */,
 /* 471 */,
 /* 472 */,
-/* 473 */
+/* 473 */,
+/* 474 */
 /* exports provided: default */
 /* exports used: default */
 /*!********************************************************************!*\
@@ -48971,14 +49695,14 @@ exports.default = valueEqual;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__(/*! react-redux */ 31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(/*! prop-types */ 7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(/*! react-router-dom */ 407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(/*! react-router-dom */ 408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_document_title__ = __webpack_require__(/*! react-document-title */ 403);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_document_title___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_document_title__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react__ = __webpack_require__(/*! react */ 5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__stores_appLocalStorage__ = __webpack_require__(/*! ../../../../stores/appLocalStorage */ 41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__action_creators_loginActionCreators__ = __webpack_require__(/*! ../../../../action_creators/loginActionCreators */ 428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LoginForm__ = __webpack_require__(/*! ./LoginForm */ 474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__action_creators_loginActionCreators__ = __webpack_require__(/*! ../../../../action_creators/loginActionCreators */ 429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__LoginForm__ = __webpack_require__(/*! ./LoginForm */ 475);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49099,7 +49823,7 @@ LoginApp.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* withRouter */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_react_redux__["a" /* connect */])(mapStateToProps, mapDispatchToProps)(LoginApp)));
 
 /***/ }),
-/* 474 */
+/* 475 */
 /* exports provided: default */
 /* exports used: default */
 /*!*********************************************************************!*\
@@ -49110,7 +49834,7 @@ LoginApp.defaultProps = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types__ = __webpack_require__(/*! prop-types */ 7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(/*! classnames */ 65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames__ = __webpack_require__(/*! classnames */ 66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react__ = __webpack_require__(/*! react */ 5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
@@ -49191,7 +49915,6 @@ LoginForm.propTypes = {
 };
 
 /***/ }),
-/* 475 */,
 /* 476 */,
 /* 477 */,
 /* 478 */,
@@ -49200,7 +49923,8 @@ LoginForm.propTypes = {
 /* 481 */,
 /* 482 */,
 /* 483 */,
-/* 484 */
+/* 484 */,
+/* 485 */
 /* unknown exports provided */
 /* all exports used */
 /*!******************************************************!*\
@@ -49213,7 +49937,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(/*! react */ 5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_rendering__ = __webpack_require__(/*! ../../../utils/rendering */ 260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginApp__ = __webpack_require__(/*! ./components/LoginApp */ 473);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_LoginApp__ = __webpack_require__(/*! ./components/LoginApp */ 474);
 
 
 
@@ -49223,13 +49947,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils_rendering__["a" /* renderAppInContainer */])(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__components_LoginApp__["a" /* default */], null));
 
 /***/ }),
-/* 485 */,
 /* 486 */,
 /* 487 */,
 /* 488 */,
 /* 489 */,
 /* 490 */,
-/* 491 */
+/* 491 */,
+/* 492 */
 /* unknown exports provided */
 /* all exports used */
 /*!************************************************!*\
@@ -49237,7 +49961,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__utils_rendering__["a" /* rend
   \************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! apps/sessions/login */ 484);
+__webpack_require__(/*! apps/sessions/login */ 485);
 
 /***/ })
 /******/ ]);

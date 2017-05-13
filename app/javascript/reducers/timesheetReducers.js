@@ -18,15 +18,7 @@ export default function reducers(state, action) {
     responseParsers: {
       index: resp => resp.TimeEntries.map(obj => singleObjectParser(obj)),
       create: singleObjectParser,
-      update: resp => {
-        const {
-          id,
-        } = resp;
-        return {
-          ...singleObjectParser(resp),
-          id,
-        };
-      },
+      update: singleObjectParser,
     },
     saveParsers: {
       create: singleObjectParser,

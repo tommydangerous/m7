@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "http://localhost:8080/packs/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 486);
+/******/ 	return __webpack_require__(__webpack_require__.s = 487);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 486:
+/***/ 487:
 /* unknown exports provided */
 /* all exports used */
 /*!*********************************************!*\

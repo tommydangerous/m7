@@ -1,10 +1,18 @@
 {
-  "application.js": "/packs/application-9ed7ee2ba3d45e122542.js",
-  "expenses/main.js": "/packs/expenses/main-3dd6618ca1bb13bcb5ae.js",
-  "header/main.js": "/packs/header/main-ac2571e0063ddcbd7d4b.js",
-  "pages/index.js": "/packs/pages/index-2b3da6d82bd1960da167.js",
-  "pages/test.css": "/packs/pages/test-23c279eb677796390afc.css",
-  "pages/test.js": "/packs/pages/test-39ac0b5825f32523d8f9.js",
-  "sessions/login.js": "/packs/sessions/login-658d402dc2508da919b8.js",
-  "timesheets/main.js": "/packs/timesheets/main-a3a623ae25696d2baba4.js"
+  "application.js": "http://localhost:8080/packs/application.js",
+  "application.js.map": "http://localhost:8080/packs/application.js.map",
+  "expenses/main.js": "http://localhost:8080/packs/expenses/main.js",
+  "expenses/main.js.map": "http://localhost:8080/packs/expenses/main.js.map",
+  "header/main.js": "http://localhost:8080/packs/header/main.js",
+  "header/main.js.map": "http://localhost:8080/packs/header/main.js.map",
+  "pages/index.js": "http://localhost:8080/packs/pages/index.js",
+  "pages/index.js.map": "http://localhost:8080/packs/pages/index.js.map",
+  "pages/test.css": "http://localhost:8080/packs/pages/test.css",
+  "pages/test.css.map": "http://localhost:8080/packs/pages/test.css.map",
+  "pages/test.js": "http://localhost:8080/packs/pages/test.js",
+  "pages/test.js.map": "http://localhost:8080/packs/pages/test.js.map",
+  "sessions/login.js": "http://localhost:8080/packs/sessions/login.js",
+  "sessions/login.js.map": "http://localhost:8080/packs/sessions/login.js.map",
+  "timesheets/main.js": "http://localhost:8080/packs/timesheets/main.js",
+  "timesheets/main.js.map": "http://localhost:8080/packs/timesheets/main.js.map"
 }

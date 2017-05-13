@@ -1,26 +1,13 @@
-import { OFFLINE_MODE } from '../utils/constants';
 import SimpleReducerGenerator from './SimpleReducerGenerator';
 
-import { mock } from '../mocks/expense';
-
-const initialExpensesById = {};
-
-if (OFFLINE_MODE) {
-  [mock(), mock(), mock(), mock(), mock()].forEach(expense => {
-    initialExpensesById[expense.id] = expense;
-  });
-}
-
 const RESET_STATE = {};
-const INITIAL_STATE = {
-  expensesById: initialExpensesById,
-};
+const INITIAL_STATE = {};
 
-const singleObjectParser = obj => {
+const singleObjectParser = resp => {
+  const { ExpenseEntry } = resp;
   return {
-    ...obj,
-    billable: obj.billable.toLowerCase() === 'yes',
-    id: parseInt(obj.id),
+    ...ExpenseEntry,
+    billable: ExpenseEntry.billable.toLowerCase() === 'yes',
   };
 };
 
@@ -29,13 +16,13 @@ export default function reducers(state, action) {
     action,
     name: 'expenses',
     responseParsers: {
-      index: resp => resp.ExpenseEntries.map(obj => singleObjectParser(obj.ExpenseEntry)),
+      index: resp => resp.ExpenseEntries.map(obj => singleObjectParser(obj)),
       create: singleObjectParser,
       update: singleObjectParser,
     },
     saveParsers: {
-      create: payload => singleObjectParser(payload.ExpenseEntry),
-      update: payload => singleObjectParser(payload.ExpenseEntry),
+      create: singleObjectParser,
+      update: singleObjectParser,
     },
     singularName: 'expense',
     states: {

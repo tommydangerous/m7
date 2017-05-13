@@ -58,6 +58,7 @@ export const CREATE_FORM_FIELDS = {
     numberOnly: true,
     order: [5, 1],
     placeholder: '5.25',
+    required: true,
     scale: 2,
     type: 'text',
   },
