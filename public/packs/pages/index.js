@@ -54411,31 +54411,30 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__utils_rendering__["a" /* rend
   __WEBPACK_IMPORTED_MODULE_1_react_router__["c" /* Router */],
   { history: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_history__["createBrowserHistory"])() },
   __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-    __WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */],
-    { path: '/' },
-    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
-      'div',
-      null,
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__header_main_components_HeaderMainApp__["a" /* default */], null),
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
-        path: '/login',
-        render: function render() {
-          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/timesheets' }) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__sessions_login_components_LoginApp__["a" /* default */], null);
-        }
-      }),
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
-        path: '/expenses',
-        render: function render() {
-          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__expenses_main_components_ExpensesMainApp__["a" /* default */], null) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/login' });
-        }
-      }),
-      __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
-        path: '/timesheets',
-        render: function render() {
-          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__timesheets_main_components_TimesheetMainApp__["a" /* default */], null) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/login' });
-        }
-      })
-    )
+    'div',
+    null,
+    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__header_main_components_HeaderMainApp__["a" /* default */], null),
+    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], { path: '/', render: function render() {
+        return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/login' });
+      } }),
+    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
+      path: '/login',
+      render: function render() {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/timesheets' }) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__sessions_login_components_LoginApp__["a" /* default */], null);
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
+      path: '/expenses',
+      render: function render() {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__expenses_main_components_ExpensesMainApp__["a" /* default */], null) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/login' });
+      }
+    }),
+    __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["b" /* Route */], {
+      path: '/timesheets',
+      render: function render() {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__stores_appLocalStorage__["a" /* isLoggedIn */])() ? __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__timesheets_main_components_TimesheetMainApp__["a" /* default */], null) : __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_router__["d" /* Redirect */], { to: '/login' });
+      }
+    })
   )
 ));
 
