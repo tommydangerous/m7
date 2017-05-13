@@ -138,6 +138,7 @@ class HeaderMainApp extends React.Component {
             <li className="pull-left hide-sm">
               <a
                 className="link-block link-reset"
+                href="#"
                 onClick={e => {
                   e.preventDefault();
                   headerActions.hide();
@@ -151,6 +152,7 @@ class HeaderMainApp extends React.Component {
             <li className="pull-left hide-sm">
               <a
                 className="link-block link-reset"
+                href="#"
                 onClick={e => {
                   e.preventDefault();
                   headerActions.hide();
@@ -183,6 +185,7 @@ class HeaderMainApp extends React.Component {
                     <li className="show-sm">
                       <a
                         className={`border-bottom ${dropdownItemClasses}`}
+                        href="#"
                         onClick={e => {
                           e.preventDefault();
                           headerActions.hide();
@@ -195,6 +198,7 @@ class HeaderMainApp extends React.Component {
                     <li className="show-sm">
                       <a
                         className={`border-bottom ${dropdownItemClasses}`}
+                        href="#"
                         onClick={e => {
                           e.preventDefault();
                           headerActions.hide();

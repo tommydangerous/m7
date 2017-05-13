@@ -53201,6 +53201,7 @@ var HeaderMainApp = function (_React$Component) {
                 'a',
                 {
                   className: 'link-block link-reset',
+                  href: '#',
                   onClick: function onClick(e) {
                     e.preventDefault();
                     headerActions.hide();
@@ -53217,6 +53218,7 @@ var HeaderMainApp = function (_React$Component) {
                 'a',
                 {
                   className: 'link-block link-reset',
+                  href: '#',
                   onClick: function onClick(e) {
                     e.preventDefault();
                     headerActions.hide();
@@ -53258,6 +53260,7 @@ var HeaderMainApp = function (_React$Component) {
                       'a',
                       {
                         className: 'border-bottom ' + dropdownItemClasses,
+                        href: '#',
                         onClick: function onClick(e) {
                           e.preventDefault();
                           headerActions.hide();
@@ -53274,6 +53277,7 @@ var HeaderMainApp = function (_React$Component) {
                       'a',
                       {
                         className: 'border-bottom ' + dropdownItemClasses,
+                        href: '#',
                         onClick: function onClick(e) {
                           e.preventDefault();
                           headerActions.hide();
