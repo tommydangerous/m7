@@ -80,7 +80,6 @@ export default {
       } = getCurrentSession();
 
       queryParams = {
-        // session_name: sessionId,
         ...queryParams,
       };
     }
