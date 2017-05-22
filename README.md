@@ -121,6 +121,48 @@ You typically will not need to make any changes to the files in this directory.
 ### `utils/`
 All helper functions that are shared across apps.
 
+## Common Files
+### `SimpleReducerGenerator`
+This will create a reducer that properly updates the state after any CRUD operation.
+
+Here are the available parameters:
+1. `action`: this is required
+1. `name`: this is required; it must be pluralized
+1. `responseParsers`: if you have custom parsing logic for each CRUD operation, use this parameter
+to parse the response from the server
+1. `saveParsers`: if you want to parse the payload after the server has already successfully
+performed a desired operation, use this parameter to do so
+1. `singularName`: if the plural name is difficult to singularize, use this parameter
+to explicitly declare the singular name of the resource you are generating a reducer for
+1. `states`: you must always include the state argument as the `current` value under the
+`states` parameter, if you want to include an initial state and a reset state then you can
+add them here as well
+
+```javascript
+export default function reducers(state, action) {
+  return SimpleReducerGenerator({
+    action, // Required
+    name: 'expenses', // Required
+    // Optional
+    responseParsers: {
+      create: singleObjectParser,
+      index: resp => resp.TimeEntries.map(obj => singleObjectParser(obj)),
+      update: singleObjectParser,
+    },
+    // Optional
+    saveParsers: {
+      create: singleObjectParser,
+      update: singleObjectParser,
+    },
+    states: {
+      current: state, // Required
+      initial: INITIAL_STATE, // Optional
+      reset: RESET_STATE, // Optional
+    },
+  });
+}
+```
+
 ## Questions
 - Ask in [Slack](https://arcaio.slack.com)
 - Email [Tommy Dang](mailto:tommydangerouss@gmail.com)

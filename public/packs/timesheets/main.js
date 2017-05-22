@@ -5953,7 +5953,7 @@ function generate() {
   });
   initialState[objectsByIdKey] = {};
 
-  var state = current || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(initialState, initial);
+  var state = current || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(initialState, initial || {});
   var errors = state.errors,
       loading = state.loading,
       successes = state.successes;
@@ -5987,7 +5987,7 @@ function generate() {
           id: id
         }, obj, updatedPayload);
 
-        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(state, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(DEFAULT_RESET_STATE, reset)), Object.assign({}, objectsByIdUpdated, {
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(state, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__utils_reducer__["a" /* combine */])(DEFAULT_RESET_STATE, reset || {})), Object.assign({}, objectsByIdUpdated, {
           successes: updateSuccesses('create', successes)
         }));
       }

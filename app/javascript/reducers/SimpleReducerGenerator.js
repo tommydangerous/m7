@@ -72,7 +72,7 @@ export default function generate(opts = {}) {
   });
   initialState[objectsByIdKey] = {};
 
-  const state = current || combine(initialState, initial);
+  const state = current || combine(initialState, initial || {});
   const {
     errors,
     loading,
@@ -111,7 +111,7 @@ export default function generate(opts = {}) {
       return combine(
         combine(
           state,
-          combine(DEFAULT_RESET_STATE, reset),
+          combine(DEFAULT_RESET_STATE, reset || {}),
         ),
         {
           ...objectsByIdUpdated,
