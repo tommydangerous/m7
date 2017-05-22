@@ -36,6 +36,14 @@ Or
 $ bin/deploy
 ```
 
+## Pages
+Visit [mobile-v2.minute7.com](http://mobile-v2.minute7.com) in your browser to load the production
+application.
+
+1. [Login](http://mobile-v2.minute7.com/login)
+1. [Timesheets](http://mobile-v2.minute7.com/timesheets)
+1. [Expenses](http://mobile-v2.minute7.com/expenses)
+
 ## Technology stack
 1. Webpack
 1. Rails
@@ -112,3 +120,7 @@ You typically will not need to make any changes to the files in this directory.
 
 ### `utils/`
 All helper functions that are shared across apps.
+
+## Questions
+- Ask in [Slack](https://arcaio.slack.com)
+- Email [Tommy Dang](mailto:tommydangerouss@gmail.com)
