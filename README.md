@@ -49,29 +49,24 @@ For example, the Login page app lives in `app/javascript/apps/sessions/login/`.
 Here is a description for all directories under `app/javascript/`:
 
 ### `action_creators/`
-
 Functions for interacting with the store.
 Use the `SimpleActionCreatorGenerator` to create action creators with base CRUD operations.
 Look at the `timesheetActionCreators` as an example on how to use the generator.
 
 ## `actions/`
-
 Declare your Redux action constants here.
 For simple CRUD actions, use the `SimpleActionGenerator` to quickly generate action names for
 your basic CRUD operations as well as the failed, started, and succeeded states.
 
 ## `api/`
-
 Code used to interact with the remote API server. You do not need to import this file into any
 of your code. If you use the `SimpleActionCreatorGenerator` to generate your action creator,
 you will be able to make requests without importing the `Api.js` file directly.
 
 ## `apps/`
-
 All app specific components lives in here.
 
 ## `components/`
-
 Components that are commonly used in multiple apps live here. Currently, the most commonly used
 component is the `Modal` component and the `SimpleForm` component.
 
@@ -82,11 +77,30 @@ The `SimpleForm` component allows you to quickly render forms. Use `ExpenseForm`
 how to render a `SimpleForm`.
 
 ## `containers/`
+Containers are used to render components with properties from the global store.
+
 ## `mocks/`
+Helper functions to generate fake data.
+
 ## `packs/`
+Entry point for single page apps.
+
 ## `reducers/`
+Redux reducers. Use `SimpleReducerGenerator` to create a basic reducer for all CRUD operations.
+See `expenseReducers` as an example on how to generate a reducer.
+
 ## `routes/`
+React router routes.
+
 ## `selectors/`
+Helper functions for mapping state to props in components.
+
 ## `shapes/`
+React prop type shapes.
+
 ## `stores/`
+Single store for all apps. Also contains functions for interacting with the local storage.
+You typically will not need to make any changes to the files in this directory.
+
 ## `utils/`
+All helper functions that are shared across apps.
