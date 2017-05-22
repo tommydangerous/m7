@@ -1,13 +1,16 @@
 # M7
-
-## Description
 Web client for the Minute7 application.
 
 ## Setup
+Install RVM and Rails.
+```
+$ curl -sSL https://get.rvm.io | bash -s stable --ruby
+$ gem install rails
+```
+
 Install libraries.
 ```
 $ npm install
-$ gem install rails
 $ bundle install
 ```
 Copy contents of `.env.sample` and save into a file named `.env` in the app’s root directory.
@@ -26,6 +29,11 @@ $ bundle exec foreman start -f Procfile.dev
 ```
 $ bundle exec rake assets:precompile RAILS_ENV=production
 $ git heroku push master
+```
+
+Or
+```
+$ bin/deploy
 ```
 
 ## Technology stack
