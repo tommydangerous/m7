@@ -440,12 +440,13 @@ export default class SimpleForm extends React.Component {
 };
 
 SimpleForm.propTypes = {
+  children: PropTypes.node,
   error: PropTypes.string,
-  header: PropTypes.string,
   fields: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.object),
     PropTypes.object,
   ]).isRequired,
+  header: PropTypes.string,
   loading: PropTypes.bool,
   onClickCancel: PropTypes.func,
   onSubmitForm: PropTypes.func.isRequired,

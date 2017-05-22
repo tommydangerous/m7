@@ -45259,9 +45259,10 @@ var SimpleForm = function (_React$Component) {
 ;
 
 SimpleForm.propTypes = {
+  children: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].node,
   error: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].string,
-  header: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].string,
   fields: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].oneOfType([__WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].arrayOf(__WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].object), __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].object]).isRequired,
+  header: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].string,
   loading: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].bool,
   onClickCancel: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].func,
   onSubmitForm: __WEBPACK_IMPORTED_MODULE_0_prop_types__["PropTypes"].func.isRequired,
